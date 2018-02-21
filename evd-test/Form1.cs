@@ -96,13 +96,13 @@ namespace evd_test
         
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Evalue> firstFile = new List<Evalue>();
-            List<Evalue> secondFile = new List<Evalue>();
+            List<EvalueBEC> firstFile = new List<EvalueBEC>();
+            List<EvalueBEC> secondFile = new List<EvalueBEC>();
             int error = 0;
 
             try
             {
-                firstFile = Evalue.CollectData(FirstFilename.Text);
+                firstFile = EvalueBEC.CollectData(FirstFilename.Text);
             }
             catch (IndexOutOfRangeException)
             {
@@ -112,7 +112,7 @@ namespace evd_test
 
             try
             {
-                secondFile = Evalue.CollectData(SecondFilename.Text);
+                secondFile = EvalueBEC.CollectData(SecondFilename.Text);
             }
             catch (IndexOutOfRangeException)
             {
@@ -122,7 +122,7 @@ namespace evd_test
 
             if (error < 1)
             {
-                string output = Evalue.BuildOutputString(firstFile, secondFile);
+                string output = EvalueBEC.BuildOutputString(firstFile, secondFile);
 
                 File.WriteAllText(OutputFilename.Text, output);
                 this.Invoke((MethodInvoker)delegate

@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace evd_test
 {
-    class Evalue
+    public abstract class Evalue
     {
-        private int LeveranceID;
-        private int LeveranceGruppe;
-        private DateTime LeveranceDato;
-        private DateTime ModelAendrDato;
-        private int FormatID;
-        private int EjdNr;
-        private int KomNr;
-        private long ModelVaerdi;
-        private DateTime ModelDato;
-        private long HandelsPris;
-        private DateTime HandelsDato;
-        private int ErIUdbud;
-        private DateTime FoersteUdbudsdato;
-        private DateTime SenesteUdbudsDato;
-        private long FoersteUdbudsPris;
-        private long SenesteUdsbudsPris;
-        private string KVHX;
+        public int LeveranceID;
+        public int LeveranceGruppe;
+        public DateTime LeveranceDato;
+        public DateTime ModelAendrDato;
+        public int FormatID;
+        public int EjdNr;
+        public int KomNr;
+        public long ModelVaerdi;
+        public DateTime ModelDato;
+        public long HandelsPris;
+        public DateTime HandelsDato;
+        public int ErIUdbud;
+        public DateTime FoersteUdbudsdato;
+        public DateTime SenesteUdbudsDato;
+        public long FoersteUdbudsPris;
+        public long SenesteUdsbudsPris;
+        public string KVHX;
 
         public int GetEjdNr() => EjdNr;
         public int GetKomNr() => KomNr;
@@ -122,24 +122,24 @@ namespace evd_test
             KVHX = fields[16];
         }
 
-        public static List<Evalue> CollectData(string filename)
-        {
-            List<Evalue> Evalues = new List<Evalue>();
-            string[] dataLines = File.ReadAllLines(filename);
+        //public static List<Evalue> CollectData(string filename)
+        //{
+        //    List<Evalue> Evalues = new List<Evalue>();
+        //    string[] dataLines = File.ReadAllLines(filename);
 
-            foreach(string dataLine in dataLines)
-            {
-                try
-                {
-                    Evalues.Add(new Evalue(dataLine));
-                }
-                catch (IndexOutOfRangeException e)
-                {
-                    throw e;
-                }
-            }
-            return Evalues;
-        }
+        //    foreach (string dataLine in dataLines)
+        //    {
+        //        try
+        //        {
+        //            Evalues.Add(new Evalue(dataLine));
+        //        }
+        //        catch (IndexOutOfRangeException e)
+        //        {
+        //            throw e;
+        //        }
+        //    }
+        //    return Evalues;
+        //}
 
         public static string BuildOutputString(List<Evalue> firstFile, List<Evalue> secondFile)
         {
@@ -208,28 +208,8 @@ namespace evd_test
             return dt.ToString();
         }
 
-        public string ToCsv()
-        {
-            string output = "" +
-            LeveranceID + ";" +
-            LeveranceGruppe + ";" +
-            DateCsv(LeveranceDato) + ";" +
-            DateCsv(ModelAendrDato) + ";" +
-            FormatID + ";" +
-            EjdNr + ";" +
-            KomNr + ";" +
-            ModelVaerdi + ";" +
-            DateCsv(ModelDato) + ";" +
-            HandelsPris + ";" +
-            DateCsv(HandelsDato) + ";" +
-            ErIUdbud + ";" +
-            DateCsv(FoersteUdbudsdato) + ";" +
-            DateCsv(SenesteUdbudsDato) + ";" +
-            FoersteUdbudsPris + ";" +
-            SenesteUdsbudsPris + ";" +
-            KVHX + "\n";
-            return output; 
-        }
+        public abstract string ToCsv();
+           
         public override string ToString()
         {
             string output = "" +
