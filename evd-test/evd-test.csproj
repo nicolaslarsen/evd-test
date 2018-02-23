@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Evalue.cs" />
     <Compile Include="EvalueBEC.cs" />
+    <Compile Include="EvalueLSB.cs" />
     <Compile Include="EvalueTest.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

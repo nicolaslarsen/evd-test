@@ -26,6 +26,19 @@ namespace evd_test
                 {
                     OutputFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Test.csv";
                 }
+                if (!RadioBEC.Checked && !RadioLSB.Checked)
+                {
+                    // Just check filename, user has the option to change it anyway
+                    if (Path.GetFileName(SecondFilename.Text).Substring(0,3) == "LSB")
+                    {
+                        RadioLSB.Checked = true;
+                    }
+                    // We assume BEC as the standard format (or at least I do)
+                    else
+                    {
+                        RadioBEC.Checked = true;
+                    }
+                }
             }
             else
             {
@@ -91,41 +104,48 @@ namespace evd_test
         
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<EvalueBEC> firstFile = new List<EvalueBEC>();
-            List<EvalueBEC> secondFile = new List<EvalueBEC>();
             int error = 0;
 
-            try
+            if (RadioBEC.Checked)
             {
-                firstFile = EvalueTest<EvalueBEC>.CollectData(FirstFilename.Text);
-            }
-            catch (IndexOutOfRangeException)
-            {
-                MessageBox.Show("Fil 1 er ikke i det korekte format", "File 1 format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error += 1;
-            }
+                List<EvalueBEC> firstFile = new List<EvalueBEC>();
+                List<EvalueBEC> secondFile = new List<EvalueBEC>();
 
-            try
-            {
-                secondFile = EvalueTest<EvalueBEC>.CollectData(SecondFilename.Text);
-            }
-            catch (IndexOutOfRangeException)
-            {
-                MessageBox.Show("Fil 2 er ikke i det korekte format", "File 2 format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error += 2;
-            }
-
-            if (error < 1)
-            {
-                string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
-
-                File.WriteAllText(OutputFilename.Text, output);
-                this.Invoke((MethodInvoker)delegate
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
+                if (error == 0)
                 {
-                    FormPanel.Enabled = true;
-                });
-                MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Process.Start(OutputFilename.Text);
+                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
+    
+                    File.WriteAllText(OutputFilename.Text, output);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        FormPanel.Enabled = true;
+                    });
+                    MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Process.Start(OutputFilename.Text);
+                }
+            }
+            if (RadioLSB.Checked)
+            {
+                // TODO: replace with lsb
+                List<EvalueBEC> firstFile = new List<EvalueBEC>();
+                List<EvalueBEC> secondFile = new List<EvalueBEC>();
+
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
+                if (error == 0)
+                {
+                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
+    
+                    File.WriteAllText(OutputFilename.Text, output);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        FormPanel.Enabled = true;
+                    });
+                    MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Process.Start(OutputFilename.Text);
+                }
             }
         }
 

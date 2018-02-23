@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace evd_test
 {
@@ -29,6 +30,23 @@ namespace evd_test
                 }
             }
             return Evalues;
+        }
+
+        // Returns a negative number on error
+        public static int TryCollectData(string filename, ref List<T> Evalue, int fileNum)
+        {
+            try
+            {
+                Evalue = EvalueTest<T>.CollectData(filename);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Fil " + fileNum + " er ikke i det korekte format", 
+                    "File " + fileNum + " format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -fileNum;
+            }
+
+            return 0;
         }
 
         public static string BuildOutputString(List<T> firstFile, List<T> secondFile)
