@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
@@ -96,13 +91,13 @@ namespace evd_test
         
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Evalue> firstFile = new List<Evalue>();
-            List<Evalue> secondFile = new List<Evalue>();
+            List<EvalueBEC> firstFile = new List<EvalueBEC>();
+            List<EvalueBEC> secondFile = new List<EvalueBEC>();
             int error = 0;
 
             try
             {
-                firstFile = Evalue.CollectData(FirstFilename.Text);
+                firstFile = EvalueTest<EvalueBEC>.CollectData(FirstFilename.Text);
             }
             catch (IndexOutOfRangeException)
             {
@@ -112,7 +107,7 @@ namespace evd_test
 
             try
             {
-                secondFile = Evalue.CollectData(SecondFilename.Text);
+                secondFile = EvalueTest<EvalueBEC>.CollectData(SecondFilename.Text);
             }
             catch (IndexOutOfRangeException)
             {
@@ -122,7 +117,7 @@ namespace evd_test
 
             if (error < 1)
             {
-                string output = Evalue.BuildOutputString(firstFile, secondFile);
+                string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
 
                 File.WriteAllText(OutputFilename.Text, output);
                 this.Invoke((MethodInvoker)delegate
