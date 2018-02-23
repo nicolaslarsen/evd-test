@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
@@ -102,7 +97,7 @@ namespace evd_test
 
             try
             {
-                firstFile = EvalueBEC.CollectData(FirstFilename.Text);
+                firstFile = EvalueTest<EvalueBEC>.CollectData(FirstFilename.Text);
             }
             catch (IndexOutOfRangeException)
             {
@@ -112,7 +107,7 @@ namespace evd_test
 
             try
             {
-                secondFile = EvalueBEC.CollectData(SecondFilename.Text);
+                secondFile = EvalueTest<EvalueBEC>.CollectData(SecondFilename.Text);
             }
             catch (IndexOutOfRangeException)
             {
@@ -122,7 +117,7 @@ namespace evd_test
 
             if (error < 1)
             {
-                string output = EvalueBEC.BuildOutputString(firstFile, secondFile);
+                string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
 
                 File.WriteAllText(OutputFilename.Text, output);
                 this.Invoke((MethodInvoker)delegate
