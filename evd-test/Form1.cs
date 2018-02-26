@@ -118,35 +118,33 @@ namespace evd_test
                     string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
     
                     File.WriteAllText(OutputFilename.Text, output);
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        FormPanel.Enabled = true;
-                    });
+
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Process.Start(OutputFilename.Text);
                 }
             }
             if (RadioLSB.Checked)
             {
-                // TODO: replace with lsb
-                List<EvalueBEC> firstFile = new List<EvalueBEC>();
-                List<EvalueBEC> secondFile = new List<EvalueBEC>();
+                List<EvalueLSB> firstFile = new List<EvalueLSB>();
+                List<EvalueLSB> secondFile = new List<EvalueLSB>();
 
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
                 if (error == 0)
                 {
-                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
+                    string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);
     
                     File.WriteAllText(OutputFilename.Text, output);
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        FormPanel.Enabled = true;
-                    });
+                    
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Process.Start(OutputFilename.Text);
                 }
             }
+            this.Invoke((MethodInvoker)delegate
+            {
+                FormPanel.Enabled = true;
+            });
+
         }
 
         private void CollectDataButton_Click(object sender, EventArgs e)

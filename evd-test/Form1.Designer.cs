@@ -39,6 +39,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.OutputPanel = new System.Windows.Forms.Panel();
             this.OutputFilenameButton = new System.Windows.Forms.Button();
+            this.RadioLSB = new System.Windows.Forms.RadioButton();
+            this.RadioBEC = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
             this.CollectDataButton = new System.Windows.Forms.Button();
             this.FirstFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SecondFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -46,8 +49,6 @@
             this.CollectDataPanel = new System.Windows.Forms.Panel();
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.FormPanel = new System.Windows.Forms.Panel();
-            this.RadioBEC = new System.Windows.Forms.RadioButton();
-            this.RadioLSB = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.OutputPanel.SuspendLayout();
             this.CollectDataPanel.SuspendLayout();
@@ -57,9 +58,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.44444F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 399F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.57471F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.42529F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 401F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.FirstFileButton, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FirstFilename, 2, 0);
@@ -69,8 +70,9 @@
             this.tableLayoutPanel1.Controls.Add(this.OutputFilename, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.OutputPanel, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.RadioBEC, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.RadioLSB, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.RadioLSB, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.RadioBEC, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -88,13 +90,13 @@
             this.label2.Location = new System.Drawing.Point(10, 54);
             this.label2.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 19);
+            this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "E-værdi fil 2:";
             // 
             // FirstFileButton
             // 
-            this.FirstFileButton.Location = new System.Drawing.Point(88, 8);
+            this.FirstFileButton.Location = new System.Drawing.Point(97, 8);
             this.FirstFileButton.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.FirstFileButton.Name = "FirstFileButton";
             this.FirstFileButton.Size = new System.Drawing.Size(66, 23);
@@ -105,7 +107,7 @@
             // 
             // FirstFilename
             // 
-            this.FirstFilename.Location = new System.Drawing.Point(185, 10);
+            this.FirstFilename.Location = new System.Drawing.Point(183, 10);
             this.FirstFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.FirstFilename.Name = "FirstFilename";
             this.FirstFilename.Size = new System.Drawing.Size(353, 20);
@@ -118,13 +120,13 @@
             this.label1.Location = new System.Drawing.Point(10, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
+            this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "E-værdi fil 1:";
             // 
             // SecondFilename
             // 
-            this.SecondFilename.Location = new System.Drawing.Point(185, 50);
+            this.SecondFilename.Location = new System.Drawing.Point(183, 50);
             this.SecondFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.SecondFilename.Name = "SecondFilename";
             this.SecondFilename.Size = new System.Drawing.Size(353, 20);
@@ -133,7 +135,7 @@
             // 
             // SecondFileButton
             // 
-            this.SecondFileButton.Location = new System.Drawing.Point(88, 48);
+            this.SecondFileButton.Location = new System.Drawing.Point(97, 48);
             this.SecondFileButton.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.SecondFileButton.Name = "SecondFileButton";
             this.SecondFileButton.Size = new System.Drawing.Size(66, 23);
@@ -144,7 +146,7 @@
             // 
             // OutputFilename
             // 
-            this.OutputFilename.Location = new System.Drawing.Point(185, 309);
+            this.OutputFilename.Location = new System.Drawing.Point(183, 309);
             this.OutputFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputFilename.Name = "OutputFilename";
             this.OutputFilename.Size = new System.Drawing.Size(353, 20);
@@ -156,14 +158,14 @@
             this.label3.Location = new System.Drawing.Point(10, 313);
             this.label3.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 15);
+            this.label3.Size = new System.Drawing.Size(64, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Test output fil:";
             // 
             // OutputPanel
             // 
             this.OutputPanel.Controls.Add(this.OutputFilenameButton);
-            this.OutputPanel.Location = new System.Drawing.Point(88, 309);
+            this.OutputPanel.Location = new System.Drawing.Point(97, 309);
             this.OutputPanel.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputPanel.Name = "OutputPanel";
             this.OutputPanel.Size = new System.Drawing.Size(65, 23);
@@ -182,6 +184,40 @@
             this.OutputFilenameButton.Text = "Gem som";
             this.OutputFilenameButton.UseVisualStyleBackColor = true;
             this.OutputFilenameButton.Click += new System.EventHandler(this.OutputFilenameButton_Click);
+            // 
+            // RadioLSB
+            // 
+            this.RadioLSB.AutoSize = true;
+            this.RadioLSB.Location = new System.Drawing.Point(183, 93);
+            this.RadioLSB.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
+            this.RadioLSB.Name = "RadioLSB";
+            this.RadioLSB.Size = new System.Drawing.Size(45, 17);
+            this.RadioLSB.TabIndex = 8;
+            this.RadioLSB.TabStop = true;
+            this.RadioLSB.Text = "LSB";
+            this.RadioLSB.UseVisualStyleBackColor = true;
+            // 
+            // RadioBEC
+            // 
+            this.RadioBEC.AutoSize = true;
+            this.RadioBEC.Location = new System.Drawing.Point(97, 93);
+            this.RadioBEC.Margin = new System.Windows.Forms.Padding(10);
+            this.RadioBEC.Name = "RadioBEC";
+            this.RadioBEC.Size = new System.Drawing.Size(46, 17);
+            this.RadioBEC.TabIndex = 7;
+            this.RadioBEC.TabStop = true;
+            this.RadioBEC.Text = "BEC";
+            this.RadioBEC.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 97);
+            this.label4.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Fil format:";
             // 
             // CollectDataButton
             // 
@@ -232,30 +268,6 @@
             this.FormPanel.Size = new System.Drawing.Size(580, 387);
             this.FormPanel.TabIndex = 3;
             // 
-            // RadioBEC
-            // 
-            this.RadioBEC.AutoSize = true;
-            this.RadioBEC.Location = new System.Drawing.Point(10, 93);
-            this.RadioBEC.Margin = new System.Windows.Forms.Padding(10);
-            this.RadioBEC.Name = "RadioBEC";
-            this.RadioBEC.Size = new System.Drawing.Size(46, 17);
-            this.RadioBEC.TabIndex = 7;
-            this.RadioBEC.TabStop = true;
-            this.RadioBEC.Text = "BEC";
-            this.RadioBEC.UseVisualStyleBackColor = true;
-            // 
-            // RadioLSB
-            // 
-            this.RadioLSB.AutoSize = true;
-            this.RadioLSB.Location = new System.Drawing.Point(88, 93);
-            this.RadioLSB.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
-            this.RadioLSB.Name = "RadioLSB";
-            this.RadioLSB.Size = new System.Drawing.Size(45, 17);
-            this.RadioLSB.TabIndex = 8;
-            this.RadioLSB.TabStop = true;
-            this.RadioLSB.Text = "LSB";
-            this.RadioLSB.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,6 +307,7 @@
         private System.Windows.Forms.Panel FormPanel;
         private System.Windows.Forms.RadioButton RadioBEC;
         private System.Windows.Forms.RadioButton RadioLSB;
+        private System.Windows.Forms.Label label4;
     }
 }
 
