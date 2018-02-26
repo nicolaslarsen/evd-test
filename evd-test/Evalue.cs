@@ -18,7 +18,7 @@ namespace evd_test
         public long ModelVaerdi;
         public DateTime ModelDato;
         public long HandelsPris;
-        public DateTime HandelsDato;
+        public DateTime HandelsDato; 
         public int ErIUdbud;
         public DateTime FoersteUdbudsdato;
         public DateTime SenesteUdbudsDato;
@@ -27,6 +27,9 @@ namespace evd_test
 
         public int GetEjdNr() => EjdNr;
         public int GetKomNr() => KomNr;
+        public long GetEVaerdi() => ModelVaerdi;
+        public long GetHandelspris() => HandelsPris;
+        public DateTime GetHandelsDato() => HandelsDato;
         public int GetErIUdbud() => ErIUdbud;
 
         // Just a null constructor
