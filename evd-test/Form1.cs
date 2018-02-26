@@ -118,10 +118,7 @@ namespace evd_test
                     string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
     
                     File.WriteAllText(OutputFilename.Text, output);
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        FormPanel.Enabled = true;
-                    });
+
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Process.Start(OutputFilename.Text);
                 }
@@ -138,14 +135,16 @@ namespace evd_test
                     string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);
     
                     File.WriteAllText(OutputFilename.Text, output);
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        FormPanel.Enabled = true;
-                    });
+                    
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Process.Start(OutputFilename.Text);
                 }
             }
+            this.Invoke((MethodInvoker)delegate
+            {
+                FormPanel.Enabled = true;
+            });
+
         }
 
         private void CollectDataButton_Click(object sender, EventArgs e)
