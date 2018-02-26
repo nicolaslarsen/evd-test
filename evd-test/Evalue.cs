@@ -9,6 +9,8 @@ namespace evd_test
 {
     public abstract class Evalue
     {
+        public string Header { get; set; }
+
         public int LeveranceID;
         public DateTime LeveranceDato;
         public int EjdNr;
@@ -23,51 +25,9 @@ namespace evd_test
         public long FoersteUdbudsPris;
         public long SenesteUdsbudsPris;
 
-        public string Header { get; set; }
-
         public int GetEjdNr() => EjdNr;
         public int GetKomNr() => KomNr;
         public int GetErIUdbud() => ErIUdbud;
-
-        public static string BECHeader =             
-            "LeveranceID" + ";" +
-            "LeveranceGruppe" + ";" +
-            "LeveranceDato" + ";" +
-            "ModelAendrDato" + ";" +
-            "FormatID" + ";" +
-            "EjdNr" + ";" +
-            "KomNr" + ";" +
-            "ModelVaerdi" + ";" +
-            "ModelDato" + ";" +
-            "HandelsPris" + ";" +
-            "HandelsDato" + ";" +
-            "ErIUdbud" + ";" +
-            "FoersteUdbudsdato" + ";" +
-            "SenesteUdbudsDato" + ";" +
-            "FoersteUdbudsPris" + ";" +
-            "SenesteUdsbudsPris" + ";" +
-            "KVHX" + "\n";
-
-        public static string LSBHeader =
-            "LeveranceNummer" + ";" +
-            "LeveranceDato" + ";" +
-            "EjdNr" + ";" +
-            "KomNr" + ";" +
-            "ModelVaerdi" + ";" +
-            "ModelDato" + ";" +
-            "HandelPris" + ";" +
-            "HandelDato" + ";" +
-            "HandelSkoedeDato" + ";" +
-            "HandelMatch" + ";" +
-            "ErIUdbud" + ";" +
-            "FoersteUdbudsDato" + ";" +
-            "SenesteUdbudsDato" + ";" +
-            "FoersteUdsbudsPris" + ";" +
-            "SenesteUdbudsPris" + ";" +
-            "Vurderingsaar" + ";" +
-            "Vurderingsdato" + ";" +
-            "Ejendomsvaerdi" + ";" +
-            "Grundvaerdi" + "\n";
 
         // Just a null constructor
         public Evalue(){}

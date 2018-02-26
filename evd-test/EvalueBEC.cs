@@ -15,8 +15,6 @@ namespace evd_test
 
         public override void Init(string dataLine)
         {
-            string[] fields = dataLine.Split(';');
-
             Header = "LeveranceID" + ";" +
                 "LeveranceGruppe" + ";" +
                 "LeveranceDato" + ";" +
@@ -34,6 +32,9 @@ namespace evd_test
                 "FoersteUdbudsPris" + ";" +
                 "SenesteUdsbudsPris" + ";" +
                 "KVHX" + "\n";
+
+            string[] fields = dataLine.Split(';');
+           
             Int32.TryParse(fields[0], out LeveranceID);
             Int32.TryParse(fields[1], out LeveranceGruppe);
             DateTime.TryParse(fields[2], out LeveranceDato);
