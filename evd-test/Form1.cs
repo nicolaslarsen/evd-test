@@ -128,15 +128,14 @@ namespace evd_test
             }
             if (RadioLSB.Checked)
             {
-                // TODO: replace with lsb
-                List<EvalueBEC> firstFile = new List<EvalueBEC>();
-                List<EvalueBEC> secondFile = new List<EvalueBEC>();
+                List<EvalueLSB> firstFile = new List<EvalueLSB>();
+                List<EvalueLSB> secondFile = new List<EvalueLSB>();
 
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
                 if (error == 0)
                 {
-                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
+                    string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);
     
                     File.WriteAllText(OutputFilename.Text, output);
                     this.Invoke((MethodInvoker)delegate

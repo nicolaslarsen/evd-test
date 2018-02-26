@@ -13,7 +13,15 @@ namespace evd_test
         public static List<T> CollectData(string filename)
         {
             List<T> Evalues = new List<T>();
-            string[] dataLines = File.ReadAllLines(filename);
+
+            try
+            {
+                string[] dataLines = File.ReadAllLines(filename);
+            }
+            catch (IOException e)
+            {
+                throw e;
+            }
 
 
             foreach (string dataLine in dataLines)
@@ -43,6 +51,12 @@ namespace evd_test
             {
                 MessageBox.Show("Fil " + fileNum + " er ikke i det korekte format", 
                     "File " + fileNum + " format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -fileNum;
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Fil " + fileNum + " er i brug af et andet program", 
+                    "File " + fileNum + " IO error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -fileNum;
             }
 
