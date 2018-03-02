@@ -10,7 +10,7 @@ namespace evd_test
 {
     public class EvalueTest<T> where T: Evalue, new()
     {
-        public static List<T> CollectData(string filename)
+        public static List<T> CollectData(string filename, StoreProperty<T> propStore)
         {
             List<T> Evalues = new List<T>();
 
@@ -24,14 +24,16 @@ namespace evd_test
                 throw e;
             }
 
-
-            foreach (string dataLine in dataLines)
+            for (int i = 0; i < dataLines.Count(); i++)
             {
+                string dataLine = dataLines[i];
+
                 try
                 {
                     T Evalue = new T();
                     Evalue.Init(dataLine);
                     Evalues.Add(Evalue);
+                    propStore.AddIndex(Evalue.GetKomNr(), Evalue.GetEjdNr(), i);
                 }
                 catch (IndexOutOfRangeException e)
                 {
@@ -42,11 +44,11 @@ namespace evd_test
         }
 
         // Returns a negative number on error
-        public static int TryCollectData(string filename, ref List<T> Evalue, int fileNum)
+        public static int TryCollectData(string filename, ref List<T> Evalue, int fileNum, StoreProperty<T> propStore)
         {
             try
             {
-                Evalue = EvalueTest<T>.CollectData(filename);
+                Evalue = EvalueTest<T>.CollectData(filename, propStore);
             }
             catch (IndexOutOfRangeException)
             {

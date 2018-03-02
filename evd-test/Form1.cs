@@ -110,9 +110,11 @@ namespace evd_test
             {
                 List<EvalueBEC> firstFile = new List<EvalueBEC>();
                 List<EvalueBEC> secondFile = new List<EvalueBEC>();
+                StoreProperty<EvalueBEC> propStore = new StoreProperty<EvalueBEC>();
 
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1, propStore);
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2, propStore);
+
                 if (error == 0)
                 {
                     string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
@@ -121,15 +123,20 @@ namespace evd_test
 
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Process.Start(OutputFilename.Text);
+                    Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile,secondFile, propStore);
+                    stat.BuildStats();
+                    Console.WriteLine("All Done");
                 }
             }
             if (RadioLSB.Checked)
             {
                 List<EvalueLSB> firstFile = new List<EvalueLSB>();
                 List<EvalueLSB> secondFile = new List<EvalueLSB>();
+                StoreProperty<EvalueLSB> propStore = new StoreProperty<EvalueLSB>();
 
-                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
-                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref secondFile, 2);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1, propStore);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref secondFile, 2, propStore);
+
                 if (error == 0)
                 {
                     string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);

@@ -84,5 +84,30 @@ namespace evd_test
             Grundvaerdi + "\n";
             return output;
         }
+
+        public override string ToString()
+        {
+            string output = "" +
+            "LeveranceID: " + LeveranceID + "\n" +
+            "LeveranceDato: " + DateCsv(LeveranceDato) + "\n" +
+            "EjdNr: " + EjdNr + "\n" +
+            "KomNr: " + KomNr + "\n" +
+            "ModelVaerdi: " + ModelVaerdi + "\n" +
+            "DateCsv(ModelDato: )" + DateCsv(ModelDato) + "\n" +
+            "HandelsPris: " + HandelsPris + "\n" +
+            "HandelsDato: " + DateCsv(HandelsDato) + "\n" +
+            "HandelSkoedeDato: " + DateCsv(HandelSkoedeDato) + "\n" +
+            "HandelMatch: " + HandelMatch + "\n" +
+            "ErIUdbud: " + ErIUdbud + "\n" +
+            "FoersteUdbudsdato: " + DateCsv(FoersteUdbudsdato) + "\n" +
+            "SenesteUdbudsDato: " + DateCsv(SenesteUdbudsDato) + "\n" +
+            "FoersteUdbudsPris: " + FoersteUdbudsPris + "\n" +
+            "SenesteUdsbudsPris: " + SenesteUdsbudsPris + "\n" +
+            "VurderingsAar: " + VurderingsAar + "\n" +
+            "DateCsv(VurderingsDato: )" + DateCsv(VurderingsDato) + "\n" +
+            "Ejendomsvaerdi: " + Ejendomsvaerdi + "\n" +
+            "Grundvaerdi: " + Grundvaerdi + "\n";
+            return output;
+        }
     }
 }

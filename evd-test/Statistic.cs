@@ -10,11 +10,13 @@ namespace evd_test
     {
         private List<T> FirstFile;
         private List<T> SecondFile;
-        
-        public Statistic(List<T> firstFile, List<T> secondFile)
+        private StoreProperty<T> PropStore;
+
+        public Statistic(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
         {
             FirstFile = firstFile;
             SecondFile = secondFile;
+            PropStore = propStore;
         } 
 
         public int CompareProperties(T first, T scnd)
@@ -28,9 +30,8 @@ namespace evd_test
 
             foreach(T Ejendom in FirstFile)
             {
-                // TODO: Think about making this faster, could be very costly
-                T ScndEjendom = SecondFile.Single(scnd => scnd.KomNr == Ejendom.KomNr
-                    && scnd.EjdNr == Ejendom.EjdNr);
+                PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
+
                 output += ""; 
             }
 
