@@ -76,5 +76,29 @@ namespace evd_test
             KVHX + "\n";
             return output; 
         }
+
+        public override string ToString()
+        { 
+            string output = "" +
+            "LeveranceID : " + LeveranceID + "\n" +
+            "LeveranceGruppe : " + LeveranceGruppe + "\n" +
+            "LeveranceDato : " + DateCsv(LeveranceDato) + "\n" +
+            "ModelAendrDato : " + DateCsv(ModelAendrDato) + "\n" +
+            "FormatID : " + FormatID + "\n" +
+            "EjdNr : " + EjdNr + "\n" +
+            "KomNr : " + KomNr + "\n" +
+            "ModelVaerdi : " + ModelVaerdi + "\n" +
+            "ModelDato : " + DateCsv(ModelDato) + "\n" +
+            "HandelsPris : " + HandelsPris + "\n" +
+            "HandelsDato : " + DateCsv(HandelsDato) + "\n" +
+            "ErIUdbud : " + ErIUdbud + "\n" +
+            "FoersteUdbudsdato : " + DateCsv(FoersteUdbudsdato) + "\n" +
+            "SenesteUdbudsDato : " + DateCsv(SenesteUdbudsDato) + "\n" +
+            "FoersteUdbudsPris : " + FoersteUdbudsPris + "\n" +
+            "SenesteUdsbudsPris : " + SenesteUdsbudsPris + "\n" +
+            KVHX + "\n";
+            return output; 
+ 
+        }
     }
 }

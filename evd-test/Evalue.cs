@@ -72,5 +72,6 @@ namespace evd_test
         }
 
         public abstract string ToCsv();
+        public abstract override string ToString();
     }
 }
