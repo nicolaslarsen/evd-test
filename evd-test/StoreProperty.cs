@@ -9,8 +9,6 @@ namespace evd_test
     // Class is used to store indexes for properties somewhat efficiently
     public class StoreProperty<T> where T: Evalue, new()
     {
-        //List<Kommune> Kommuner;
-
         // Uses komkode and ejdnr to find index in the original array
         Dictionary<int, Dictionary<int, int>> Indexes;
 

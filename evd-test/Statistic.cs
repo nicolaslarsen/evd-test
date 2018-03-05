@@ -10,6 +10,8 @@ namespace evd_test
     {
         private List<T> FirstFile;
         private List<T> SecondFile;
+        // Stores the komkode and ejdnr in dictionaries, 
+        // contains the indexes for an ejendom in the "file" arrays
         private StoreProperty<T> PropStore;
 
         public Statistic(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
@@ -19,23 +21,53 @@ namespace evd_test
             PropStore = propStore;
         } 
 
-        public int CompareProperties(T first, T scnd)
+        public StatisticProperty CompareProperties(T first, T scnd)
         {
-            return 0;
+            int komNr = first.KomNr;
+            int ejdNr = first.EjdNr;
+            long evalueOld = first.ModelVaerdi;
+            long evalueNew = scnd.ModelVaerdi;
+            long handelspris = scnd.HandelsPris;
+            DateTime handelsDato = scnd.HandelsDato;
+
+            Decimal evalueNewCompOld = 0;
+            Decimal evalueNewCompHandelspris = 0;
+
+            if (evalueNew != 0)
+            {
+                if (evalueOld != 0)
+                {
+                    evalueNewCompOld = (Decimal) evalueNew / (Decimal) evalueOld;
+                }
+                
+                if (handelspris != 0)
+                {
+                    evalueNewCompHandelspris = (Decimal) evalueNew / (Decimal) handelspris;
+                }
+            }
+
+
+            StatisticProperty statProp = new StatisticProperty(komNr, ejdNr, 
+                evalueOld, evalueNew, handelspris, handelsDato, evalueNewCompOld,
+                evalueNewCompHandelspris);
+
+            return statProp;
         }
 
-        public int BuildStats()
+        public List<string> BuildStats()
         {
-            string output = "";
+            List<string> output = new List<string>();
 
             foreach(T Ejendom in FirstFile)
             {
-                PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
+                T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
 
-                output += ""; 
+                StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
+
+                output.Add(statProp.ToCsv());
             }
 
-            return 0;
+            return output;
         }
     }
 }

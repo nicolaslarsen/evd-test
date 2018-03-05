@@ -113,19 +113,21 @@ namespace evd_test
                 StoreProperty<EvalueBEC> propStore = new StoreProperty<EvalueBEC>();
 
                 error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1, propStore);
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref secondFile, 2, propStore);
+                error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text, ref secondFile, 2, propStore);
 
                 if (error == 0)
                 {
-                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
+                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile, propStore);
     
                     File.WriteAllText(OutputFilename.Text, output);
 
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Process.Start(OutputFilename.Text);
-                    Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile,secondFile, propStore);
-                    stat.BuildStats();
-                    Console.WriteLine("All Done");
+                    Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, secondFile, propStore);
+                    List<string> stats = stat.BuildStats();
+                    // Random test, 
+                    // TODO: Add statistics file name to form and put it here.
+                    File.WriteAllLines("C:/users/nr/Desktop/ftest.csv", stats);
                 }
             }
             if (RadioLSB.Checked)
@@ -135,11 +137,11 @@ namespace evd_test
                 StoreProperty<EvalueLSB> propStore = new StoreProperty<EvalueLSB>();
 
                 error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1, propStore);
-                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref secondFile, 2, propStore);
+                error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text, ref secondFile, 2, propStore);
 
                 if (error == 0)
                 {
-                    string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);
+                    string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile, propStore);
     
                     File.WriteAllText(OutputFilename.Text, output);
                     

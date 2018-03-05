@@ -25,13 +25,6 @@ namespace evd_test
         public long FoersteUdbudsPris;
         public long SenesteUdsbudsPris;
 
-        public int GetEjdNr() => EjdNr;
-        public int GetKomNr() => KomNr;
-        public long GetEVaerdi() => ModelVaerdi;
-        public long GetHandelspris() => HandelsPris;
-        public DateTime GetHandelsDato() => HandelsDato;
-        public int GetErIUdbud() => ErIUdbud;
-
         // Just a null constructor
         public Evalue(){}
 
@@ -58,6 +51,7 @@ namespace evd_test
 
         public abstract void Init(string dataLine);
 
+        // TODO: Move this function to somewhere more accessible 
         public string DateCsv(DateTime dt)
         {
             if (dt == DateTime.MinValue)

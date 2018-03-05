@@ -33,7 +33,7 @@ namespace evd_test
                     T Evalue = new T();
                     Evalue.Init(dataLine);
                     Evalues.Add(Evalue);
-                    propStore.AddIndex(Evalue.GetKomNr(), Evalue.GetEjdNr(), i);
+                    propStore.AddIndex(Evalue.KomNr, Evalue.EjdNr, i);
                 }
                 catch (IndexOutOfRangeException e)
                 {
@@ -66,7 +66,7 @@ namespace evd_test
             return 0;
         }
 
-        public static string BuildOutputString(List<T> firstFile, List<T> secondFile)
+        public static string BuildOutputString(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
         {
             string output = firstFile[0].Header;
             Random rand = new Random();
@@ -84,10 +84,8 @@ namespace evd_test
                 }
                 T firstEjendom = firstFile[randIndex];
 
-                T secondEjendom = secondFile.Find(scndEjd =>
-                    firstEjendom.GetKomNr() == scndEjd.GetKomNr() &&
-                    firstEjendom.GetEjdNr() == scndEjd.GetEjdNr()
-                );
+                T secondEjendom = propStore.GetEjendom
+                    (firstEjendom.KomNr, firstEjendom.EjdNr, secondFile); 
 
                 output += firstEjendom.ToCsv() + secondEjendom.ToCsv() + "\n";
 
@@ -96,7 +94,7 @@ namespace evd_test
             }
 
             // Only get properties that are "i udbud"
-            List<T> ScndIUdbud = secondFile.Where(ejd => ejd.GetErIUdbud() == 1).ToList();
+            List<T> ScndIUdbud = secondFile.Where(ejd => ejd.ErIUdbud == 1).ToList();
 
             // i should be 5 at this point, so we get 5 more properties here
             while (i < 10)
