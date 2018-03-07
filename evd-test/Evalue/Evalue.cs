@@ -49,8 +49,6 @@ namespace evd_test
             SenesteUdsbudsPris = senesteUdsbudsPris;
         }
 
-        public abstract void Init(string dataLine);
-
         // TODO: Move this function to somewhere more accessible 
         public string DateCsv(DateTime dt)
         {
@@ -65,6 +63,7 @@ namespace evd_test
             return dt.ToString();
         }
 
+        public abstract void Init(string dataLine);
         public abstract string ToCsv();
         public abstract override string ToString();
     }
