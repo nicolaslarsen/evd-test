@@ -54,7 +54,35 @@ namespace evd_test
             return statProp;
         }
 
-        public List<string> BuildStats()
+        public List<StatisticProperty> BuildStats()
+        {
+            List<StatisticProperty> statList = new List<StatisticProperty>();
+
+            foreach (T Ejendom in FirstFile)
+            {
+                T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
+
+                StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
+
+                statList.Add(statProp);
+            }
+
+            return statList;
+        }
+
+        public List<string> BuildStatString(List<StatisticProperty> statList)
+        {
+            List<string> output = new List<string>();
+
+            foreach (StatisticProperty statProp in statList)
+            {
+                output.Add(statProp.ToCsv());
+            }
+
+            return output;
+        }
+
+        public List<string> BuildStatStringDirectly()
         {
             List<string> output = new List<string>();
 
@@ -66,7 +94,6 @@ namespace evd_test
 
                 output.Add(statProp.ToCsv());
             }
-
             return output;
         }
     }

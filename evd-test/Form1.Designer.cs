@@ -51,6 +51,10 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.TestCheck = new System.Windows.Forms.CheckBox();
             this.GraphCheck = new System.Windows.Forms.CheckBox();
+            this.GraphPanel = new System.Windows.Forms.Panel();
+            this.GraphFilenameButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.GraphFilename = new System.Windows.Forms.TextBox();
             this.CollectDataButton = new System.Windows.Forms.Button();
             this.FirstFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SecondFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -59,17 +63,14 @@
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.FormPanel = new System.Windows.Forms.Panel();
             this.StatFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.GraphPanel = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.GraphFilenameButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.GraphFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.OutputPanel.SuspendLayout();
             this.StatFilePanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.GraphPanel.SuspendLayout();
             this.CollectDataPanel.SuspendLayout();
             this.FormPanel.SuspendLayout();
-            this.GraphPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -77,7 +78,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.11454F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.88546F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 353F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.FirstFileButton, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FirstFilename, 2, 0);
@@ -98,7 +99,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.GraphPanel, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.GraphFilename, 2, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -125,7 +126,7 @@
             // 
             // FirstFileButton
             // 
-            this.FirstFileButton.Location = new System.Drawing.Point(147, 8);
+            this.FirstFileButton.Location = new System.Drawing.Point(146, 8);
             this.FirstFileButton.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.FirstFileButton.Name = "FirstFileButton";
             this.FirstFileButton.Size = new System.Drawing.Size(65, 23);
@@ -136,7 +137,7 @@
             // 
             // FirstFilename
             // 
-            this.FirstFilename.Location = new System.Drawing.Point(231, 10);
+            this.FirstFilename.Location = new System.Drawing.Point(229, 10);
             this.FirstFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.FirstFilename.Name = "FirstFilename";
             this.FirstFilename.Size = new System.Drawing.Size(338, 20);
@@ -155,7 +156,7 @@
             // 
             // SecondFilename
             // 
-            this.SecondFilename.Location = new System.Drawing.Point(231, 49);
+            this.SecondFilename.Location = new System.Drawing.Point(229, 49);
             this.SecondFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.SecondFilename.Name = "SecondFilename";
             this.SecondFilename.Size = new System.Drawing.Size(338, 20);
@@ -164,7 +165,7 @@
             // 
             // SecondFileButton
             // 
-            this.SecondFileButton.Location = new System.Drawing.Point(147, 47);
+            this.SecondFileButton.Location = new System.Drawing.Point(146, 47);
             this.SecondFileButton.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.SecondFileButton.Name = "SecondFileButton";
             this.SecondFileButton.Size = new System.Drawing.Size(65, 23);
@@ -177,7 +178,7 @@
             // 
             this.RadioLSB.AutoSize = true;
             this.RadioLSB.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.RadioLSB.Location = new System.Drawing.Point(231, 85);
+            this.RadioLSB.Location = new System.Drawing.Point(229, 85);
             this.RadioLSB.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.RadioLSB.Name = "RadioLSB";
             this.RadioLSB.Size = new System.Drawing.Size(45, 17);
@@ -190,7 +191,7 @@
             // 
             this.RadioBEC.AutoSize = true;
             this.RadioBEC.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.RadioBEC.Location = new System.Drawing.Point(147, 85);
+            this.RadioBEC.Location = new System.Drawing.Point(146, 85);
             this.RadioBEC.Margin = new System.Windows.Forms.Padding(10);
             this.RadioBEC.Name = "RadioBEC";
             this.RadioBEC.Size = new System.Drawing.Size(46, 17);
@@ -212,7 +213,7 @@
             // OutputFilename
             // 
             this.OutputFilename.Enabled = false;
-            this.OutputFilename.Location = new System.Drawing.Point(231, 265);
+            this.OutputFilename.Location = new System.Drawing.Point(229, 265);
             this.OutputFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputFilename.Name = "OutputFilename";
             this.OutputFilename.Size = new System.Drawing.Size(338, 20);
@@ -221,7 +222,7 @@
             // OutputPanel
             // 
             this.OutputPanel.Controls.Add(this.OutputFilenameButton);
-            this.OutputPanel.Location = new System.Drawing.Point(147, 265);
+            this.OutputPanel.Location = new System.Drawing.Point(146, 265);
             this.OutputPanel.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputPanel.Name = "OutputPanel";
             this.OutputPanel.Size = new System.Drawing.Size(65, 23);
@@ -264,7 +265,7 @@
             // StatFilePanel
             // 
             this.StatFilePanel.Controls.Add(this.StatFilenameButton);
-            this.StatFilePanel.Location = new System.Drawing.Point(147, 225);
+            this.StatFilePanel.Location = new System.Drawing.Point(146, 225);
             this.StatFilePanel.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.StatFilePanel.Name = "StatFilePanel";
             this.StatFilePanel.Size = new System.Drawing.Size(65, 23);
@@ -286,7 +287,7 @@
             // StatFilename
             // 
             this.StatFilename.Enabled = false;
-            this.StatFilename.Location = new System.Drawing.Point(231, 227);
+            this.StatFilename.Location = new System.Drawing.Point(229, 227);
             this.StatFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.StatFilename.Name = "StatFilename";
             this.StatFilename.Size = new System.Drawing.Size(338, 20);
@@ -296,7 +297,7 @@
             // 
             this.StatCheck.AutoSize = true;
             this.StatCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StatCheck.Location = new System.Drawing.Point(147, 127);
+            this.StatCheck.Location = new System.Drawing.Point(146, 127);
             this.StatCheck.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
             this.StatCheck.Name = "StatCheck";
             this.StatCheck.Size = new System.Drawing.Size(63, 17);
@@ -322,7 +323,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 236F));
             this.tableLayoutPanel2.Controls.Add(this.TestCheck, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.GraphCheck, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(221, 113);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(219, 113);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -354,6 +355,48 @@
             this.GraphCheck.TabIndex = 15;
             this.GraphCheck.Text = "Graf";
             this.GraphCheck.UseVisualStyleBackColor = true;
+            this.GraphCheck.CheckedChanged += new System.EventHandler(this.GraphCheck_CheckedChanged);
+            // 
+            // GraphPanel
+            // 
+            this.GraphPanel.Controls.Add(this.GraphFilenameButton);
+            this.GraphPanel.Location = new System.Drawing.Point(146, 303);
+            this.GraphPanel.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
+            this.GraphPanel.Name = "GraphPanel";
+            this.GraphPanel.Size = new System.Drawing.Size(65, 23);
+            this.GraphPanel.TabIndex = 18;
+            this.GraphPanel.MouseEnter += new System.EventHandler(this.GraphPanel_MouseEnter);
+            this.GraphPanel.MouseLeave += new System.EventHandler(this.GraphPanel_MouseLeave);
+            // 
+            // GraphFilenameButton
+            // 
+            this.GraphFilenameButton.Enabled = false;
+            this.GraphFilenameButton.Location = new System.Drawing.Point(0, 0);
+            this.GraphFilenameButton.Name = "GraphFilenameButton";
+            this.GraphFilenameButton.Size = new System.Drawing.Size(65, 23);
+            this.GraphFilenameButton.TabIndex = 0;
+            this.GraphFilenameButton.Text = "Gem som";
+            this.GraphFilenameButton.UseVisualStyleBackColor = true;
+            this.GraphFilenameButton.Click += new System.EventHandler(this.GraphFilenameButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(10, 307);
+            this.label7.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(97, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Graf output filnavn:";
+            // 
+            // GraphFilename
+            // 
+            this.GraphFilename.Enabled = false;
+            this.GraphFilename.Location = new System.Drawing.Point(229, 303);
+            this.GraphFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
+            this.GraphFilename.Name = "GraphFilename";
+            this.GraphFilename.Size = new System.Drawing.Size(338, 20);
+            this.GraphFilename.TabIndex = 20;
             // 
             // CollectDataButton
             // 
@@ -409,42 +452,6 @@
             this.StatFileDialog.DefaultExt = "csv";
             this.StatFileDialog.FileName = "Statistik";
             // 
-            // GraphPanel
-            // 
-            this.GraphPanel.Controls.Add(this.GraphFilenameButton);
-            this.GraphPanel.Location = new System.Drawing.Point(147, 303);
-            this.GraphPanel.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
-            this.GraphPanel.Name = "GraphPanel";
-            this.GraphPanel.Size = new System.Drawing.Size(65, 23);
-            this.GraphPanel.TabIndex = 18;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 307);
-            this.label7.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Graf output filnavn:";
-            // 
-            // GraphFilenameButton
-            // 
-            this.GraphFilenameButton.Location = new System.Drawing.Point(0, 0);
-            this.GraphFilenameButton.Name = "GraphFilenameButton";
-            this.GraphFilenameButton.Size = new System.Drawing.Size(65, 23);
-            this.GraphFilenameButton.TabIndex = 0;
-            this.GraphFilenameButton.Text = "Gem som";
-            this.GraphFilenameButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(231, 303);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(338, 20);
-            this.textBox1.TabIndex = 20;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,9 +466,9 @@
             this.StatFilePanel.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.GraphPanel.ResumeLayout(false);
             this.CollectDataPanel.ResumeLayout(false);
             this.FormPanel.ResumeLayout(false);
-            this.GraphPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -502,7 +509,8 @@
         private System.Windows.Forms.Panel GraphPanel;
         private System.Windows.Forms.Button GraphFilenameButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox GraphFilename;
+        private System.Windows.Forms.SaveFileDialog GraphFileDialog;
     }
 }
 

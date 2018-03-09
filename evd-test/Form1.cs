@@ -13,7 +13,7 @@ namespace evd_test
         {
             InitializeComponent();
         }
-        // TODO: FINISH GRAPH ON FORM
+
         private ToolTip tt = new ToolTip
         {
             InitialDelay = 0,
@@ -55,9 +55,15 @@ namespace evd_test
                         RadioBEC.Checked = true;
                     }
                     TestCheck.Checked = true;
+
                     if (StatCheck.Checked && StatFilename.Text == "")
                     {
                         StatFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Statistik.csv";
+                    }
+
+                    if (GraphCheck.Checked && GraphFilename.Text == "")
+                    {
+                        GraphFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Graph.csv";
                     }
                 }
             }
@@ -128,15 +134,24 @@ namespace evd_test
 
                 if (error == 0)
                 {
-                    if (StatCheck.Checked)
+                    if (StatCheck.Checked || TestCheck.Checked)
                     {
                         Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, secondFile, propStore);
-                        List<string> stats = stat.BuildStats();
+                        List<StatisticProperty> statList = stat.BuildStats();
 
-                        File.WriteAllLines(StatFilename.Text, stats);
+                        if (StatCheck.Checked)
+                        {
+                            List<string> stats = stat.BuildStatString(statList);
+                            File.WriteAllLines(StatFilename.Text, stats);
+                        }
+
+                        if (GraphCheck.Checked)
+                        {
+                            // TODO: Implement graph
+                        }
                     }
+                    
                     if (TestCheck.Checked)
-
                     {
                         string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile, propStore);
 
@@ -158,13 +173,20 @@ namespace evd_test
 
                 if (error == 0)
                 {
-                    if (StatCheck.Checked)
+                    if (StatCheck.Checked || GraphCheck.Checked)
                     {
-                        
                         Statistic<EvalueLSB> stat = new Statistic<EvalueLSB>(firstFile, secondFile, propStore);
-                        List<string> stats = stat.BuildStats();
+                        List<StatisticProperty> statList = stat.BuildStats();
 
-                        File.WriteAllLines(StatFilename.Text, stats);
+                        if (StatCheck.Checked)
+                        {
+                            List<string> stats = stat.BuildStatString(statList);
+                            File.WriteAllLines(StatFilename.Text, stats);
+                        }
+                        if (GraphCheck.Checked)
+                        {
+                            // TODO: Implement graph
+                        }
                     }
 
                     if (TestCheck.Checked)
@@ -187,7 +209,7 @@ namespace evd_test
 
         private void CollectDataButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(OutputFilename.Text))
+            if (File.Exists(OutputFilename.Text) && TestCheck.Checked)
             { 
                 DialogResult FileExistsResult = MessageBox.Show("Output filen: " + OutputFilename.Text + 
                     " findes allerede, vil du overskrive den?",
@@ -199,9 +221,21 @@ namespace evd_test
                 }
             }
             
-            if (File.Exists(StatFilename.Text))
+            if (File.Exists(StatFilename.Text) && TestCheck.Checked)
             { 
                 DialogResult FileExistsResult = MessageBox.Show("Statistik output filen: " + StatFilename.Text + 
+                    " findes allerede, vil du overskrive den?",
+                    "Output file exists",MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (!(FileExistsResult == DialogResult.Yes))
+                {
+                    return;
+                }
+            }
+
+            if (File.Exists(GraphFilename.Text) && GraphCheck.Checked)
+            { 
+                DialogResult FileExistsResult = MessageBox.Show("Graf filen: " + GraphFilename.Text + 
                     " findes allerede, vil du overskrive den?",
                     "Output file exists",MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -233,7 +267,7 @@ namespace evd_test
 
         private void CheckChanged()
         {
-            if (!TestCheck.Checked && !StatCheck.Checked)
+            if (!TestCheck.Checked && !StatCheck.Checked && !GraphCheck.Checked)
             {
                 CollectDataButton.Enabled = false;
             }
@@ -280,6 +314,38 @@ namespace evd_test
             if (StatFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StatFilename.Text = StatFileDialog.FileName;
+            }
+        }
+
+        private void GraphCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            GraphFilenameButton.Enabled = GraphCheck.Checked;
+            GraphFilename.Enabled = GraphCheck.Checked;
+
+            if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text) && GraphFilename.Text == "")
+            {
+                GraphFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Statistik.csv";
+            }
+            CheckChanged();
+        }
+
+        private void GraphPanel_MouseEnter(object sender, EventArgs e)
+        {
+            tt.Show(string.Empty, GraphFilenameButton);
+            tt.Show("Tjek at begge input-filer eksisterer", GraphFilenameButton, 
+                GraphFilenameButton.Width/3, GraphFilenameButton.Height * -2);
+        }
+
+        private void GraphPanel_MouseLeave(object sender, EventArgs e)
+        {
+            MouseLeft();
+        }
+
+        private void GraphFilenameButton_Click(object sender, EventArgs e)
+        {
+            if (GraphFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                GraphFilename.Text = GraphFileDialog.FileName;
             }
         }
     }

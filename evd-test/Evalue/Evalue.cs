@@ -49,20 +49,6 @@ namespace evd_test
             SenesteUdsbudsPris = senesteUdsbudsPris;
         }
 
-        // TODO: Move this function to somewhere more accessible 
-        public string DateCsv(DateTime dt)
-        {
-            if (dt == DateTime.MinValue)
-            {
-                return "";
-            }
-            if (dt.TimeOfDay.TotalSeconds == 0)
-            {
-                return dt.Date.ToString("yyyy-MM-dd");
-            }
-            return dt.ToString();
-        }
-
         public abstract void Init(string dataLine);
         public abstract string ToCsv();
         public abstract override string ToString();

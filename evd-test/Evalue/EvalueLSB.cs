@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evd_test.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,22 +65,22 @@ namespace evd_test
         {
             string output = "" +
             LeveranceID + ";" +
-            DateCsv(LeveranceDato) + ";" +
+            CommonFunc.DateCsv(LeveranceDato) + ";" +
             EjdNr + ";" +
             KomNr + ";" +
             ModelVaerdi + ";" +
-            DateCsv(ModelDato) + ";" +
+            CommonFunc.DateCsv(ModelDato) + ";" +
             HandelsPris + ";" +
-            DateCsv(HandelsDato) + ";" +
-            DateCsv(HandelSkoedeDato) + ";" +
+            CommonFunc.DateCsv(HandelsDato) + ";" +
+            CommonFunc.DateCsv(HandelSkoedeDato) + ";" +
             HandelMatch + ";" +
             ErIUdbud + ";" +
-            DateCsv(FoersteUdbudsdato) + ";" +
-            DateCsv(SenesteUdbudsDato) + ";" +
+            CommonFunc.DateCsv(FoersteUdbudsdato) + ";" +
+            CommonFunc.DateCsv(SenesteUdbudsDato) + ";" +
             FoersteUdbudsPris + ";" +
             SenesteUdsbudsPris + ";" +
             VurderingsAar + ";" +
-            DateCsv(VurderingsDato) + ";" +
+            CommonFunc.DateCsv(VurderingsDato) + ";" +
             Ejendomsvaerdi + ";" +
             Grundvaerdi + "\n";
             return output;
@@ -89,22 +90,22 @@ namespace evd_test
         {
             string output = "" +
             "LeveranceID: " + LeveranceID + "\n" +
-            "LeveranceDato: " + DateCsv(LeveranceDato) + "\n" +
+            "LeveranceDato: " + CommonFunc.DateCsv(LeveranceDato) + "\n" +
             "EjdNr: " + EjdNr + "\n" +
             "KomNr: " + KomNr + "\n" +
             "ModelVaerdi: " + ModelVaerdi + "\n" +
-            "DateCsv(ModelDato: )" + DateCsv(ModelDato) + "\n" +
+            "CommonFunc.DateCsv(ModelDato: )" + CommonFunc.DateCsv(ModelDato) + "\n" +
             "HandelsPris: " + HandelsPris + "\n" +
-            "HandelsDato: " + DateCsv(HandelsDato) + "\n" +
-            "HandelSkoedeDato: " + DateCsv(HandelSkoedeDato) + "\n" +
+            "HandelsDato: " + CommonFunc.DateCsv(HandelsDato) + "\n" +
+            "HandelSkoedeDato: " + CommonFunc.DateCsv(HandelSkoedeDato) + "\n" +
             "HandelMatch: " + HandelMatch + "\n" +
             "ErIUdbud: " + ErIUdbud + "\n" +
-            "FoersteUdbudsdato: " + DateCsv(FoersteUdbudsdato) + "\n" +
-            "SenesteUdbudsDato: " + DateCsv(SenesteUdbudsDato) + "\n" +
+            "FoersteUdbudsdato: " + CommonFunc.DateCsv(FoersteUdbudsdato) + "\n" +
+            "SenesteUdbudsDato: " + CommonFunc.DateCsv(SenesteUdbudsDato) + "\n" +
             "FoersteUdbudsPris: " + FoersteUdbudsPris + "\n" +
             "SenesteUdsbudsPris: " + SenesteUdsbudsPris + "\n" +
             "VurderingsAar: " + VurderingsAar + "\n" +
-            "DateCsv(VurderingsDato: )" + DateCsv(VurderingsDato) + "\n" +
+            "CommonFunc.DateCsv(VurderingsDato: )" + CommonFunc.DateCsv(VurderingsDato) + "\n" +
             "Ejendomsvaerdi: " + Ejendomsvaerdi + "\n" +
             "Grundvaerdi: " + Grundvaerdi + "\n";
             return output;

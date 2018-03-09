@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evd_test.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,11 +41,12 @@ namespace evd_test
         {
             string output = "";
 
-            // Just need the DateCsv function.
+            // Just need the CommonFunc.DateCsv function.
             EvalueBEC dummy = new EvalueBEC();
+            CommonFunc lel = new CommonFunc();
 
             output = KomNr + ";" + EjdNr + ";" + EvalueOld + ";" + EvalueNew + ";"
-                + Handelspris + ";" + dummy.DateCsv(HandelsDato) + ";" + EvalueNewCompOld + ";" 
+                + Handelspris + ";" + CommonFunc.DateCsv(HandelsDato) + ";" + EvalueNewCompOld + ";" 
                 + EvalueNewCompHandelspris; 
 
             return output; 

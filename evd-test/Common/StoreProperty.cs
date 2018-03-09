@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace evd_test 
 {
     // Class is used to store indexes for properties somewhat efficiently
-    public class StoreProperty<T> where T: Evalue, new()
+    public class StoreProperty<T> 
     {
         // Uses komkode and ejdnr to find index in the original array
         Dictionary<int, Dictionary<int, int>> Indexes;
@@ -50,7 +50,7 @@ namespace evd_test
             int index = this.FindIndex(komKode, ejdNr);
             if (0 > index)
             {
-                return null; 
+                return default(T); 
             }
 
             return properties[index];
