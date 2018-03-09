@@ -33,6 +33,7 @@ namespace evd_test
             };
         }
 
+
         private void InputTextChanged()
         {
             if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text))
@@ -148,6 +149,12 @@ namespace evd_test
                         if (GraphCheck.Checked)
                         {
                             // TODO: Implement graph
+                            Graph graph = new Graph(statList);
+                            graph.FillGraph();
+                            foreach(string derp in graph.BuildOutputString())
+                            {
+                                Console.WriteLine(derp);
+                            }
                         }
                     }
                     
@@ -186,6 +193,9 @@ namespace evd_test
                         if (GraphCheck.Checked)
                         {
                             // TODO: Implement graph
+                            Graph graph = new Graph(statList);
+                            graph.FillGraph();
+                            Console.WriteLine(graph.BuildOutputString());
                         }
                     }
 
@@ -221,7 +231,7 @@ namespace evd_test
                 }
             }
             
-            if (File.Exists(StatFilename.Text) && TestCheck.Checked)
+            if (File.Exists(StatFilename.Text) && StatCheck.Checked)
             { 
                 DialogResult FileExistsResult = MessageBox.Show("Statistik output filen: " + StatFilename.Text + 
                     " findes allerede, vil du overskrive den?",
@@ -324,7 +334,7 @@ namespace evd_test
 
             if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text) && GraphFilename.Text == "")
             {
-                GraphFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Statistik.csv";
+                GraphFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Graph.csv";
             }
             CheckChanged();
         }

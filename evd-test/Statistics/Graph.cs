@@ -8,10 +8,79 @@ namespace evd_test
 {
     public class Graph
     {
-        
+        // 1 for every 5% up to 100% and two extra for 0 and 100+% 
+        public int[] GraphPoints = new int[22];
+        public List<StatisticProperty> StatList;
+
         public Graph()
         {
         }
-    }
 
+        public Graph(List<StatisticProperty> statList)
+        {
+            StatList = statList;
+        }
+
+        public int Categorize(Decimal evalueDiff)
+        {
+            // The smallest group aside from 0
+            int group = 0;
+
+            if (evalueDiff == 0)
+            {
+                return 0;
+            }
+
+            Decimal evalueDiffGroup = (evalueDiff * 100) - 100;
+
+            while (group <= 100)
+            {
+                if (evalueDiffGroup <= group)
+                {
+                    return group / 5;
+                }
+                group += 5;
+            }
+
+            return 21;
+        }
+
+        public int FillGraph()
+        {
+            foreach (StatisticProperty statProp in StatList)
+            {
+                Decimal evalueDiff = statProp.EvalueNewCompOld;
+                GraphPoints[Categorize(evalueDiff)]++;
+            }
+            return 0;
+        }
+
+        public List<string> BuildOutputString()
+        {
+            List<string> GraphStrings = new List<string>();
+
+            for (int i = 0; i < GraphPoints.Length; i++){
+                int group = i * 5;
+                string graphPointStr = ""; 
+                
+                switch (group)
+                {
+                    case 0:
+                        graphPointStr = "0%;" + GraphPoints[i];
+                        break;
+                    case 105:
+                        graphPointStr = "105%;" + GraphPoints[i];
+                        break;
+                    default:
+                        graphPointStr = group - 5 + "-" + group + "%;" + GraphPoints[i];
+                        break;
+                }
+
+                GraphStrings.Add(graphPointStr);
+            }
+
+            
+            return GraphStrings;
+        }
+    }
 }
