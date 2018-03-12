@@ -14,6 +14,8 @@ namespace evd_test
         // contains the indexes for an ejendom in the "file" arrays
         private StoreProperty<T> PropStore;
 
+        private string Header = "KomNr;EjdNr;Gammel e-value;Ny e-value;Handelspris;Handelsdato;Ny e-value i forhold til gammel; Ny e-value i forhold til handelspris";
+
         public Statistic(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
         {
             FirstFile = firstFile;
@@ -63,6 +65,14 @@ namespace evd_test
                 T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
 
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
+                if (statProp.EvalueOld == 0)
+                {
+                    Console.WriteLine(
+                        "EvalueOld: " + statProp.EvalueOld + "\n" +
+                        "EvalueNew: " + statProp.EvalueNew + "\n" +
+                        "Comparison: " + statProp.EvalueNewCompOld + "\n"
+                    );
+                }
 
                 statList.Add(statProp);
             }
@@ -72,7 +82,11 @@ namespace evd_test
 
         public List<string> BuildStatString(List<StatisticProperty> statList)
         {
-            List<string> output = new List<string>();
+            // New list, just add the header
+            List<string> output = new List<string>
+            {
+                Header
+            };
 
             foreach (StatisticProperty statProp in statList)
             {
@@ -84,9 +98,13 @@ namespace evd_test
 
         public List<string> BuildStatStringDirectly()
         {
-            List<string> output = new List<string>();
+            // New list, just add the header
+            List<string> output = new List<string>
+            {
+                Header
+            };
 
-            foreach(T Ejendom in FirstFile)
+            foreach (T Ejendom in FirstFile)
             {
                 T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
 

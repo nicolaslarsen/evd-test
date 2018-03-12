@@ -41,10 +41,6 @@ namespace evd_test
         {
             string output = "";
 
-            // Just need the CommonFunc.DateCsv function.
-            EvalueBEC dummy = new EvalueBEC();
-            CommonFunc lel = new CommonFunc();
-
             output = KomNr + ";" + EjdNr + ";" + EvalueOld + ";" + EvalueNew + ";"
                 + Handelspris + ";" + CommonFunc.DateCsv(HandelsDato) + ";" + EvalueNewCompOld + ";" 
                 + EvalueNewCompHandelspris; 

@@ -26,12 +26,19 @@ namespace evd_test
             // The smallest group aside from 0
             int group = 0;
 
+            // Just an extra check, even though we will probably check before calling the function
             if (evalueDiff == 0)
             {
-                return 0;
+                return -1;
             }
 
             Decimal evalueDiffGroup = (evalueDiff * 100) - 100;
+
+            // Get the absolute value
+            if (evalueDiffGroup < 0)
+            {
+                evalueDiffGroup *= -1; 
+            }
 
             while (group <= 100)
             {
@@ -49,8 +56,19 @@ namespace evd_test
         {
             foreach (StatisticProperty statProp in StatList)
             {
-                Decimal evalueDiff = statProp.EvalueNewCompOld;
-                GraphPoints[Categorize(evalueDiff)]++;
+                int group = Categorize(statProp.EvalueNewCompOld);
+                if (group >= 0)
+                {
+                    if (group == 0)
+                    {
+                        Console.WriteLine(
+                            "Old: " + statProp.EvalueOld + "\n" +
+                            "New: " + statProp.EvalueNew + "\n" +
+                            "Diff: " + statProp.EvalueNewCompOld + "\n"
+                        );
+                    }
+                    GraphPoints[group]++;
+                }
             }
             return 0;
         }
@@ -69,7 +87,7 @@ namespace evd_test
                         graphPointStr = "0%;" + GraphPoints[i];
                         break;
                     case 105:
-                        graphPointStr = "105%;" + GraphPoints[i];
+                        graphPointStr = "Over 100%;" + GraphPoints[i];
                         break;
                     default:
                         graphPointStr = group - 5 + "-" + group + "%;" + GraphPoints[i];
@@ -78,7 +96,6 @@ namespace evd_test
 
                 GraphStrings.Add(graphPointStr);
             }
-
             
             return GraphStrings;
         }
