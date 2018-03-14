@@ -59,13 +59,13 @@ namespace evd_test
                 int group = Categorize(statProp.EvalueNewCompOld);
                 if (group >= 0)
                 {
-                    if (group == 0)
-                    {
+                    
+                    if (group == 1) {
                         Console.WriteLine(
-                            "Old: " + statProp.EvalueOld + "\n" +
-                            "New: " + statProp.EvalueNew + "\n" +
-                            "Diff: " + statProp.EvalueNewCompOld + "\n"
-                        );
+                                "Group: " + group + "\n" +
+                                "Old: " + statProp.EvalueOld + "\n" +
+                                "New: " + statProp.EvalueNew + "\n" +
+                                "Diff: " + statProp.EvalueNewCompOld + "\n");
                     }
                     GraphPoints[group]++;
                 }
