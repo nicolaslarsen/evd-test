@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,22 +55,30 @@ namespace evd_test
 
         public int FillGraph()
         {
+            List<string> Over100 = new List<string>();
+
             foreach (StatisticProperty statProp in StatList)
             {
                 int group = Categorize(statProp.EvalueNewCompOld);
                 if (group >= 0)
                 {
-                    
-                    if (group == 1) {
-                        Console.WriteLine(
-                                "Group: " + group + "\n" +
-                                "Old: " + statProp.EvalueOld + "\n" +
-                                "New: " + statProp.EvalueNew + "\n" +
-                                "Diff: " + statProp.EvalueNewCompOld + "\n");
+                    if (group == 0)
+                    {
+                        Over100.Add(statProp.ToCsv());
                     }
+                    
+                    //if (group == 1) {
+                    //    Console.WriteLine(
+                    //            "Group: " + group + "\n" +
+                    //            "Old: " + statProp.EvalueOld + "\n" +
+                    //            "New: " + statProp.EvalueNew + "\n" +
+                    //            "Diff: " + statProp.EvalueNewCompOld + "\n");
+                    //}
                     GraphPoints[group]++;
                 }
             }
+            File.WriteAllLines("testestestest.csv", Over100);
+            
             return 0;
         }
 
@@ -79,7 +88,7 @@ namespace evd_test
 
             for (int i = 0; i < GraphPoints.Length; i++){
                 int group = i * 5;
-                string graphPointStr = ""; 
+                string graphPointStr = "";
                 
                 switch (group)
                 {
