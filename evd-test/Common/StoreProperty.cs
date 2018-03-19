@@ -45,11 +45,14 @@ namespace evd_test
             return -1;
         }
 
+        public int counter = 0;
         public T GetEjendom(int komKode, int ejdNr, List<T> properties)
         {
             int index = this.FindIndex(komKode, ejdNr);
             if (0 > index)
             {
+                Console.WriteLine(counter);
+                counter++;
                 return default(T); 
             }
 

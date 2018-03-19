@@ -62,7 +62,8 @@ namespace evd_test
                 int group = Categorize(statProp.EvalueNewCompOld);
                 if (group >= 0)
                 {
-                    if (group == 0)
+                    // TO DELETE
+                    if (group == 21)
                     {
                         Over100.Add(statProp.ToCsv());
                     }
@@ -74,6 +75,8 @@ namespace evd_test
                     //            "New: " + statProp.EvalueNew + "\n" +
                     //            "Diff: " + statProp.EvalueNewCompOld + "\n");
                     //}
+
+                    // Except this
                     GraphPoints[group]++;
                 }
             }

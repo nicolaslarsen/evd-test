@@ -47,6 +47,11 @@ namespace evd_test
                     evalueNewCompHandelspris = (Decimal) evalueNew / (Decimal) handelspris;
                 }
             }
+            else
+            {
+                Console.WriteLine(komNr + ";" + ejdNr + ";" + evalueOld + ";" + evalueNew + ";" +
+                    handelspris + ";" + handelsDato + ";" + evalueNewCompOld + ";" + evalueNewCompHandelspris);
+            }
 
 
             StatisticProperty statProp = new StatisticProperty(komNr, ejdNr, 
@@ -65,7 +70,8 @@ namespace evd_test
                 T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
 
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
-                if (statProp.EvalueOld == 0)
+                // TO DELETE
+                if (statProp.EvalueNew == 0)
                 {
                     Console.WriteLine(
                         "EvalueOld: " + statProp.EvalueOld + "\n" +
