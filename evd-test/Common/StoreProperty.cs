@@ -49,11 +49,11 @@ namespace evd_test
         public T GetEjendom(int komKode, int ejdNr, List<T> properties)
         {
             int index = this.FindIndex(komKode, ejdNr);
-            if (0 > index)
+            if (index < 0)
             {
                 Console.WriteLine(counter);
                 counter++;
-                return default(T); 
+                return default; 
             }
 
             return properties[index];

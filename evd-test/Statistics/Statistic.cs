@@ -16,6 +16,7 @@ namespace evd_test
 
         private string Header = "KomNr;EjdNr;Gammel e-value;Ny e-value;Handelspris;Handelsdato;Ny e-value i forhold til gammel; Ny e-value i forhold til handelspris";
 
+        public Statistic() { }
         public Statistic(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
         {
             FirstFile = firstFile;
@@ -47,12 +48,6 @@ namespace evd_test
                     evalueNewCompHandelspris = (Decimal) evalueNew / (Decimal) handelspris;
                 }
             }
-            else
-            {
-                Console.WriteLine(komNr + ";" + ejdNr + ";" + evalueOld + ";" + evalueNew + ";" +
-                    handelspris + ";" + handelsDato + ";" + evalueNewCompOld + ";" + evalueNewCompHandelspris);
-            }
-
 
             StatisticProperty statProp = new StatisticProperty(komNr, ejdNr, 
                 evalueOld, evalueNew, handelspris, handelsDato, evalueNewCompOld,
