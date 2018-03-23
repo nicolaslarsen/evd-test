@@ -21,10 +21,12 @@ namespace evd_test
 
             //EvalueBECTest becTest = new EvalueBECTest();
             //becTest.TestEvalueBEC();
-            
-            StatisticsTest statTest = new StatisticsTest();
-            statTest.TestStatistics();
 
+            //StatisticsTest statTest = new StatisticsTest();
+            //statTest.TestStatistics();
+
+            EvalueStorageTest evalStoreTest = new EvalueStorageTest();
+            evalStoreTest.TestEvalueStorage();
         }
     }
 }

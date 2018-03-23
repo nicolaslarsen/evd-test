@@ -59,7 +59,7 @@ namespace evd_test.Test
             uniqueEjd.Init("69;69;2018-02-09T16:30:30.033;2012-05-29;1;26510;253;3117000;2018-02-01;2600000;2010-02-12;0;;;0;0;2532179017");
 
             localOldFile.Add(uniqueEjd);
-            stat = new Statistic<EvalueBEC>(localOldFile, localNewFile, localPropStoreNew);
+            stat = new Statistic<EvalueBEC>(localOldFile, localNewFile);
 
             List<StatisticProperty> statList = stat.BuildStats();
 

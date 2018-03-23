@@ -8,20 +8,16 @@ namespace evd_test
 {
     public class Statistic<T> where T: Evalue, new()
     {
-        private List<T> FirstFile;
-        private List<T> SecondFile;
-        // Stores the komkode and ejdnr in dictionaries, 
-        // contains the indexes for an ejendom in the "file" arrays
-        private StoreProperty<T> PropStore;
+        private EvalueStorage<T> FirstFile;
+        private EvalueStorage<T> SecondFile;
 
         private string Header = "KomNr;EjdNr;Gammel e-value;Ny e-value;Handelspris;Handelsdato;Ny e-value i forhold til gammel; Ny e-value i forhold til handelspris";
 
         public Statistic() { }
-        public Statistic(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
+        public Statistic(EvalueStorage<T> firstFile, EvalueStorage<T> secondFile) 
         {
             FirstFile = firstFile;
             SecondFile = secondFile;
-            PropStore = propStore;
         } 
 
         public StatisticProperty CompareProperties(T first, T scnd)
@@ -48,6 +44,10 @@ namespace evd_test
                     evalueNewCompHandelspris = (Decimal) evalueNew / (Decimal) handelspris;
                 }
             }
+            else
+            {
+                Console.WriteLine(komNr + ";" + ejdNr + ";" + evalueOld + ";" + evalueNew + ";" + evalueNewCompOld);
+            }
 
             StatisticProperty statProp = new StatisticProperty(komNr, ejdNr, 
                 evalueOld, evalueNew, handelspris, handelsDato, evalueNewCompOld,
@@ -59,6 +59,7 @@ namespace evd_test
         public List<StatisticProperty> BuildStats()
         {
             List<StatisticProperty> statList = new List<StatisticProperty>();
+
 
             foreach (T Ejendom in FirstFile)
             {

@@ -51,6 +51,7 @@
     <Compile Include="Evalue\Evalue.cs" />
     <Compile Include="Evalue\EvalueBEC.cs" />
     <Compile Include="Evalue\EvalueLSB.cs" />
+    <Compile Include="Evalue\EvalueStorage.cs" />
     <Compile Include="Evalue\EvalueTest.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -65,6 +66,7 @@
     <Compile Include="Statistics\StatisticProperty.cs" />
     <Compile Include="Common\StoreProperty.cs" />
     <Compile Include="Test\EvalueBECTest.cs" />
+    <Compile Include="Test\EvalueStorageTest.cs" />
     <Compile Include="Test\StatisticsTest.cs" />
     <Compile Include="Test\StorePropertyTest.cs" />
     <EmbeddedResource Include="Form1.resx">
