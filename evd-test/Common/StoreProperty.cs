@@ -34,14 +34,13 @@ namespace evd_test
 
         public int FindIndex(int komKode, int ejdNr)
         {
-            try
-            {
-                return Indexes[komKode][ejdNr];
+            if (Indexes.ContainsKey(komKode)) {
+                if (Indexes[komKode].ContainsKey(ejdNr)){
+                    return Indexes[komKode][ejdNr];
+                }
             }
-            catch (KeyNotFoundException)
-            {
-                Console.WriteLine("KeyNotFound: KomNr: " + komKode + " EjdNr: " + ejdNr);
-            }
+            Console.WriteLine("KeyNotFound: KomNr: " + komKode + " EjdNr: " + ejdNr);
+
             return -1;
         }
 
@@ -57,6 +56,11 @@ namespace evd_test
             }
 
             return properties[index];
+        }
+
+        public int Length()
+        {
+            return Indexes.Values.Sum(x => x.Count());
         }
     }
 }

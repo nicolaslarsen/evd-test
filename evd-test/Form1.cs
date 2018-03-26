@@ -126,18 +126,17 @@ namespace evd_test
 
             if (RadioBEC.Checked)
             {
-                List<EvalueBEC> firstFile = new List<EvalueBEC>();
-                List<EvalueBEC> secondFile = new List<EvalueBEC>();
-                StoreProperty<EvalueBEC> propStore = new StoreProperty<EvalueBEC>();
+                EvalueStorage<EvalueBEC> firstFile = new EvalueStorage<EvalueBEC>();
+                EvalueStorage<EvalueBEC> secondFile = new EvalueStorage<EvalueBEC>();
 
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1, propStore);
-                error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text, ref secondFile, 2, propStore);
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
+                error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text, ref secondFile, 2);
 
                 if (error == 0)
                 {
                     if (StatCheck.Checked || TestCheck.Checked)
                     {
-                        Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, secondFile, propStore);
+                        Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, secondFile);
                         List<StatisticProperty> statList = stat.BuildStats();
 
                         if (StatCheck.Checked)
@@ -160,7 +159,7 @@ namespace evd_test
                     
                     if (TestCheck.Checked)
                     {
-                        string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile, propStore);
+                        string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
 
                         File.WriteAllText(OutputFilename.Text, output);
                         Process.Start(OutputFilename.Text);
@@ -171,19 +170,17 @@ namespace evd_test
             }
             if (RadioLSB.Checked)
             {
-                List<EvalueLSB> firstFile = new List<EvalueLSB>();
-                List<EvalueLSB> secondFile = new List<EvalueLSB>();
-                StoreProperty<EvalueLSB> propStoreOld = new StoreProperty<EvalueLSB>();
-                StoreProperty<EvalueLSB> propStoreNew = new StoreProperty<EvalueLSB>();
+                EvalueStorage<EvalueLSB> firstFile = new EvalueStorage<EvalueLSB>();
+                EvalueStorage<EvalueLSB> secondFile = new EvalueStorage<EvalueLSB>();
 
-                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1, propStoreOld);
-                error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text, ref secondFile, 2, propStoreNew);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
+                error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text, ref secondFile, 2);
 
                 if (error == 0)
                 {
                     if (StatCheck.Checked || GraphCheck.Checked)
                     {
-                        Statistic<EvalueLSB> stat = new Statistic<EvalueLSB>(firstFile, secondFile, propStoreNew);
+                        Statistic<EvalueLSB> stat = new Statistic<EvalueLSB>(firstFile, secondFile);
                         List<StatisticProperty> statList = stat.BuildStats();
 
                         if (StatCheck.Checked)
@@ -202,7 +199,7 @@ namespace evd_test
 
                     if (TestCheck.Checked)
                     {
-                        string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile, propStoreNew);
+                        string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);
 
                         File.WriteAllText(OutputFilename.Text, output);
                         Process.Start(OutputFilename.Text);

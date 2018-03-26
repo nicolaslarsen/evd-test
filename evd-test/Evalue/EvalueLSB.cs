@@ -15,29 +15,34 @@ namespace evd_test
         private DateTime VurderingsDato;
         private long Ejendomsvaerdi;
         private long Grundvaerdi;
+
+        public override string Header()
+        {
+            return "LeveranceNummer" + ";" +
+                "LeveranceDato" + ";" +
+                "EjdNr" + ";" +
+                "KomNr" + ";" +
+                "ModelVaerdi" + ";" +
+                "ModelDato" + ";" +
+                "HandelPris" + ";" +
+                "HandelDato" + ";" +
+                "HandelSkoedeDato" + ";" +
+                "HandelMatch" + ";" +
+                "ErIUdbud" + ";" +
+                "FoersteUdbudsDato" + ";" +
+                "SenesteUdbudsDato" + ";" +
+                "FoersteUdsbudsPris" + ";" +
+                "SenesteUdbudsPris" + ";" +
+                "Vurderingsaar" + ";" +
+                "Vurderingsdato" + ";" +
+                "Ejendomsvaerdi" + ";" +
+                "Grundvaerdi" + "\n";
+        }
+
+
   
         public override void Init(string dataLine)
         {
-            Header = "LeveranceNummer" + ";" +
-            "LeveranceDato" + ";" +
-            "EjdNr" + ";" +
-            "KomNr" + ";" +
-            "ModelVaerdi" + ";" +
-            "ModelDato" + ";" +
-            "HandelPris" + ";" +
-            "HandelDato" + ";" +
-            "HandelSkoedeDato" + ";" +
-            "HandelMatch" + ";" +
-            "ErIUdbud" + ";" +
-            "FoersteUdbudsDato" + ";" +
-            "SenesteUdbudsDato" + ";" +
-            "FoersteUdsbudsPris" + ";" +
-            "SenesteUdbudsPris" + ";" +
-            "Vurderingsaar" + ";" +
-            "Vurderingsdato" + ";" +
-            "Ejendomsvaerdi" + ";" +
-            "Grundvaerdi" + "\n";
-
             string[] fields = dataLine.Split(';');
 
             Int32.TryParse(fields[0], out LeveranceID);

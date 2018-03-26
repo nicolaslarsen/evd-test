@@ -9,8 +9,6 @@ namespace evd_test
 {
     public abstract class Evalue
     {
-        public string Header { get; set; }
-
         public int LeveranceID;
         public DateTime LeveranceDato;
         public int EjdNr;
@@ -49,6 +47,7 @@ namespace evd_test
             SenesteUdsbudsPris = senesteUdsbudsPris;
         }
 
+        public abstract string Header();
         public abstract void Init(string dataLine);
         public abstract string ToCsv();
         public abstract override string ToString();

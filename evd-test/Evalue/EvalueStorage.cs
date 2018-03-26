@@ -11,6 +11,7 @@ namespace evd_test
         public List<T> Evalues;
         private StoreProperty<T> PropStore;
 
+
         public EvalueStorage()
         {
             // Just init list
@@ -21,6 +22,7 @@ namespace evd_test
         public int PutProperty(T evalue)
         {
             Evalues.Add(evalue);
+            // The index to be added must be the last index of Evalues
             PropStore.AddIndex(evalue.KomNr, evalue.EjdNr, Evalues.Count() - 1);
 
             return 0;
@@ -28,21 +30,21 @@ namespace evd_test
 
         public T GetProperty(int komKode, int ejdNr)
         {
-            if (Evalues.ContainsKey(komKode))
-            {
-                if (Evalues[komKode].ContainsKey(ejdNr))
-                {
-                    return Evalues[komKode][ejdNr]; 
-                }
-            }
-
-            return default;
+            return PropStore.GetEjendom(komKode, ejdNr, Evalues);
         }
 
         // Number of properties in the EvalueStorage
         public int Length()
         {
-            return Evalues.Values.Sum(x => x.Count());
+            int length = Evalues.Count();
+
+            if (PropStore.Length() == length)
+            {
+                return length;
+            }
+
+            // Just a check, there should always be an index for each evalue
+            return -1;
         }
     }
 }

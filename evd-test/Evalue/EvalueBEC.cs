@@ -14,27 +14,31 @@ namespace evd_test
         public int FormatID;
         public string KVHX;
 
+        public override string Header()
+        {
+
+            return "LeveranceID" + ";" +
+                    "LeveranceGruppe" + ";" +
+                    "LeveranceDato" + ";" +
+                    "ModelAendrDato" + ";" +
+                    "FormatID" + ";" +
+                    "EjdNr" + ";" +
+                    "KomNr" + ";" +
+                    "ModelVaerdi" + ";" +
+                    "ModelDato" + ";" +
+                    "HandelsPris" + ";" +
+                    "HandelsDato" + ";" +
+                    "ErIUdbud" + ";" +
+                    "FoersteUdbudsdato" + ";" +
+                    "SenesteUdbudsDato" + ";" +
+                    "FoersteUdbudsPris" + ";" +
+                    "SenesteUdsbudsPris" + ";" +
+                    "KVHX" + "\n";
+        }
+
         public override void Init(string dataLine)
         {
-            Header = "LeveranceID" + ";" +
-                "LeveranceGruppe" + ";" +
-                "LeveranceDato" + ";" +
-                "ModelAendrDato" + ";" +
-                "FormatID" + ";" +
-                "EjdNr" + ";" +
-                "KomNr" + ";" +
-                "ModelVaerdi" + ";" +
-                "ModelDato" + ";" +
-                "HandelsPris" + ";" +
-                "HandelsDato" + ";" +
-                "ErIUdbud" + ";" +
-                "FoersteUdbudsdato" + ";" +
-                "SenesteUdbudsDato" + ";" +
-                "FoersteUdbudsPris" + ";" +
-                "SenesteUdsbudsPris" + ";" +
-                "KVHX" + "\n";
-
-            string[] fields = dataLine.Split(';');
+                        string[] fields = dataLine.Split(';');
            
             Int32.TryParse(fields[0], out LeveranceID);
             Int32.TryParse(fields[1], out LeveranceGruppe);

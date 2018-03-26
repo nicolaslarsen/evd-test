@@ -10,11 +10,9 @@ namespace evd_test.Test
     {
         private string testPathOld = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1_old.csv";
         private string testPathNew = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1.csv";
-        private StoreProperty<EvalueBEC> localPropStoreOld = new StoreProperty<EvalueBEC>();
-        private StoreProperty<EvalueBEC> localPropStoreNew = new StoreProperty<EvalueBEC>();
 
-        private List<EvalueBEC> localOldFile = new List<EvalueBEC>();
-        private List<EvalueBEC> localNewFile = new List<EvalueBEC>();
+        private EvalueStorage<EvalueBEC> localOldFile = new EvalueStorage<EvalueBEC>();
+        private EvalueStorage<EvalueBEC> localNewFile = new EvalueStorage<EvalueBEC>();
 
         private Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>();
        
@@ -52,13 +50,13 @@ namespace evd_test.Test
 
         public int BuildStats()
         {
-            int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1, localPropStoreOld);
-            int TryNew = EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2, localPropStoreNew);
+            int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
+            int TryNew = EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2);
 
             EvalueBEC uniqueEjd = new EvalueBEC();
             uniqueEjd.Init("69;69;2018-02-09T16:30:30.033;2012-05-29;1;26510;253;3117000;2018-02-01;2600000;2010-02-12;0;;;0;0;2532179017");
 
-            localOldFile.Add(uniqueEjd);
+            localOldFile.PutProperty(uniqueEjd);
             stat = new Statistic<EvalueBEC>(localOldFile, localNewFile);
 
             List<StatisticProperty> statList = stat.BuildStats();
@@ -76,11 +74,27 @@ namespace evd_test.Test
             return 0;
         }
 
+        // We want to see if each property has a distinct KomNr and EjdNr
+        public int UniqueTest()
+        {
+            int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
+
+            Console.WriteLine("\nUniqueTest() Test:\n---------------------------------------------");
+
+            Console.WriteLine("Test if lengths match: {0}: {1}",
+                localOldFile.Length(), 0 < localOldFile.Length());
+
+            Console.WriteLine("---------------------------------------------\n");
+            return 0;
+        }
+
         public int TestStatistics()
         {
-            CompareProperties();
+            //CompareProperties();
 
-            BuildStats();
+            //BuildStats();
+
+            UniqueTest();
 
             return 0;
         }

@@ -10,45 +10,31 @@ namespace evd_test
 {
     public class EvalueTest<T> where T: Evalue, new()
     {
-        public static List<T> CollectData(string filename, StoreProperty<T> propStore)
+        public static EvalueStorage<T> CollectData(string filename)
         {
-            List<T> Evalues = new List<T>();
+            EvalueStorage<T> EvalueStore = new EvalueStorage<T>();
 
             string[] dataLines;
-            try
-            {
-                dataLines = File.ReadAllLines(filename);
-            }
-            catch (IOException e)
-            {
-                throw e;
-            }
+
+            dataLines = File.ReadAllLines(filename);
 
             for (int i = 0; i < dataLines.Count(); i++)
             {
                 string dataLine = dataLines[i];
 
-                try
-                {
-                    T Evalue = new T();
-                    Evalue.Init(dataLine);
-                    Evalues.Add(Evalue);
-                    propStore.AddIndex(Evalue.KomNr, Evalue.EjdNr, i);
-                }
-                catch (IndexOutOfRangeException e)
-                {
-                    throw e;
-                }
+                T Evalue = new T();
+                Evalue.Init(dataLine);
+                EvalueStore.PutProperty(Evalue);
             }
-            return Evalues;
+            return EvalueStore;
         }
 
         // Returns a negative number on error
-        public static int TryCollectData(string filename, ref List<T> Evalue, int fileNum, StoreProperty<T> propStore)
+        public static int TryCollectData(string filename, ref EvalueStorage<T> Evalue, int fileNum)
         {
             try
             {
-                Evalue = EvalueTest<T>.CollectData(filename, propStore);
+                Evalue = CollectData(filename);
             }
             catch (IndexOutOfRangeException)
             {
@@ -66,35 +52,37 @@ namespace evd_test
             return 0;
         }
 
-        public static string BuildOutputString(List<T> firstFile, List<T> secondFile, StoreProperty<T> propStore)
+        public static string BuildOutputString(EvalueStorage<T> firstFile, EvalueStorage<T> secondFile)
         {
-            string output = firstFile[0].Header;
+            // Just get the header from a new instance
+            string output = new T().Header();
+
             Random rand = new Random();
             List<int> randoms = new List<int>();
 
             int i = 0;
             while(i < 5)
             {
-                int randIndex = rand.Next(firstFile.Count);
+                int randIndex = rand.Next(firstFile.Length());
 
                 // If we already used this property
                 if (randoms.Contains(randIndex))
                 {
                     continue;
                 }
-                T firstEjendom = firstFile[randIndex];
+                T firstEjendom = firstFile.Evalues[randIndex];
 
-                T secondEjendom = propStore.GetEjendom
-                    (firstEjendom.KomNr, firstEjendom.EjdNr, secondFile); 
+                T secondEjendom = secondFile.GetProperty(
+                    firstEjendom.KomNr, firstEjendom.EjdNr); 
 
-                output += firstEjendom.ToCsv() + secondEjendom.ToCsv() + "\n";
+                output += firstEjendom.ToCsv() + "\n" + secondEjendom.ToCsv() + "\n";
 
                 randoms.Add(randIndex);
                 i++;
             }
 
             // Only get properties that are "i udbud"
-            List<T> ScndIUdbud = secondFile.Where(ejd => ejd.ErIUdbud == 1).ToList();
+            List<T> ScndIUdbud = secondFile.Evalues.Where(ejd => ejd.ErIUdbud == 1).ToList();
 
             // i should be 5 at this point, so we get 5 more properties here
             while (i < 10)

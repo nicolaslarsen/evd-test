@@ -10,17 +10,15 @@ namespace evd_test.Test
     {
         private string testPathOld = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1_old.csv";
         private string testPathNew = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1.csv";
-        private StoreProperty<EvalueBEC> localPropStore = new StoreProperty<EvalueBEC>();
 
-        private List<EvalueBEC> localOldFile = new List<EvalueBEC>();
-        private List<EvalueBEC> localNewFile = new List<EvalueBEC>();
+        private EvalueStorage<EvalueBEC> localOldFile = new EvalueStorage<EvalueBEC>();
+        private EvalueStorage<EvalueBEC> localNewFile = new EvalueStorage<EvalueBEC>();
 
         private Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>();
 
         public int GetEjendom()
         {
-            EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1, localPropStore);
-
+            EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
 
             return 0;
         }

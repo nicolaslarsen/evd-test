@@ -61,9 +61,9 @@ namespace evd_test
             List<StatisticProperty> statList = new List<StatisticProperty>();
 
 
-            foreach (T Ejendom in FirstFile)
+            foreach (T Ejendom in FirstFile.Evalues)
             {
-                T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
+                T scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
 
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
                 // TO DELETE
@@ -98,6 +98,7 @@ namespace evd_test
             return output;
         }
 
+        // Without saving it in a statList basically
         public List<string> BuildStatStringDirectly()
         {
             // New list, just add the header
@@ -106,9 +107,9 @@ namespace evd_test
                 Header
             };
 
-            foreach (T Ejendom in FirstFile)
+            foreach (T Ejendom in FirstFile.Evalues)
             {
-                T scndEjd = PropStore.GetEjendom(Ejendom.KomNr, Ejendom.EjdNr, SecondFile);
+                T scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
 
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
 
