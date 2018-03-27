@@ -101,7 +101,7 @@ namespace evd_test
             "SenesteUdbudsDato : " + CommonFunc.DateCsv(SenesteUdbudsDato) + "\n" +
             "FoersteUdbudsPris : " + FoersteUdbudsPris + "\n" +
             "SenesteUdsbudsPris : " + SenesteUdsbudsPris + "\n" +
-            KVHX + "\n";
+            "KVHX : " + KVHX + "\n";
             return output; 
  
         }

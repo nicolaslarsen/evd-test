@@ -55,32 +55,14 @@ namespace evd_test
 
         public int FillGraph()
         {
-            List<string> Over100 = new List<string>();
-
             foreach (StatisticProperty statProp in StatList)
             {
                 int group = Categorize(statProp.EvalueNewCompOld);
                 if (group >= 0)
                 {
-                    // TO DELETE
-                    if (group == 21)
-                    {
-                        Over100.Add(statProp.ToCsv());
-                    }
-                    
-                    //if (group == 1) {
-                    //    Console.WriteLine(
-                    //            "Group: " + group + "\n" +
-                    //            "Old: " + statProp.EvalueOld + "\n" +
-                    //            "New: " + statProp.EvalueNew + "\n" +
-                    //            "Diff: " + statProp.EvalueNewCompOld + "\n");
-                    //}
-
-                    // Except this
                     GraphPoints[group]++;
                 }
             }
-            File.WriteAllLines("testestestest.csv", Over100);
             
             return 0;
         }

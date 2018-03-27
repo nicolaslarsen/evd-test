@@ -50,25 +50,20 @@ namespace evd_test.Test
 
         public int BuildStats()
         {
+            Console.WriteLine("\nBuildStats() Test:\n---------------------------------------------");
+
             int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
             int TryNew = EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2);
 
-            EvalueBEC uniqueEjd = new EvalueBEC();
-            uniqueEjd.Init("69;69;2018-02-09T16:30:30.033;2012-05-29;1;26510;253;3117000;2018-02-01;2600000;2010-02-12;0;;;0;0;2532179017");
-
-            localOldFile.PutProperty(uniqueEjd);
             stat = new Statistic<EvalueBEC>(localOldFile, localNewFile);
-
             List<StatisticProperty> statList = stat.BuildStats();
 
-            Console.WriteLine("\nBuildStats() Test:\n---------------------------------------------");
-
-            // Test for evaluenew = 0
+            // Test for evaluenew = 0. By new rules, this should be empty
             IEnumerable<StatisticProperty> NoEvalueNews = statList.Where(ejd => ejd.EvalueNew == 0);
             foreach (StatisticProperty sp in NoEvalueNews)
             {
                 Console.WriteLine(sp.ToCsv());
-            } 
+            }
 
             Console.WriteLine("---------------------------------------------\n");
             return 0;
@@ -90,9 +85,9 @@ namespace evd_test.Test
 
         public int TestStatistics()
         {
-            //CompareProperties();
+            CompareProperties();
 
-            //BuildStats();
+            BuildStats();
 
             UniqueTest();
 

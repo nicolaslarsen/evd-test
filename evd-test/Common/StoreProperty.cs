@@ -39,19 +39,15 @@ namespace evd_test
                     return Indexes[komKode][ejdNr];
                 }
             }
-            Console.WriteLine("KeyNotFound: KomNr: " + komKode + " EjdNr: " + ejdNr);
 
             return -1;
         }
 
-        public int counter = 0;
         public T GetEjendom(int komKode, int ejdNr, List<T> properties)
         {
             int index = this.FindIndex(komKode, ejdNr);
             if (index < 0)
             {
-                Console.WriteLine(counter);
-                counter++;
                 return default; 
             }
 

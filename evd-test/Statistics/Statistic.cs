@@ -14,6 +14,7 @@ namespace evd_test
         private string Header = "KomNr;EjdNr;Gammel e-value;Ny e-value;Handelspris;Handelsdato;Ny e-value i forhold til gammel; Ny e-value i forhold til handelspris";
 
         public Statistic() { }
+
         public Statistic(EvalueStorage<T> firstFile, EvalueStorage<T> secondFile) 
         {
             FirstFile = firstFile;
@@ -22,13 +23,25 @@ namespace evd_test
 
         public StatisticProperty CompareProperties(T first, T scnd)
         {
+            // This can be removed if we decide to include nulls. 
+            // first should never be null. Just a sanity check.
+            if (scnd == null || first == null)
+            {
+                return null;
+            }
             int komNr = first.KomNr;
             int ejdNr = first.EjdNr;
             long evalueOld = first.ModelVaerdi;
-            long evalueNew = scnd.ModelVaerdi;
-            long handelspris = scnd.HandelsPris;
-            DateTime handelsDato = scnd.HandelsDato;
-
+            long evalueNew = 0;
+            long handelspris = 0;
+            DateTime handelsDato = new DateTime();
+            // We already checked for this, but if we decide to include these in the stats,
+            // we can just remove the null check above. 
+            if (scnd != null) 
+            {
+                evalueNew = scnd.ModelVaerdi;
+                handelspris = scnd.HandelsPris;
+            }
             Decimal evalueNewCompOld = 0;
             Decimal evalueNewCompHandelspris = 0;
 
@@ -44,10 +57,7 @@ namespace evd_test
                     evalueNewCompHandelspris = (Decimal) evalueNew / (Decimal) handelspris;
                 }
             }
-            else
-            {
-                Console.WriteLine(komNr + ";" + ejdNr + ";" + evalueOld + ";" + evalueNew + ";" + evalueNewCompOld);
-            }
+            
 
             StatisticProperty statProp = new StatisticProperty(komNr, ejdNr, 
                 evalueOld, evalueNew, handelspris, handelsDato, evalueNewCompOld,
@@ -64,19 +74,11 @@ namespace evd_test
             foreach (T Ejendom in FirstFile.Evalues)
             {
                 T scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
-
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
-                // TO DELETE
-                if (statProp.EvalueNew == 0)
+                if (statProp != null)
                 {
-                    Console.WriteLine(
-                        "EvalueOld: " + statProp.EvalueOld + "\n" +
-                        "EvalueNew: " + statProp.EvalueNew + "\n" +
-                        "Comparison: " + statProp.EvalueNewCompOld + "\n"
-                    );
+                    statList.Add(statProp);
                 }
-
-                statList.Add(statProp);
             }
 
             return statList;
@@ -110,10 +112,11 @@ namespace evd_test
             foreach (T Ejendom in FirstFile.Evalues)
             {
                 T scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
-
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
-
-                output.Add(statProp.ToCsv());
+                if (statProp != null)
+                {
+                    output.Add(statProp.ToCsv());
+                }
             }
             return output;
         }

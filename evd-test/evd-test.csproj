@@ -67,6 +67,7 @@
     <Compile Include="Common\StoreProperty.cs" />
     <Compile Include="Test\EvalueBECTest.cs" />
     <Compile Include="Test\EvalueStorageTest.cs" />
+    <Compile Include="Test\GraphTest.cs" />
     <Compile Include="Test\StatisticsTest.cs" />
     <Compile Include="Test\StorePropertyTest.cs" />
     <EmbeddedResource Include="Form1.resx">
