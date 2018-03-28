@@ -12,9 +12,10 @@ C:\Users\nr\Documents\evd-test\evd-test\bin\Debug\evd-test.exe.config
 C:\Users\nr\Documents\evd-test\evd-test\bin\Debug\evd-test.exe
 C:\Users\nr\Documents\evd-test\evd-test\bin\Debug\evd-test.pdb
 C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd-test.csprojResolveAssemblyReference.cache
-C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd_test.Form1.resources
 C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd_test.Properties.Resources.resources
 C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd-test.csproj.GenerateResource.Cache
 C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd-test.csproj.CoreCompileInputs.cache
 C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd-test.exe
 C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd-test.pdb
+C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd_test.MainForm.resources
+C:\Users\nr\Documents\evd-test\evd-test\obj\Debug\evd_test.FilterForm.resources

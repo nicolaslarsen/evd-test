@@ -7,11 +7,14 @@ using System.Diagnostics;
 
 namespace evd_test
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        private FilterForm filterForm;
+
+        public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            filterForm = new FilterForm();
         }
 
         private ToolTip tt = new ToolTip
@@ -32,7 +35,6 @@ namespace evd_test
                 IsBalloon = true
             };
         }
-
 
         private void InputTextChanged()
         {
@@ -301,6 +303,7 @@ namespace evd_test
             {
                 StatFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Statistik.csv";
             }
+           
             CheckChanged();
         }
 
@@ -355,6 +358,12 @@ namespace evd_test
             {
                 GraphFilename.Text = GraphFileDialog.FileName;
             }
+        }
+
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+            filterForm.Show();
+            filterForm.Focus();
         }
     }
 }

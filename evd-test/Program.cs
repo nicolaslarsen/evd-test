@@ -17,7 +17,7 @@ namespace evd_test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.Run(new MainForm());
 
             //EvalueBECTest becTest = new EvalueBECTest();
             //becTest.TestEvalueBEC();
@@ -31,8 +31,8 @@ namespace evd_test
             //StorePropertyTest storePropTest = new StorePropertyTest();
             //storePropTest.TestStoreProperty();
 
-            GraphTest gt = new GraphTest();
-            gt.TestGraph();
+            //GraphTest gt = new GraphTest();
+            //gt.TestGraph();
         }
     }
 }

@@ -75,7 +75,7 @@ namespace evd_test
                 T secondEjendom = secondFile.GetProperty(
                     firstEjendom.KomNr, firstEjendom.EjdNr); 
 
-                output += firstEjendom.ToCsv() + "\n" + secondEjendom.ToCsv() + "\n";
+                output += firstEjendom.ToCsv() + "\n" + secondEjendom.ToCsv() + "\n\n";
 
                 randoms.Add(randIndex);
                 i++;

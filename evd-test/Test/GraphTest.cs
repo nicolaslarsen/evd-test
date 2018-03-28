@@ -22,25 +22,40 @@ namespace evd_test.Test
 
             Graph graph = new Graph();
             // Categorize takes a evalueDifference. So 1 means there's no difference
-            int zeroGroup = graph.Categorize(1m);
+            decimal zGTest = 1m;
+            int zeroGroup = graph.Categorize(zGTest);
 
-            Console.WriteLine("Group {0} is in the 0 group : {1}", 
-                zeroGroup, zeroGroup == 0);
+            Console.WriteLine("Categorize({0}) is in the 0 group : {1}", 
+                zGTest, zeroGroup == 0);
 
             // 1 1-1.05, 1.05-1.1, 1.1-1.15, 1.15-1.2, 1.2-1.25
             // 0   1        2        3          4         5 
             // So 1.25 should be in the 5th group.
             // Apart from the 0 group, all other groups contain the top value as well (e.g. 1.25)
-            int fiveGroup = graph.Categorize(1.25m);
+            decimal fGTest = 1.25m;
+            int fiveGroup = graph.Categorize(fGTest);
 
-            Console.WriteLine("Group {0} is in the 5 group : {1}", 
-                fiveGroup, fiveGroup == 5);
+            Console.WriteLine("Categorize({0}) is in the 5 (1.2-1.25) group : {1}", 
+                fGTest, fiveGroup == 5);
 
             // Over 100% difference
-            int overHundred = graph.Categorize(2.1m);
-            Console.WriteLine("Group {0} is in the 21 group : {1}", 
-                overHundred, overHundred == 21);
-            
+            decimal oHTest = 2.1m;
+            int overHundred = graph.Categorize(oHTest);
+            Console.WriteLine("Categorize({0}) is in the 21 (over 100) group : {1}", 
+                oHTest, overHundred == 21);
+
+            // fourgroup this time
+            fGTest = 0.8m;
+            int fourGroup = graph.Categorize(fGTest);
+
+            Console.WriteLine("Categorize({0}) is in the 4 (1.15-1.2) group : {1}", 
+                fGTest, fourGroup == 4);
+           
+            fGTest = 0.81m;
+            fourGroup = graph.Categorize(fGTest);
+
+            Console.WriteLine("Categorize({0}) is in the 4 (1.15-1.2) group : {1}", 
+                fGTest, fourGroup == 4);
             Console.WriteLine("---------------------------------------------\n");
             return 0;
         }
