@@ -36,6 +36,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.YearTo = new System.Windows.Forms.TextBox();
             this.SaveFilterButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.KomNr = new System.Windows.Forms.TextBox();
+            this.EjdNr = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.HandelsprisTo = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.HandelsprisFrom = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.ErIUdbud = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -44,13 +56,13 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.Size = new System.Drawing.Size(92, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Årstal: ";
+            this.label1.Text = "Handelsdato:";
             // 
             // YearFrom
             // 
-            this.YearFrom.Location = new System.Drawing.Point(70, 100);
+            this.YearFrom.Location = new System.Drawing.Point(46, 100);
             this.YearFrom.Name = "YearFrom";
             this.YearFrom.Size = new System.Drawing.Size(100, 20);
             this.YearFrom.TabIndex = 1;
@@ -68,7 +80,7 @@
             // YearIntervalCheck
             // 
             this.YearIntervalCheck.AutoSize = true;
-            this.YearIntervalCheck.Location = new System.Drawing.Point(70, 77);
+            this.YearIntervalCheck.Location = new System.Drawing.Point(109, 77);
             this.YearIntervalCheck.Name = "YearIntervalCheck";
             this.YearIntervalCheck.Size = new System.Drawing.Size(61, 17);
             this.YearIntervalCheck.TabIndex = 3;
@@ -79,7 +91,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 103);
+            this.label3.Location = new System.Drawing.Point(15, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(25, 13);
             this.label3.TabIndex = 4;
@@ -88,7 +100,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(177, 103);
+            this.label4.Location = new System.Drawing.Point(152, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(21, 13);
             this.label4.TabIndex = 5;
@@ -97,7 +109,7 @@
             // YearTo
             // 
             this.YearTo.Enabled = false;
-            this.YearTo.Location = new System.Drawing.Point(204, 100);
+            this.YearTo.Location = new System.Drawing.Point(179, 100);
             this.YearTo.Name = "YearTo";
             this.YearTo.Size = new System.Drawing.Size(100, 20);
             this.YearTo.TabIndex = 6;
@@ -113,12 +125,120 @@
             this.SaveFilterButton.UseVisualStyleBackColor = true;
             this.SaveFilterButton.Click += new System.EventHandler(this.SaveFilterButton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Kommune Nr";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(118, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Ejendoms Nr";
+            // 
+            // KomNr
+            // 
+            this.KomNr.Location = new System.Drawing.Point(3, 24);
+            this.KomNr.Name = "KomNr";
+            this.KomNr.Size = new System.Drawing.Size(100, 20);
+            this.KomNr.TabIndex = 10;
+            // 
+            // EjdNr
+            // 
+            this.EjdNr.Location = new System.Drawing.Point(118, 24);
+            this.EjdNr.Name = "EjdNr";
+            this.EjdNr.Size = new System.Drawing.Size(100, 20);
+            this.EjdNr.TabIndex = 11;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.KomNr, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.EjdNr, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(393, 76);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.88889F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.11111F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(231, 54);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // HandelsprisTo
+            // 
+            this.HandelsprisTo.Location = new System.Drawing.Point(179, 173);
+            this.HandelsprisTo.Name = "HandelsprisTo";
+            this.HandelsprisTo.Size = new System.Drawing.Size(100, 20);
+            this.HandelsprisTo.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(152, 176);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(21, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Til:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(15, 176);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(25, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Fra:";
+            // 
+            // HandelsprisFrom
+            // 
+            this.HandelsprisFrom.Location = new System.Drawing.Point(46, 173);
+            this.HandelsprisFrom.Name = "HandelsprisFrom";
+            this.HandelsprisFrom.Size = new System.Drawing.Size(100, 20);
+            this.HandelsprisFrom.TabIndex = 14;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(12, 149);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(87, 17);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Handelspris:";
+            // 
+            // ErIUdbud
+            // 
+            this.ErIUdbud.AutoSize = true;
+            this.ErIUdbud.Location = new System.Drawing.Point(394, 175);
+            this.ErIUdbud.Name = "ErIUdbud";
+            this.ErIUdbud.Size = new System.Drawing.Size(140, 17);
+            this.ErIUdbud.TabIndex = 19;
+            this.ErIUdbud.Text = "Kun ejendomme i udbud";
+            this.ErIUdbud.UseVisualStyleBackColor = true;
+            // 
             // FilterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 537);
             this.ControlBox = false;
+            this.Controls.Add(this.ErIUdbud);
+            this.Controls.Add(this.HandelsprisTo);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.HandelsprisFrom);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.SaveFilterButton);
             this.Controls.Add(this.YearTo);
             this.Controls.Add(this.label4);
@@ -129,6 +249,8 @@
             this.Controls.Add(this.label1);
             this.Name = "FilterForm";
             this.Text = "FilterForm";
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,5 +266,16 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox YearTo;
         private System.Windows.Forms.Button SaveFilterButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox KomNr;
+        private System.Windows.Forms.TextBox EjdNr;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox HandelsprisTo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox HandelsprisFrom;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox ErIUdbud;
     }
 }

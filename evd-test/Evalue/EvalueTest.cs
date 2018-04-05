@@ -61,7 +61,9 @@ namespace evd_test
             List<int> randoms = new List<int>();
 
             int i = 0;
-            while(i < 5)
+            // randoms < firstFile and secondFile to make sure we have enough properties to test.
+            while(i < 5 && randoms.Count() < firstFile.Length() &&
+                randoms.Count() < secondFile.Length())
             {
                 int randIndex = rand.Next(firstFile.Length());
 
@@ -75,6 +77,11 @@ namespace evd_test
                 T secondEjendom = secondFile.GetProperty(
                     firstEjendom.KomNr, firstEjendom.EjdNr); 
 
+                // If secondFile did not contain the property
+                if (secondEjendom == null)
+                {
+                    continue;
+                }
                 output += firstEjendom.ToCsv() + "\n" + secondEjendom.ToCsv() + "\n\n";
 
                 randoms.Add(randIndex);
@@ -85,7 +92,7 @@ namespace evd_test
             List<T> ScndIUdbud = secondFile.Evalues.Where(ejd => ejd.ErIUdbud == 1).ToList();
 
             // i should be 5 at this point, so we get 5 more properties here
-            while (i < 10)
+            while (i < 10 && randoms.Count() < ScndIUdbud.Count())
             {
                 int randIndex = rand.Next(ScndIUdbud.Count);
 

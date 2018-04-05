@@ -12,10 +12,14 @@ namespace evd_test
 {
     public partial class FilterForm : Form
     {
-        public Filter Filter;
+        public Filter<EvalueBEC> FilterBEC;
+        public Filter<EvalueLSB> FilterLSB;
+
         public FilterForm()
         {
             InitializeComponent();
+            FilterBEC = new Filter<EvalueBEC>();
+            FilterLSB = new Filter<EvalueLSB>();
         }
 
         private void YearIntervalCheck_CheckedChanged(object sender, EventArgs e)
@@ -33,7 +37,16 @@ namespace evd_test
 
         private void SaveFilterButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            if (FilterBEC.SetFilters(YearFrom.Text, YearTo.Text,
+                YearIntervalCheck.Checked, KomNr.Text, EjdNr.Text,
+                HandelsprisFrom.Text, HandelsprisTo.Text, ErIUdbud.Checked) == 0) {
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Der var en fejl i formatet på en af filtrene",
+                    "Filter format error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

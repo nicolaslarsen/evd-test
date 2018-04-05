@@ -169,6 +169,11 @@ namespace evd_test
 
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                EvalueStorage<EvalueBEC> test = filterForm.FilterBEC.ApplyFilters(firstFile.Evalues);
+                foreach (EvalueBEC prop in test.Evalues)
+                {
+                    Console.WriteLine(prop.ToCsv());
+                }
             }
             if (RadioLSB.Checked)
             {
@@ -364,6 +369,7 @@ namespace evd_test
         {
             filterForm.Show();
             filterForm.Focus();
+
         }
     }
 }
