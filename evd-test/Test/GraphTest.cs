@@ -11,10 +11,10 @@ namespace evd_test.Test
         private string testPathOld = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1_old.csv";
         private string testPathNew = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1.csv";
 
-        private EvalueStorage<EvalueBEC> localOldFile = new EvalueStorage<EvalueBEC>();
-        private EvalueStorage<EvalueBEC> localNewFile = new EvalueStorage<EvalueBEC>();
+        private EvalueStorage localOldFile = new EvalueStorage();
+        private EvalueStorage localNewFile = new EvalueStorage();
 
-        private Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>();
+        private Statistic stat = new Statistic();
        
         public int Categorize()
         {
@@ -67,7 +67,7 @@ namespace evd_test.Test
             int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
             int TryNew = EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2);
 
-            stat = new Statistic<EvalueBEC>(localOldFile, localNewFile);
+            stat = new Statistic(localOldFile, localNewFile);
             List<StatisticProperty> statList = stat.BuildStats();
 
             Graph graph = new Graph(statList);

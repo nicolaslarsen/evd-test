@@ -14,7 +14,7 @@ namespace evd_test.Test
         {
             Console.WriteLine("\nPutProperty() and GetProperty() Test:\n---------------------------------------------");
 
-            EvalueStorage<EvalueBEC> evalStore = new EvalueStorage<EvalueBEC>();
+            EvalueStorage evalStore = new EvalueStorage();
 
             EvalueBEC testProp = new EvalueBEC
             {
@@ -26,7 +26,7 @@ namespace evd_test.Test
             int ret = evalStore.PutProperty(testProp);
             Console.WriteLine("Put-test. Return == 0: {0}", ret == 0);
 
-            EvalueBEC test = evalStore.GetProperty(253, 26510);
+            Evalue test = evalStore.GetProperty(253, 26510);
             Console.WriteLine("Get-test. Return == testProp: {0}", test == testProp);
 
             int length = evalStore.Length();
@@ -40,7 +40,7 @@ namespace evd_test.Test
             ret = evalStore.PutProperty(test);
             Console.WriteLine("Put-test. Return == 0: {0}", ret == 0);
 
-            EvalueBEC testGet = evalStore.GetProperty(253, 26510);
+            Evalue testGet = evalStore.GetProperty(253, 26510);
             Console.WriteLine("Get-test. Return == test value: {0}", testGet == test);
             Console.WriteLine("\nDouble-check:\n{0}\n{1}", test.ToCsv(), testGet.ToCsv());
 
@@ -62,7 +62,7 @@ namespace evd_test.Test
 
         public int Length()
         {
-            EvalueStorage<EvalueBEC> evalStore = new EvalueStorage<EvalueBEC>();
+            EvalueStorage evalStore = new EvalueStorage();
 
             Console.WriteLine("\nLength() Test:\n---------------------------------------------");
 

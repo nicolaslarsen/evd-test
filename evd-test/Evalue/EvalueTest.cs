@@ -10,9 +10,9 @@ namespace evd_test
 {
     public class EvalueTest<T> where T: Evalue, new()
     {
-        public static EvalueStorage<T> CollectData(string filename)
+        public static EvalueStorage CollectData(string filename)
         {
-            EvalueStorage<T> EvalueStore = new EvalueStorage<T>();
+            EvalueStorage EvalueStore = new EvalueStorage();
 
             string[] dataLines;
 
@@ -30,7 +30,7 @@ namespace evd_test
         }
 
         // Returns a negative number on error
-        public static int TryCollectData(string filename, ref EvalueStorage<T> Evalue, int fileNum)
+        public static int TryCollectData(string filename, ref EvalueStorage Evalue, int fileNum)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace evd_test
             return 0;
         }
 
-        public static string BuildOutputString(EvalueStorage<T> firstFile, EvalueStorage<T> secondFile)
+        public static string BuildOutputString(EvalueStorage firstFile, EvalueStorage secondFile)
         {
             // Just get the header from a new instance
             string output = new T().Header();
@@ -72,9 +72,9 @@ namespace evd_test
                 {
                     continue;
                 }
-                T firstEjendom = firstFile.Evalues[randIndex];
+                Evalue firstEjendom = firstFile.Evalues[randIndex];
 
-                T secondEjendom = secondFile.GetProperty(
+                Evalue secondEjendom = secondFile.GetProperty(
                     firstEjendom.KomNr, firstEjendom.EjdNr); 
 
                 // If secondFile did not contain the property
@@ -89,7 +89,7 @@ namespace evd_test
             }
 
             // Only get properties that are "i udbud"
-            List<T> ScndIUdbud = secondFile.Evalues.Where(ejd => ejd.ErIUdbud == 1).ToList();
+            List<Evalue> ScndIUdbud = secondFile.Evalues.Where(ejd => ejd.ErIUdbud == 1).ToList();
 
             // i should be 5 at this point, so we get 5 more properties here
             while (i < 10 && randoms.Count() < ScndIUdbud.Count())
@@ -103,7 +103,7 @@ namespace evd_test
                 {
                     continue;
                 }
-                T Ejendom = ScndIUdbud[randIndex];
+                Evalue Ejendom = ScndIUdbud[randIndex];
 
                 output += Ejendom.ToCsv() + "\n";
 

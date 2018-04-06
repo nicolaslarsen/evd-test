@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace evd_test
 {
-    public class EvalueStorage<T> where T: Evalue, new()
+    public class EvalueStorage
     {
-        public List<T> Evalues;
-        private StoreProperty<T> PropStore;
+        public List<Evalue> Evalues;
+        private StoreProperty<Evalue> PropStore;
 
 
         public EvalueStorage()
         {
             // Just init list
-            Evalues = new List<T>();
-            PropStore = new StoreProperty<T>();
+            Evalues = new List<Evalue>();
+            PropStore = new StoreProperty<Evalue>();
         }
 
-        public int PutProperty(T evalue)
+        public int PutProperty(Evalue evalue)
         {
             Evalues.Add(evalue);
             // The index to be added must be the last index of Evalues
@@ -28,7 +28,7 @@ namespace evd_test
             return 0;
         }
 
-        public T GetProperty(int komKode, int ejdNr)
+        public Evalue GetProperty(int komKode, int ejdNr)
         {
             return PropStore.GetEjendom(komKode, ejdNr, Evalues);
         }

@@ -11,10 +11,10 @@ namespace evd_test.Test
         private string testPathOld = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1_old.csv";
         private string testPathNew = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1.csv";
 
-        private EvalueStorage<EvalueBEC> localOldFile = new EvalueStorage<EvalueBEC>();
-        private EvalueStorage<EvalueBEC> localNewFile = new EvalueStorage<EvalueBEC>();
+        private EvalueStorage localOldFile = new EvalueStorage();
+        private EvalueStorage localNewFile = new EvalueStorage();
 
-        private Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>();
+        private Statistic stat = new Statistic();
 
         public int GetEjendom()
         {
@@ -25,7 +25,7 @@ namespace evd_test.Test
             // It just uses the storeproperty on its own List anyway,
             // might as well use the EvalueStorage class.
             // Right now we're checking for a KeyNotFound.
-            EvalueBEC fest = localNewFile.GetProperty(localOldFile.Evalues[0].KomNr,
+            Evalue fest = localNewFile.GetProperty(localOldFile.Evalues[0].KomNr,
                 localOldFile.Evalues[0].EjdNr);
             Console.WriteLine("Fest == null: {0}\n", fest == null);
 

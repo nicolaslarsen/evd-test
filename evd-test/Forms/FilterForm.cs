@@ -12,14 +12,12 @@ namespace evd_test
 {
     public partial class FilterForm : Form 
     {
-        public Filter<EvalueBEC> FilterBEC;
-        public Filter<EvalueLSB> FilterLSB;
+        public Filter Filter;
 
         public FilterForm()
         {
             InitializeComponent();
-            FilterBEC = new Filter<EvalueBEC>();
-            FilterLSB = new Filter<EvalueLSB>();
+            Filter = new Filter();
         }
 
         private void YearIntervalCheck_CheckedChanged(object sender, EventArgs e)
@@ -37,7 +35,7 @@ namespace evd_test
 
         private void SaveFilterButton_Click(object sender, EventArgs e)
         {
-            if (FilterBEC.SetFilters(YearFrom.Text, YearTo.Text,
+            if (Filter.SetFilters(YearFrom.Text, YearTo.Text,
                 YearIntervalCheck.Checked, KomNr.Text, EjdNr.Text,
                 HandelsprisFrom.Text, HandelsprisTo.Text, ErIUdbud.Checked) == 0) {
                 this.Hide();

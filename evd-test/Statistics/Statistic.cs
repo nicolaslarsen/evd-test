@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace evd_test
 {
-    public class Statistic<T> where T: Evalue, new()
+    public class Statistic
     {
-        private EvalueStorage<T> FirstFile;
-        private EvalueStorage<T> SecondFile;
+        private EvalueStorage FirstFile;
+        private EvalueStorage SecondFile;
 
         private string Header = "KomNr;EjdNr;Gammel e-value;Ny e-value;Handelspris;Handelsdato;Ny e-value i forhold til gammel; Ny e-value i forhold til handelspris";
 
         public Statistic() { }
 
-        public Statistic(EvalueStorage<T> firstFile, EvalueStorage<T> secondFile) 
+        public Statistic(EvalueStorage firstFile, EvalueStorage secondFile) 
         {
             FirstFile = firstFile;
             SecondFile = secondFile;
         } 
 
-        public StatisticProperty CompareProperties(T first, T scnd)
+        public StatisticProperty CompareProperties(Evalue first, Evalue scnd)
         {
             // This can be removed if we decide to include nulls. 
             // first should never be null. Just a sanity check.
@@ -72,9 +72,9 @@ namespace evd_test
             List<StatisticProperty> statList = new List<StatisticProperty>();
 
 
-            foreach (T Ejendom in FirstFile.Evalues)
+            foreach (Evalue Ejendom in FirstFile.Evalues)
             {
-                T scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
+                Evalue scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
                 if (statProp != null)
                 {
@@ -110,9 +110,9 @@ namespace evd_test
                 Header
             };
 
-            foreach (T Ejendom in FirstFile.Evalues)
+            foreach (Evalue Ejendom in FirstFile.Evalues)
             {
-                T scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
+                Evalue scndEjd = SecondFile.GetProperty(Ejendom.KomNr, Ejendom.EjdNr);
                 StatisticProperty statProp = CompareProperties(Ejendom, scndEjd);
                 if (statProp != null)
                 {

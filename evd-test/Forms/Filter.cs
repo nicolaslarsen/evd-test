@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace evd_test
 {
-    public class Filter<T> where T: Evalue, new()
+    public class Filter
     {
         public int YearFrom;
         public int YearTo;
@@ -94,7 +94,7 @@ namespace evd_test
             return retVal;
         }
 
-        public IEnumerable<T> YearFilter(IEnumerable<T> evalueList)
+        public IEnumerable<Evalue> YearFilter(IEnumerable<Evalue> evalueList)
         {
             if (YearFrom > 0)
             {
@@ -133,7 +133,7 @@ namespace evd_test
             return evalueList;
         }
 
-        public IEnumerable<T> KomNrFilter(IEnumerable<T> evalueList)
+        public IEnumerable<Evalue> KomNrFilter(IEnumerable<Evalue> evalueList)
         {
             if (KomNr > 0)
             {
@@ -144,7 +144,7 @@ namespace evd_test
             return evalueList; 
         }
 
-        public IEnumerable<T> EjdNrFilter(IEnumerable<T> evalueList)
+        public IEnumerable<Evalue> EjdNrFilter(IEnumerable<Evalue> evalueList)
         {
             if (EjdNr > 0)
             {
@@ -155,7 +155,7 @@ namespace evd_test
             return evalueList;
         }
 
-        public IEnumerable<T> HandelsprisFilter(IEnumerable<T> evalueList)
+        public IEnumerable<Evalue> HandelsprisFilter(IEnumerable<Evalue> evalueList)
         {
             if (HandelsprisFrom >= 0)
             {
@@ -187,7 +187,7 @@ namespace evd_test
             return evalueList;
         }
 
-        public IEnumerable<T> ErIUdbudFilter(IEnumerable<T> evalueList)
+        public IEnumerable<Evalue> ErIUdbudFilter(IEnumerable<Evalue> evalueList)
         {
             if (ErIUdbud)
             {
@@ -199,9 +199,9 @@ namespace evd_test
         } 
 
         // Apply filters for a regular file 
-        public EvalueStorage<T> ApplyFilters(List<T> evalueList)
+        public EvalueStorage ApplyFilters(List<Evalue> evalueList)
         {
-            IEnumerable<T> filteredList = evalueList;
+            IEnumerable<Evalue> filteredList = evalueList;
 
             filteredList = YearFilter(filteredList);
             filteredList = KomNrFilter(filteredList);
@@ -210,10 +210,10 @@ namespace evd_test
             filteredList = ErIUdbudFilter(filteredList);
 
             // Create the storage class
-            EvalueStorage<T> filteredStorage = new EvalueStorage<T>();
+            EvalueStorage filteredStorage = new EvalueStorage();
 
             // Fill it
-            foreach (T prop in filteredList)
+            foreach (Evalue prop in filteredList)
             {
                 filteredStorage.PutProperty(prop);
             }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace evd_test
 {
@@ -126,103 +127,61 @@ namespace evd_test
         {
             int error = 0;
 
+            EvalueStorage firstFile = new EvalueStorage();
+            EvalueStorage secondFile = new EvalueStorage();
+
             if (RadioBEC.Checked)
             {
-                EvalueStorage<EvalueBEC> firstFile = new EvalueStorage<EvalueBEC>();
-                EvalueStorage<EvalueBEC> secondFile = new EvalueStorage<EvalueBEC>();
-
                 error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
                 error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text, ref secondFile, 2);
-
-                if (error == 0)
-                {
-                    EvalueStorage<EvalueBEC> filterSecondFile = 
-                        filterForm.FilterBEC.ApplyFilters(secondFile.Evalues);
-                    foreach (EvalueBEC prop in filterSecondFile.Evalues)
-                    {
-                        Console.WriteLine(prop.ToCsv());
-                    }
-
-                    if (StatCheck.Checked || TestCheck.Checked)
-                    {
-                        Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, filterSecondFile);
-                        List<StatisticProperty> statList = stat.BuildStats();
-
-                        if (StatCheck.Checked)
-                        {
-                            List<string> stats = stat.BuildStatString(statList);
-                            File.WriteAllLines(StatFilename.Text, stats);
-                        }
-
-                        if (GraphCheck.Checked)
-                        {
-                            // TODO: Implement graph
-                            Graph graph = new Graph(statList);
-                            graph.FillGraph();
-                            foreach(string derp in graph.BuildOutputString())
-                            {
-                                Console.WriteLine(derp);
-                            }
-                        }
-                    }
-                    
-                    if (TestCheck.Checked)
-                    {
-                        string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, filterSecondFile);
-
-                        File.WriteAllText(OutputFilename.Text, output);
-                        Process.Start(OutputFilename.Text);
-                    }
-
-                    MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
-            if (RadioLSB.Checked)
-            {
-                EvalueStorage<EvalueLSB> firstFile = new EvalueStorage<EvalueLSB>();
-                EvalueStorage<EvalueLSB> secondFile = new EvalueStorage<EvalueLSB>();
-
+            else if (RadioLSB.Checked) {
                 error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
                 error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text, ref secondFile, 2);
-
-                if (error == 0)
+            }
+            if (error == 0)
+            {
+                EvalueStorage filterSecondFile = 
+                    filterForm.Filter.ApplyFilters(secondFile.Evalues);
+                foreach (EvalueBEC prop in filterSecondFile.Evalues)
                 {
-                    if (StatCheck.Checked || GraphCheck.Checked)
-                    {
-                        Statistic<EvalueLSB> stat = new Statistic<EvalueLSB>(firstFile, secondFile);
-                        List<StatisticProperty> statList = stat.BuildStats();
-
-                        if (StatCheck.Checked)
-                        {
-                            List<string> stats = stat.BuildStatString(statList);
-                            File.WriteAllLines(StatFilename.Text, stats);
-                        }
-                        if (GraphCheck.Checked)
-                        {
-                            // TODO: Implement graph
-                            Graph graph = new Graph(statList);
-                            graph.FillGraph();
-                            Console.WriteLine(graph.BuildOutputString());
-                        }
-                    }
-
-                    if (TestCheck.Checked)
-                    {
-                        string output = EvalueTest<EvalueLSB>.BuildOutputString(firstFile, secondFile);
-
-                        File.WriteAllText(OutputFilename.Text, output);
-                        Process.Start(OutputFilename.Text);
-                    }
-                    
-                    MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Console.WriteLine(prop.ToCsv());
                 }
+                if (StatCheck.Checked || TestCheck.Checked)
+                {
+                    Statistic stat = new Statistic(firstFile, filterSecondFile);
+                    List<StatisticProperty> statList = stat.BuildStats();
+                    if (StatCheck.Checked)
+                    {
+                        List<string> stats = stat.BuildStatString(statList);
+                        File.WriteAllLines(StatFilename.Text, stats);
+                    }
+                    if (GraphCheck.Checked)
+                    {
+                        // TODO: Implement graph
+                        Graph graph = new Graph(statList);
+                        graph.FillGraph();
+                        foreach(string derp in graph.BuildOutputString())
+                        {
+                         Console.WriteLine(derp);
+                        }
+                    }
+                }
+                
+                if (TestCheck.Checked)
+                {
+                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, filterSecondFile);
+                    File.WriteAllText(OutputFilename.Text, output);
+                    Process.Start(OutputFilename.Text);
+                }
+                MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Invoke((MethodInvoker)delegate
             {
                 FormPanel.Enabled = true;
             });
         }
-
+            
         // Checks if a file should be overridden
         private bool AllowOverride(string filename, bool isChecked, string type)
         {
