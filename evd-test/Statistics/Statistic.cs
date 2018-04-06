@@ -41,6 +41,7 @@ namespace evd_test
             {
                 evalueNew = scnd.ModelVaerdi;
                 handelspris = scnd.HandelsPris;
+                handelsDato = scnd.HandelsDato;
             }
             Decimal evalueNewCompOld = 0;
             Decimal evalueNewCompHandelspris = 0;

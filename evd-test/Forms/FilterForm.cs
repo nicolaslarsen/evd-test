@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace evd_test
 {
-    public partial class FilterForm : Form
+    public partial class FilterForm : Form 
     {
         public Filter<EvalueBEC> FilterBEC;
         public Filter<EvalueLSB> FilterLSB;
@@ -47,6 +47,11 @@ namespace evd_test
                 MessageBox.Show("Der var en fejl i formatet på en af filtrene",
                     "Filter format error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void CancButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

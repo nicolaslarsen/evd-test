@@ -17,13 +17,16 @@ namespace evd_test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            //Application.Run(new MainForm());
 
             //EvalueBECTest becTest = new EvalueBECTest();
             //becTest.TestEvalueBEC();
 
             //EvalueStorageTest evalStoreTest = new EvalueStorageTest();
             //evalStoreTest.TestEvalueStorage();
+
+            EvalueStorageNG evalStoreTest = new EvalueStorageNG();
+            evalStoreTest.Test();
 
             //StatisticsTest statTest = new StatisticsTest();
             //statTest.TestStatistics();

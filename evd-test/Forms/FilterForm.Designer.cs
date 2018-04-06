@@ -47,6 +47,9 @@
             this.HandelsprisFrom = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.ErIUdbud = new System.Windows.Forms.CheckBox();
+            this.CancButton = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,10 +75,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(519, 13);
+            this.label2.Size = new System.Drawing.Size(525, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "OBS: Alt der efterlades tomt benyttes ikke i filtreringen (medmindre den specifik" +
-    "t har et felt der kan krydses af)";
+    "t har et felt der kan krydses af). ";
             // 
             // YearIntervalCheck
             // 
@@ -226,12 +229,45 @@
             this.ErIUdbud.Text = "Kun ejendomme i udbud";
             this.ErIUdbud.UseVisualStyleBackColor = true;
             // 
+            // CancButton
+            // 
+            this.CancButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancButton.Location = new System.Drawing.Point(383, 474);
+            this.CancButton.Name = "CancButton";
+            this.CancButton.Size = new System.Drawing.Size(113, 51);
+            this.CancButton.TabIndex = 20;
+            this.CancButton.Text = "Annuller";
+            this.CancButton.UseVisualStyleBackColor = true;
+            this.CancButton.Click += new System.EventHandler(this.CancButton_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClearButton.Location = new System.Drawing.Point(18, 474);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(113, 51);
+            this.ClearButton.TabIndex = 21;
+            this.ClearButton.Text = "Ryd filtre";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(15, 35);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(214, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Filtering foregår i øvrigt ud fra den nyeste fil. ";
+            // 
             // FilterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 537);
             this.ControlBox = false;
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.CancButton);
             this.Controls.Add(this.ErIUdbud);
             this.Controls.Add(this.HandelsprisTo);
             this.Controls.Add(this.label7);
@@ -277,5 +313,8 @@
         private System.Windows.Forms.TextBox HandelsprisFrom;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox ErIUdbud;
+        private System.Windows.Forms.Button CancButton;
+        private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Label label10;
     }
 }

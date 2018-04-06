@@ -136,9 +136,16 @@ namespace evd_test
 
                 if (error == 0)
                 {
+                    EvalueStorage<EvalueBEC> filterSecondFile = 
+                        filterForm.FilterBEC.ApplyFilters(secondFile.Evalues);
+                    foreach (EvalueBEC prop in filterSecondFile.Evalues)
+                    {
+                        Console.WriteLine(prop.ToCsv());
+                    }
+
                     if (StatCheck.Checked || TestCheck.Checked)
                     {
-                        Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, secondFile);
+                        Statistic<EvalueBEC> stat = new Statistic<EvalueBEC>(firstFile, filterSecondFile);
                         List<StatisticProperty> statList = stat.BuildStats();
 
                         if (StatCheck.Checked)
@@ -161,18 +168,13 @@ namespace evd_test
                     
                     if (TestCheck.Checked)
                     {
-                        string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, secondFile);
+                        string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, filterSecondFile);
 
                         File.WriteAllText(OutputFilename.Text, output);
                         Process.Start(OutputFilename.Text);
                     }
 
                     MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                EvalueStorage<EvalueBEC> test = filterForm.FilterBEC.ApplyFilters(firstFile.Evalues);
-                foreach (EvalueBEC prop in test.Evalues)
-                {
-                    Console.WriteLine(prop.ToCsv());
                 }
             }
             if (RadioLSB.Checked)
@@ -219,51 +221,36 @@ namespace evd_test
             {
                 FormPanel.Enabled = true;
             });
+        }
 
+        // Checks if a file should be overridden
+        private bool AllowOverride(string filename, bool isChecked, string type)
+        {
+            if (File.Exists(filename) && isChecked)
+            { 
+                DialogResult FileExistsResult = MessageBox.Show(type + " filen: " + filename + 
+                    " findes allerede, vil du overskrive den?",
+                    "Output file exists",MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                return (FileExistsResult == DialogResult.Yes);
+            }
+
+            return true;
         }
 
         private void CollectDataButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(OutputFilename.Text) && TestCheck.Checked)
-            { 
-                DialogResult FileExistsResult = MessageBox.Show("Output filen: " + OutputFilename.Text + 
-                    " findes allerede, vil du overskrive den?",
-                    "Output file exists",MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (!(FileExistsResult == DialogResult.Yes))
-                {
-                    return;
-                }
-            }
-            
-            if (File.Exists(StatFilename.Text) && StatCheck.Checked)
-            { 
-                DialogResult FileExistsResult = MessageBox.Show("Statistik output filen: " + StatFilename.Text + 
-                    " findes allerede, vil du overskrive den?",
-                    "Output file exists",MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (!(FileExistsResult == DialogResult.Yes))
-                {
-                    return;
-                }
-            }
-
-            if (File.Exists(GraphFilename.Text) && GraphCheck.Checked)
-            { 
-                DialogResult FileExistsResult = MessageBox.Show("Graf filen: " + GraphFilename.Text + 
-                    " findes allerede, vil du overskrive den?",
-                    "Output file exists",MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (!(FileExistsResult == DialogResult.Yes))
-                {
-                    return;
-                }
-            }
-
-            if (!BackgroundWorker.IsBusy)
+            // If we are allowed to override any files checked, we can continue
+            if (AllowOverride(OutputFilename.Text, TestCheck.Checked, "Test output")
+                && AllowOverride(StatFilename.Text, StatCheck.Checked, "Statistik output")
+                && AllowOverride(GraphFilename.Text, GraphCheck.Checked, "Graf"))
             {
-                FormPanel.Enabled = false;
-                BackgroundWorker.RunWorkerAsync();
+
+                if (!BackgroundWorker.IsBusy)
+                {
+                    FormPanel.Enabled = false;
+                    BackgroundWorker.RunWorkerAsync();
+                }
             }
         }
 
@@ -369,7 +356,6 @@ namespace evd_test
         {
             filterForm.Show();
             filterForm.Focus();
-
         }
     }
 }

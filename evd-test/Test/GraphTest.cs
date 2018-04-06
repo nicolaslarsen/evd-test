@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace evd_test.Test
 {
-    public class GraphTest
+    class GraphTest
     {
         private string testPathOld = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1_old.csv";
         private string testPathNew = "c:/users/nr/desktop/e-quality/bec-realview-boligprismodel-v1.csv";

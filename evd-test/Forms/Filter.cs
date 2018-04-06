@@ -25,7 +25,7 @@ namespace evd_test
             KomNr       = 0;
             EjdNr       = 0;
             HandelsprisFrom = -1;
-            HandelsprisTo = 0;
+            HandelsprisTo = -1;
             ErIUdbud    = false;
         }
 
@@ -82,7 +82,7 @@ namespace evd_test
 
             if (!Int32.TryParse(handelsPrisTo, out HandelsprisTo))
             {
-                HandelsprisTo = 0;
+                HandelsprisTo = -1;
                 if (handelsPrisTo != "")
                 {
                     retVal -= 6;
@@ -98,13 +98,9 @@ namespace evd_test
         {
             if (YearFrom > 0)
             {
-                Console.WriteLine("YearFrom > 0");
-
                 // If interval isn't checked or if the YearTo has no value (or 0)
                 if (YearTo == 0 || !YearChecked)
                 {
-                    Console.WriteLine("!YearCheck || YearTo == 0");
-                    Console.WriteLine("YearTo: {0}", YearTo);
                     return evalueList.Where(prop =>
                         prop.HandelsDato.Year == YearFrom
                     );
@@ -176,7 +172,16 @@ namespace evd_test
                         prop.HandelsPris == HandelsprisFrom
                     );
                 }
-
+            }
+            else
+            {
+                if (HandelsprisTo >= 0)
+                {
+                    return evalueList.Where(prop =>
+                        prop.HandelsPris >= HandelsprisFrom &&
+                        prop.HandelsPris <= HandelsprisTo
+                    );
+                }
             }
 
             return evalueList;
@@ -193,7 +198,7 @@ namespace evd_test
             return evalueList;
         } 
 
-        // TODO: 
+        // Apply filters for a regular file 
         public EvalueStorage<T> ApplyFilters(List<T> evalueList)
         {
             IEnumerable<T> filteredList = evalueList;
@@ -213,6 +218,15 @@ namespace evd_test
                 filteredStorage.PutProperty(prop);
             }
             return filteredStorage;
+        }
+
+        // Apply filters for statistics
+        public List<StatisticProperty> ApplyFilters(
+            List<StatisticProperty> statList)
+        {
+            IEnumerable<StatisticProperty> filteredList = statList;
+
+            return filteredList.ToList();
         }
     }
 }
