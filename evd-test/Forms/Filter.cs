@@ -8,14 +8,25 @@ namespace evd_test
 {
     public class Filter
     {
+        // Everything
         public int YearFrom;
         public int YearTo;
         public bool YearChecked;
         public int KomNr;
         public int EjdNr;
-        public int HandelsprisFrom;
-        public int HandelsprisTo;
+        public long HandelsprisFrom;
+        public long HandelsprisTo;
         public bool ErIUdbud;
+        
+        //Statistics
+        public long EvalueFrom;
+        public long EvalueTo;
+        public Decimal EvalueCompHandelsprisFrom;
+        public Decimal EvalueCompHandelsprisTo;
+        public Decimal EvalueNewCompOldFrom;
+        public Decimal EvalueNewCompOldTo;
+
+
 
         public Filter()
         {
@@ -71,7 +82,7 @@ namespace evd_test
                 }
             }
 
-            if (!Int32.TryParse(handelsPrisFrom, out HandelsprisFrom))
+            if (!Int64.TryParse(handelsPrisFrom, out HandelsprisFrom))
             {
                 HandelsprisFrom = -1;
                 if (handelsPrisFrom != "")
@@ -80,7 +91,7 @@ namespace evd_test
                 }
             }
 
-            if (!Int32.TryParse(handelsPrisTo, out HandelsprisTo))
+            if (!Int64.TryParse(handelsPrisTo, out HandelsprisTo))
             {
                 HandelsprisTo = -1;
                 if (handelsPrisTo != "")

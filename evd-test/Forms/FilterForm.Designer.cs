@@ -50,6 +50,21 @@
             this.CancButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.EvalueCompHandelsprisTo = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.EvalueCompHandelsprisFrom = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.EvalueTo = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.EvalueFrom = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.EvalueNewCompOldTo = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.EvalueNewCompOldFrom = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,7 +135,7 @@
             // SaveFilterButton
             // 
             this.SaveFilterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveFilterButton.Location = new System.Drawing.Point(511, 474);
+            this.SaveFilterButton.Location = new System.Drawing.Point(511, 433);
             this.SaveFilterButton.Name = "SaveFilterButton";
             this.SaveFilterButton.Size = new System.Drawing.Size(113, 51);
             this.SaveFilterButton.TabIndex = 7;
@@ -133,18 +148,18 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 13);
+            this.label5.Size = new System.Drawing.Size(71, 13);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Kommune Nr";
+            this.label5.Text = "Kommune Nr:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(118, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 9;
-            this.label6.Text = "Ejendoms Nr";
+            this.label6.Text = "Ejendoms Nr:";
             // 
             // KomNr
             // 
@@ -169,7 +184,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.EjdNr, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(393, 76);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 77);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.88889F));
@@ -222,7 +237,7 @@
             // ErIUdbud
             // 
             this.ErIUdbud.AutoSize = true;
-            this.ErIUdbud.Location = new System.Drawing.Point(394, 175);
+            this.ErIUdbud.Location = new System.Drawing.Point(372, 176);
             this.ErIUdbud.Name = "ErIUdbud";
             this.ErIUdbud.Size = new System.Drawing.Size(140, 17);
             this.ErIUdbud.TabIndex = 19;
@@ -232,7 +247,7 @@
             // CancButton
             // 
             this.CancButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancButton.Location = new System.Drawing.Point(383, 474);
+            this.CancButton.Location = new System.Drawing.Point(383, 433);
             this.CancButton.Name = "CancButton";
             this.CancButton.Size = new System.Drawing.Size(113, 51);
             this.CancButton.TabIndex = 20;
@@ -243,12 +258,13 @@
             // ClearButton
             // 
             this.ClearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClearButton.Location = new System.Drawing.Point(18, 474);
+            this.ClearButton.Location = new System.Drawing.Point(18, 433);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(113, 51);
             this.ClearButton.TabIndex = 21;
             this.ClearButton.Text = "Ryd filtre";
             this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // label10
             // 
@@ -259,12 +275,153 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Filtering foregår i øvrigt ud fra den nyeste fil. ";
             // 
+            // EvalueCompHandelsprisTo
+            // 
+            this.EvalueCompHandelsprisTo.Location = new System.Drawing.Point(179, 352);
+            this.EvalueCompHandelsprisTo.Name = "EvalueCompHandelsprisTo";
+            this.EvalueCompHandelsprisTo.Size = new System.Drawing.Size(100, 20);
+            this.EvalueCompHandelsprisTo.TabIndex = 33;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(152, 355);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(21, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Til:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 355);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(25, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Fra:";
+            // 
+            // EvalueCompHandelsprisFrom
+            // 
+            this.EvalueCompHandelsprisFrom.Location = new System.Drawing.Point(46, 352);
+            this.EvalueCompHandelsprisFrom.Name = "EvalueCompHandelsprisFrom";
+            this.EvalueCompHandelsprisFrom.Size = new System.Drawing.Size(100, 20);
+            this.EvalueCompHandelsprisFrom.TabIndex = 30;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(12, 328);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(209, 17);
+            this.label13.TabIndex = 29;
+            this.label13.Text = "Handelspris i forhold til e-værdi:";
+            // 
+            // EvalueTo
+            // 
+            this.EvalueTo.Location = new System.Drawing.Point(179, 279);
+            this.EvalueTo.Name = "EvalueTo";
+            this.EvalueTo.Size = new System.Drawing.Size(100, 20);
+            this.EvalueTo.TabIndex = 28;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(152, 282);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(21, 13);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "Til:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(15, 282);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(25, 13);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "Fra:";
+            // 
+            // EvalueFrom
+            // 
+            this.EvalueFrom.Location = new System.Drawing.Point(46, 279);
+            this.EvalueFrom.Name = "EvalueFrom";
+            this.EvalueFrom.Size = new System.Drawing.Size(100, 20);
+            this.EvalueFrom.TabIndex = 24;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(12, 255);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(62, 17);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "E-værdi:";
+            // 
+            // EvalueNewCompOldTo
+            // 
+            this.EvalueNewCompOldTo.Location = new System.Drawing.Point(514, 279);
+            this.EvalueNewCompOldTo.Name = "EvalueNewCompOldTo";
+            this.EvalueNewCompOldTo.Size = new System.Drawing.Size(100, 20);
+            this.EvalueNewCompOldTo.TabIndex = 38;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(487, 282);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(21, 13);
+            this.label17.TabIndex = 37;
+            this.label17.Text = "Til:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(350, 282);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(25, 13);
+            this.label18.TabIndex = 36;
+            this.label18.Text = "Fra:";
+            // 
+            // EvalueNewCompOldFrom
+            // 
+            this.EvalueNewCompOldFrom.Location = new System.Drawing.Point(381, 279);
+            this.EvalueNewCompOldFrom.Name = "EvalueNewCompOldFrom";
+            this.EvalueNewCompOldFrom.Size = new System.Drawing.Size(100, 20);
+            this.EvalueNewCompOldFrom.TabIndex = 35;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(347, 255);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(169, 17);
+            this.label19.TabIndex = 34;
+            this.label19.Text = "E-værdi fil 1 i forhold til 2:";
+            // 
             // FilterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 537);
+            this.ClientSize = new System.Drawing.Size(652, 505);
             this.ControlBox = false;
+            this.Controls.Add(this.EvalueNewCompOldTo);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.EvalueNewCompOldFrom);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.EvalueCompHandelsprisTo);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.EvalueCompHandelsprisFrom);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.EvalueTo);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.EvalueFrom);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.CancButton);
@@ -284,7 +441,8 @@
             this.Controls.Add(this.YearFrom);
             this.Controls.Add(this.label1);
             this.Name = "FilterForm";
-            this.Text = "FilterForm";
+            this.Text = "Filtre";
+            this.Load += new System.EventHandler(this.FilterForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -316,5 +474,20 @@
         private System.Windows.Forms.Button CancButton;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox EvalueCompHandelsprisTo;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox EvalueCompHandelsprisFrom;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox EvalueTo;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox EvalueFrom;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox EvalueNewCompOldTo;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox EvalueNewCompOldFrom;
+        private System.Windows.Forms.Label label19;
     }
 }
