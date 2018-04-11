@@ -17,10 +17,10 @@ namespace evd_test
         public long HandelsprisFrom;
         public long HandelsprisTo;
         public bool ErIUdbud;
-        
-        //Statistics
         public long EvalueFrom;
         public long EvalueTo;
+        
+        //Statistics
         public Decimal EvalueCompHandelsprisFrom;
         public Decimal EvalueCompHandelsprisTo;
         public Decimal EvalueNewCompOldFrom;
@@ -30,77 +30,91 @@ namespace evd_test
 
         public Filter()
         {
-            YearFrom    = 0;
-            YearTo      = 0;
-            YearChecked = false;
-            KomNr       = 0;
-            EjdNr       = 0;
+            YearFrom        = 0;
+            YearTo          = 0;
+            YearChecked     = false;
+            KomNr           = 0;
+            EjdNr           = 0;
             HandelsprisFrom = -1;
-            HandelsprisTo = -1;
-            ErIUdbud    = false;
+            HandelsprisTo   = -1;
+            ErIUdbud        = false;
+            EvalueFrom      = -1;
+            EvalueTo        = -1;
+
+            // Stats
+            EvalueCompHandelsprisFrom   = -1m;
+            EvalueCompHandelsprisTo     = -1m;
+            EvalueNewCompOldFrom        = -1m;
+            EvalueNewCompOldTo          = -1m;
+
+        }
+
+        public int IntFilter(string input, out int param, int defaultValue, 
+            int errorNum)
+        {
+            if (!Int32.TryParse(input, out param))
+            {
+                param = defaultValue;
+                if (input != "")
+                {
+                    return errorNum;
+                }
+            }
+            return 0;
+        }
+
+        public int LongFilter(string input, out long param, long defaultValue, 
+            int errorNum)
+        {
+            if (!Int64.TryParse(input, out param))
+            {
+                param = defaultValue;
+                if (input != "")
+                {
+                    return errorNum;
+                }
+            }
+            return 0;
+        }
+
+        public int DecimalFilter(string input, out Decimal param, Decimal defaultValue, 
+            int errorNum)
+        {
+            if (!Decimal.TryParse(input, out param))
+            {
+                param = defaultValue;
+                if (input != "")
+                {
+                    return errorNum;
+                }
+            }
+            return 0;
         }
 
         public int SetFilters(string yearFrom, string yearTo, bool yearChecked,
-            string komNr, string ejdNr, string handelsPrisFrom, string handelsPrisTo, bool erIUdbud)
+            string komNr, string ejdNr, string handelsPrisFrom, string handelsPrisTo, bool erIUdbud,
+            string evalueFrom, string evalueTo, string evalueCompHandelsprisFrom,
+            string evalueCompHandelsprisTo, string evalueNewCompOldFrom, string evalueNewCompOldTo)
         {
             int retVal = 0;
-            if (!Int32.TryParse(yearFrom, out YearFrom))
-            {
-                YearFrom = 0;
-                if (yearFrom != "")
-                {
-                    retVal -= 1;
-                }
-            }
-
-            if (!Int32.TryParse(yearTo, out YearTo))
-            {
-                YearTo = 0;
-                if (yearTo != "")
-                {
-                    retVal -= 2;
-                }
-            }
-
+            retVal += IntFilter(yearFrom, out YearFrom, 0, -1);
+            retVal += IntFilter(yearTo, out YearTo, 0, -2); 
             YearChecked = yearChecked;
-
-            if (!Int32.TryParse(komNr, out KomNr))
-            {
-                KomNr = 0;
-                if (komNr != "")
-                {
-                    retVal -= 3;
-                }
-            }
-
-            if (!Int32.TryParse(ejdNr, out EjdNr))
-            {
-                EjdNr = 0;
-                if (ejdNr != "")
-                {
-                    retVal -= 4;
-                }
-            }
-
-            if (!Int64.TryParse(handelsPrisFrom, out HandelsprisFrom))
-            {
-                HandelsprisFrom = -1;
-                if (handelsPrisFrom != "")
-                {
-                    retVal -= 5;
-                }
-            }
-
-            if (!Int64.TryParse(handelsPrisTo, out HandelsprisTo))
-            {
-                HandelsprisTo = -1;
-                if (handelsPrisTo != "")
-                {
-                    retVal -= 6;
-                }
-            }
-
+            retVal += IntFilter(komNr, out KomNr, 0, -3);
+            retVal += IntFilter(ejdNr, out EjdNr, 0, -4);
+            retVal += LongFilter(handelsPrisFrom, out HandelsprisFrom, -1, -5);
+            retVal += LongFilter(handelsPrisTo, out HandelsprisTo, -1, -6);
             ErIUdbud = erIUdbud;
+            retVal += LongFilter(evalueFrom, out EvalueFrom, -1, -7);
+            retVal += LongFilter(evalueTo, out EvalueTo, -1, -8);
+            retVal += DecimalFilter(evalueCompHandelsprisFrom,
+                out EvalueCompHandelsprisFrom, -1m, -9);
+            retVal += DecimalFilter(evalueCompHandelsprisTo,
+                out EvalueCompHandelsprisTo, -1m, -10);
+            retVal += DecimalFilter(evalueNewCompOldFrom,
+                out EvalueNewCompOldFrom, -1m, -11);
+            retVal += DecimalFilter(evalueNewCompOldTo,
+                out EvalueNewCompOldTo, -1m, -12);
 
             return retVal;
         }
@@ -168,7 +182,7 @@ namespace evd_test
 
         public IEnumerable<Evalue> HandelsprisFilter(IEnumerable<Evalue> evalueList)
         {
-            if (HandelsprisFrom >= 0)
+            if (HandelsprisFrom > -1)
             {
                 if (HandelsprisTo > 0)
                 {
@@ -186,10 +200,9 @@ namespace evd_test
             }
             else
             {
-                if (HandelsprisTo >= 0)
+                if (HandelsprisTo > -1)
                 {
                     return evalueList.Where(prop =>
-                        prop.HandelsPris >= HandelsprisFrom &&
                         prop.HandelsPris <= HandelsprisTo
                     );
                 }
@@ -209,6 +222,100 @@ namespace evd_test
             return evalueList;
         } 
 
+        public IEnumerable<Evalue> EvalueFilter(IEnumerable<Evalue> evalueList)
+        {
+            if (EvalueFrom > -1)
+            {
+                if (EvalueTo > 0)
+                {
+                    return evalueList.Where(prop =>
+                        prop.ModelVaerdi >= EvalueFrom &&
+                        prop.ModelVaerdi <= EvalueTo
+                    );
+                }
+                else
+                {
+                    return evalueList.Where(prop =>
+                        prop.ModelVaerdi == EvalueFrom
+                    );
+                }
+            }
+            else
+            {
+                if (EvalueTo > -1)
+                {
+                    return evalueList.Where(prop =>
+                        prop.ModelVaerdi <= EvalueTo
+                    );
+                }
+            }
+
+            return evalueList;
+        }
+
+        public IEnumerable<StatisticProperty> EvalueCompHandelsprisFilter(
+            IEnumerable<StatisticProperty> statList)
+        {
+            if (EvalueCompHandelsprisFrom >= 0)
+            {
+                if (EvalueCompHandelsprisTo > 0)
+                {
+                    return statList.Where(prop =>
+                        prop.EvalueNewCompHandelspris >= EvalueCompHandelsprisFrom
+                        && prop.EvalueNewCompHandelspris <= EvalueCompHandelsprisTo
+                    );
+                }
+                else
+                {
+                    return statList.Where(prop =>
+                        prop.EvalueNewCompHandelspris == EvalueCompHandelsprisFrom
+                    );
+                }
+            }
+            else
+            {
+                if (EvalueCompHandelsprisTo > 0)
+                {
+                    return statList.Where(prop =>
+                        prop.EvalueNewCompHandelspris <= EvalueCompHandelsprisTo
+                    );
+                }
+            }
+            return statList; 
+        }
+
+        public IEnumerable<StatisticProperty> EvalueNewCompOldFilter(
+            IEnumerable<StatisticProperty> statList)
+        {
+            if (EvalueNewCompOldFrom >= 0)
+            {
+                if (EvalueNewCompOldTo > 0)
+                {
+                    return statList.Where(prop =>
+                        prop.EvalueNewCompOld >= EvalueNewCompOldFrom
+                        && prop.EvalueNewCompOld <= EvalueNewCompOldTo
+                    );
+                }
+                else
+                {
+                    return statList.Where(prop =>
+                        prop.EvalueNewCompOld == EvalueNewCompOldFrom
+                    );
+                }
+            }
+            else
+            {
+                if (EvalueNewCompOldTo > 0)
+                {
+                    return statList.Where(prop =>
+                        prop.EvalueNewCompOld <= EvalueNewCompOldTo
+                    );
+                }
+            }
+            return statList; 
+        }
+
+
         // Apply filters for a regular file 
         public EvalueStorage ApplyFilters(List<Evalue> evalueList)
         {
@@ -219,6 +326,7 @@ namespace evd_test
             filteredList = EjdNrFilter(filteredList);
             filteredList = HandelsprisFilter(filteredList);
             filteredList = ErIUdbudFilter(filteredList);
+            filteredList = EvalueFilter(filteredList);
 
             // Create the storage class
             EvalueStorage filteredStorage = new EvalueStorage();

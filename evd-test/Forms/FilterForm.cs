@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,6 +22,15 @@ namespace evd_test
             InitializeComponent();
             Filter = new Filter();
             OldFilter = new Filter();
+        }
+
+        public void ToggleStats(bool statChecked)
+        {
+            EvalueCompHandelsprisFrom.Enabled =
+                EvalueCompHandelsprisTo.Enabled =
+                EvalueNewCompOldFrom.Enabled =
+                EvalueNewCompOldTo.Enabled =
+                statChecked;
         }
 
         private void YearIntervalCheck_CheckedChanged(object sender, EventArgs e)
@@ -40,7 +50,10 @@ namespace evd_test
         {
             if (Filter.SetFilters(YearFrom.Text, YearTo.Text,
                 YearIntervalCheck.Checked, KomNr.Text, EjdNr.Text,
-                HandelsprisFrom.Text, HandelsprisTo.Text, ErIUdbud.Checked) == 0) {
+                HandelsprisFrom.Text, HandelsprisTo.Text, ErIUdbud.Checked, 
+                EvalueFrom.Text, EvalueTo.Text, EvalueCompHandelsprisFrom.Text,
+                EvalueCompHandelsprisTo.Text, EvalueNewCompOldFrom.Text,
+                EvalueNewCompOldTo.Text) == 0) {
 
                 OldFilter = Filter;
 
@@ -75,6 +88,15 @@ namespace evd_test
             BuildFormString(HandelsprisFrom, useFilter.HandelsprisFrom, (long) -1);
             BuildFormString(HandelsprisTo, useFilter.HandelsprisTo, (long) -1);
             ErIUdbud.Checked = useFilter.ErIUdbud;
+            BuildFormString(EvalueFrom, useFilter.EvalueFrom, (long) -1);
+            BuildFormString(EvalueTo, useFilter.EvalueTo, (long) -1);
+
+            // Statistics
+            
+            BuildFormString(EvalueCompHandelsprisFrom, useFilter.EvalueCompHandelsprisFrom, -1m);
+            BuildFormString(EvalueCompHandelsprisTo, useFilter.EvalueCompHandelsprisTo, -1m);
+            BuildFormString(EvalueNewCompOldFrom, useFilter.EvalueNewCompOldFrom, -1m);
+            BuildFormString(EvalueNewCompOldTo, useFilter.EvalueNewCompOldTo, -1m);
         }
 
         private void CancButton_Click(object sender, EventArgs e)
@@ -88,11 +110,6 @@ namespace evd_test
             // Reset filter before resetting form
             Filter = new Filter();
             SetForm(Filter);
-        }
-
-        private void FilterForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

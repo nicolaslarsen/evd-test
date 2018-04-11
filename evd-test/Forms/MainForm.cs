@@ -313,6 +313,7 @@ namespace evd_test
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
+            filterForm.ToggleStats(StatCheck.Checked || GraphCheck.Checked);
             filterForm.Show();
             filterForm.Focus();
         }
