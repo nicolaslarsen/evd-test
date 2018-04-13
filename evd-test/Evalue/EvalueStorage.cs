@@ -9,6 +9,7 @@ namespace evd_test
     public class EvalueStorage
     {
         public List<Evalue> Evalues;
+        public string Filename;
         private StoreProperty<Evalue> PropStore;
 
 
@@ -17,6 +18,14 @@ namespace evd_test
             // Just init list
             Evalues = new List<Evalue>();
             PropStore = new StoreProperty<Evalue>();
+        }
+
+        public EvalueStorage(string filename)
+        {
+            // Just init list
+            Evalues = new List<Evalue>();
+            PropStore = new StoreProperty<Evalue>();
+            Filename = filename;
         }
 
         public int PutProperty(Evalue evalue)

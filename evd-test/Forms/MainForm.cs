@@ -24,6 +24,11 @@ namespace evd_test
             ShowAlways = true,
             IsBalloon = true
         };
+
+        private EvalueStorage firstFile;
+        private EvalueStorage secondFile;
+
+        private bool firstRun = true;
        
         private void MouseLeft()
         {
@@ -41,11 +46,6 @@ namespace evd_test
         {
             if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text))
             {
-                CollectDataButton.Enabled = true;
-                if (OutputFilename.Text == "")
-                {
-                    OutputFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Test.csv";
-                }
                 if (!RadioBEC.Checked && !RadioLSB.Checked)
                 {
                     // Just check filename, user has the option to change it anyway
@@ -58,17 +58,22 @@ namespace evd_test
                     {
                         RadioBEC.Checked = true;
                     }
-                    TestCheck.Checked = true;
-
-                    if (StatCheck.Checked && StatFilename.Text == "")
-                    {
-                        StatFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Statistik.csv";
-                    }
-
-                    if (GraphCheck.Checked && GraphFilename.Text == "")
-                    {
-                        GraphFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Graph.csv";
-                    }
+                }
+                if (TestCheck.Checked || StatCheck.Checked || GraphCheck.Checked)
+                {
+                    CollectDataButton.Enabled = true;
+                }
+                if (TestCheck.Checked && OutputFilename.Text == "")
+                {
+                    OutputFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Test.csv";
+                }              
+                if (StatCheck.Checked && StatFilename.Text == "")
+                {
+                    StatFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Statistik.csv";
+                }              
+                if (GraphCheck.Checked && GraphFilename.Text == "")
+                {
+                    GraphFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Graph.csv";
                 }
             }
             else
@@ -126,51 +131,62 @@ namespace evd_test
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             int error = 0;
+            bool freshRun = true;
 
-            EvalueStorage firstFile = new EvalueStorage();
-            EvalueStorage secondFile = new EvalueStorage();
+            if (!firstRun)
+            {
+                freshRun = freshRunCheck.Checked || 
+                    // Even if it's just one file that changed,
+                    // We still run fresh just in case.
+                    firstFile.Filename != FirstFilename.Text ||
+                    secondFile.Filename != SecondFilename.Text;
+            }
 
             if (RadioBEC.Checked)
             {
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
-                error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text, ref secondFile, 2);
+                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text,
+                    ref firstFile, 1, freshRun);
+                error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text,
+                    ref secondFile, 2, freshRun);
             }
             else if (RadioLSB.Checked) {
-                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text, ref firstFile, 1);
-                error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text, ref secondFile, 2);
+                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text,
+                    ref firstFile, 1, freshRun);
+                error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text,
+                    ref secondFile, 2, freshRun);
             }
+
             if (error == 0)
             {
                 EvalueStorage filterSecondFile = 
                     filterForm.Filter.ApplyFilters(secondFile.Evalues);
-                foreach (EvalueBEC prop in filterSecondFile.Evalues)
-                {
-                    Console.WriteLine(prop.ToCsv());
-                }
-                if (StatCheck.Checked || TestCheck.Checked)
+                
+                if (StatCheck.Checked || GraphCheck.Checked)
                 {
                     Statistic stat = new Statistic(firstFile, filterSecondFile);
                     List<StatisticProperty> statList = stat.BuildStats();
+                    List<StatisticProperty> filteredStats =
+                        filterForm.Filter.ApplyFilters(statList);
                     if (StatCheck.Checked)
                     {
-                        List<string> stats = stat.BuildStatString(statList);
+                        List<string> stats = stat.BuildStatString(filteredStats);
                         File.WriteAllLines(StatFilename.Text, stats);
                     }
                     if (GraphCheck.Checked)
                     {
-                        // TODO: Implement graph
-                        Graph graph = new Graph(statList);
+                        Graph graph = new Graph(filteredStats);
                         graph.FillGraph();
-                        foreach(string derp in graph.BuildOutputString())
-                        {
-                         Console.WriteLine(derp);
-                        }
+                        File.WriteAllLines(GraphFilename.Text, graph.BuildOutputString());
                     }
                 }
                 
                 if (TestCheck.Checked)
                 {
+
                     string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, filterSecondFile);
+                    output = "Linjeantal fil 1;" + firstFile.Length() +
+                        "\nLinjeantal fil 2;" + secondFile.Length() + "\n\n" +
+                        output;
                     File.WriteAllText(OutputFilename.Text, output);
                     Process.Start(OutputFilename.Text);
                 }
@@ -179,7 +195,10 @@ namespace evd_test
             this.Invoke((MethodInvoker)delegate
             {
                 FormPanel.Enabled = true;
+                freshRunCheck.Visible = true;
             });
+
+            firstRun = false;
         }
             
         // Checks if a file should be overridden
@@ -213,7 +232,6 @@ namespace evd_test
             }
         }
 
-
         private void CollectDataPanel_MouseEnter(object sender, EventArgs e)
         {
             tt.Show(string.Empty, CollectDataButton);
@@ -234,7 +252,11 @@ namespace evd_test
             }
             else
             {
-                CollectDataButton.Enabled = true;
+                if (File.Exists(FirstFilename.Text) &&
+                    File.Exists(SecondFilename.Text))
+                {
+                    CollectDataButton.Enabled = true;
+                }
             }
         }
 
@@ -242,6 +264,12 @@ namespace evd_test
         {
             OutputFilenameButton.Enabled = TestCheck.Checked;
             OutputFilename.Enabled = TestCheck.Checked;
+
+            if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text) && StatFilename.Text == "")
+            {
+                OutputFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Test.csv";
+            }
+           
             CheckChanged();
         }
 

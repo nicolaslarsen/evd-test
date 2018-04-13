@@ -20,7 +20,7 @@ namespace evd_test.Test
         {
             Console.WriteLine("\n GetEjendom() test:\n---------------------------------------------");
             
-            EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
+            EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1, true);
 
             // It just uses the storeproperty on its own List anyway,
             // might as well use the EvalueStorage class.
@@ -30,7 +30,7 @@ namespace evd_test.Test
             Console.WriteLine("Fest == null: {0}\n", fest == null);
 
             // Fill the actual table
-            EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2);
+            EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2, true);
 
             fest = localNewFile.GetProperty(localOldFile.Evalues[0].KomNr,
                 localOldFile.Evalues[0].EjdNr);

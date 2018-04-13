@@ -253,22 +253,38 @@ namespace evd_test
             return evalueList;
         }
 
+        private Decimal GetAbsolute(Decimal compHandelspris)
+        {
+            if (compHandelspris < 1)
+            {
+                return 1 - compHandelspris;
+            }
+            else
+            {
+                return compHandelspris - 1;
+            }
+        }
+ 
         public IEnumerable<StatisticProperty> EvalueCompHandelsprisFilter(
             IEnumerable<StatisticProperty> statList)
         {
+            Decimal fromDecimal = EvalueCompHandelsprisFrom / 100;
+            Decimal toDecimal = EvalueCompHandelsprisTo / 100;
+            
+           
             if (EvalueCompHandelsprisFrom >= 0)
             {
                 if (EvalueCompHandelsprisTo > 0)
                 {
                     return statList.Where(prop =>
-                        prop.EvalueNewCompHandelspris >= EvalueCompHandelsprisFrom
-                        && prop.EvalueNewCompHandelspris <= EvalueCompHandelsprisTo
+                        GetAbsolute(prop.EvalueNewCompHandelspris) >= fromDecimal
+                        && GetAbsolute(prop.EvalueNewCompHandelspris) <= toDecimal
                     );
                 }
                 else
                 {
                     return statList.Where(prop =>
-                        prop.EvalueNewCompHandelspris == EvalueCompHandelsprisFrom
+                        GetAbsolute(prop.EvalueNewCompHandelspris) == fromDecimal
                     );
                 }
             }
@@ -277,7 +293,7 @@ namespace evd_test
                 if (EvalueCompHandelsprisTo > 0)
                 {
                     return statList.Where(prop =>
-                        prop.EvalueNewCompHandelspris <= EvalueCompHandelsprisTo
+                        GetAbsolute(prop.EvalueNewCompHandelspris) <= toDecimal
                     );
                 }
             }
@@ -287,19 +303,22 @@ namespace evd_test
         public IEnumerable<StatisticProperty> EvalueNewCompOldFilter(
             IEnumerable<StatisticProperty> statList)
         {
+            Decimal fromDecimal = EvalueNewCompOldFrom / 100;
+            Decimal toDecimal = EvalueNewCompOldTo / 100;
+            
             if (EvalueNewCompOldFrom >= 0)
             {
                 if (EvalueNewCompOldTo > 0)
                 {
                     return statList.Where(prop =>
-                        prop.EvalueNewCompOld >= EvalueNewCompOldFrom
-                        && prop.EvalueNewCompOld <= EvalueNewCompOldTo
+                        GetAbsolute(prop.EvalueNewCompOld) >= fromDecimal
+                        && GetAbsolute(prop.EvalueNewCompOld) <= toDecimal
                     );
                 }
                 else
                 {
                     return statList.Where(prop =>
-                        prop.EvalueNewCompOld == EvalueNewCompOldFrom
+                        GetAbsolute(prop.EvalueNewCompOld) == fromDecimal
                     );
                 }
             }
@@ -308,7 +327,7 @@ namespace evd_test
                 if (EvalueNewCompOldTo > 0)
                 {
                     return statList.Where(prop =>
-                        prop.EvalueNewCompOld <= EvalueNewCompOldTo
+                        GetAbsolute(prop.EvalueNewCompOld) <= toDecimal
                     );
                 }
             }
@@ -321,11 +340,11 @@ namespace evd_test
         {
             IEnumerable<Evalue> filteredList = evalueList;
 
+            filteredList = ErIUdbudFilter(filteredList);
             filteredList = YearFilter(filteredList);
             filteredList = KomNrFilter(filteredList);
             filteredList = EjdNrFilter(filteredList);
             filteredList = HandelsprisFilter(filteredList);
-            filteredList = ErIUdbudFilter(filteredList);
             filteredList = EvalueFilter(filteredList);
 
             // Create the storage class
@@ -344,6 +363,9 @@ namespace evd_test
             List<StatisticProperty> statList)
         {
             IEnumerable<StatisticProperty> filteredList = statList;
+
+            filteredList = EvalueCompHandelsprisFilter(filteredList);
+            filteredList = EvalueNewCompOldFilter(filteredList);
 
             return filteredList.ToList();
         }

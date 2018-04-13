@@ -12,7 +12,7 @@ namespace evd_test
     {
         public static EvalueStorage CollectData(string filename)
         {
-            EvalueStorage EvalueStore = new EvalueStorage();
+            EvalueStorage EvalueStore = new EvalueStorage(filename);
 
             string[] dataLines;
 
@@ -30,25 +30,42 @@ namespace evd_test
         }
 
         // Returns a negative number on error
-        public static int TryCollectData(string filename, ref EvalueStorage Evalue, int fileNum)
+        public static int TryCollectData(string filename, ref EvalueStorage Evalue, int fileNum, bool freshRun)
         {
+            // If we already have the file cached, we don't neeed to recollect the data
+            if (!freshRun)
+            {
+                return 0;
+            }
+
             try
             {
                 Evalue = CollectData(filename);
             }
             catch (IndexOutOfRangeException)
             {
-                MessageBox.Show("Fil: " + fileNum + " er ikke i det korekte format", 
-                    "File " + fileNum + " format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Fil: " + filename + " er ikke i det korekte format", 
+                    "File " + filename + " format error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -fileNum;
             }
             catch (IOException)
             {
-                MessageBox.Show("Fil: " + fileNum + " er i brug af et andet program", 
-                    "File " + fileNum + " IO error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Fil: " + filename + " er i brug af et andet program", 
+                    "File " + filename + " IO error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -fileNum;
             }
 
+            return 0;
+        }
+
+        public static async Task<int> TryCollectAsyncFiles(string firstFilename, EvalueStorage firstFile,
+                string secondFilename, EvalueStorage secondFile, bool freshRun)
+        {
+            var firstTask = Task.Run(() => TryCollectData(firstFilename, ref firstFile, 1, freshRun));
+            var secondTask = Task.Run(() => TryCollectData(secondFilename, ref secondFile, 1, freshRun));
+
+            await Task.WhenAll(firstTask, secondTask);
+            Console.WriteLine(firstTask);
             return 0;
         }
 
@@ -90,6 +107,12 @@ namespace evd_test
 
             // Only get properties that are "i udbud"
             List<Evalue> ScndIUdbud = secondFile.Evalues.Where(ejd => ejd.ErIUdbud == 1).ToList();
+
+            // Just force it to 5, so we only get 5 where ErIUdbud == 1 
+            if (i != 5)
+            {
+                i = 5;
+            }
 
             // i should be 5 at this point, so we get 5 more properties here
             while (i < 10 && randoms.Count() < ScndIUdbud.Count())

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.FilterButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.FirstFileButton = new System.Windows.Forms.Button();
             this.FirstFilename = new System.Windows.Forms.TextBox();
@@ -47,7 +50,6 @@
             this.StatFilenameButton = new System.Windows.Forms.Button();
             this.StatFilename = new System.Windows.Forms.TextBox();
             this.StatCheck = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.TestCheck = new System.Windows.Forms.CheckBox();
             this.GraphCheck = new System.Windows.Forms.CheckBox();
@@ -64,16 +66,15 @@
             this.FormPanel = new System.Windows.Forms.Panel();
             this.StatFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.GraphFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.FilterButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.freshRunCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.OutputPanel.SuspendLayout();
             this.StatFilePanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.GraphPanel.SuspendLayout();
             this.CollectDataPanel.SuspendLayout();
             this.FormPanel.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -81,7 +82,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.11454F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.88546F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.FirstFileButton, 1, 0);
@@ -117,6 +118,43 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(575, 338);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.FilterButton, 0, 1);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 113);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(139, 100);
+            this.tableLayoutPanel3.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 14);
+            this.label6.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Programmer:";
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FilterButton.Location = new System.Drawing.Point(10, 50);
+            this.FilterButton.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(104, 50);
+            this.FilterButton.TabIndex = 16;
+            this.FilterButton.Text = "Filtrér";
+            this.FilterButton.UseVisualStyleBackColor = true;
+            this.FilterButton.Click += new System.EventHandler(this.FilterButton_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -129,7 +167,7 @@
             // 
             // FirstFileButton
             // 
-            this.FirstFileButton.Location = new System.Drawing.Point(150, 8);
+            this.FirstFileButton.Location = new System.Drawing.Point(149, 8);
             this.FirstFileButton.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.FirstFileButton.Name = "FirstFileButton";
             this.FirstFileButton.Size = new System.Drawing.Size(65, 23);
@@ -140,7 +178,7 @@
             // 
             // FirstFilename
             // 
-            this.FirstFilename.Location = new System.Drawing.Point(235, 10);
+            this.FirstFilename.Location = new System.Drawing.Point(234, 10);
             this.FirstFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.FirstFilename.Name = "FirstFilename";
             this.FirstFilename.Size = new System.Drawing.Size(337, 20);
@@ -159,7 +197,7 @@
             // 
             // SecondFilename
             // 
-            this.SecondFilename.Location = new System.Drawing.Point(235, 49);
+            this.SecondFilename.Location = new System.Drawing.Point(234, 49);
             this.SecondFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.SecondFilename.Name = "SecondFilename";
             this.SecondFilename.Size = new System.Drawing.Size(337, 20);
@@ -168,7 +206,7 @@
             // 
             // SecondFileButton
             // 
-            this.SecondFileButton.Location = new System.Drawing.Point(150, 47);
+            this.SecondFileButton.Location = new System.Drawing.Point(149, 47);
             this.SecondFileButton.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.SecondFileButton.Name = "SecondFileButton";
             this.SecondFileButton.Size = new System.Drawing.Size(65, 23);
@@ -181,7 +219,7 @@
             // 
             this.RadioLSB.AutoSize = true;
             this.RadioLSB.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.RadioLSB.Location = new System.Drawing.Point(235, 85);
+            this.RadioLSB.Location = new System.Drawing.Point(234, 85);
             this.RadioLSB.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.RadioLSB.Name = "RadioLSB";
             this.RadioLSB.Size = new System.Drawing.Size(45, 17);
@@ -194,7 +232,7 @@
             // 
             this.RadioBEC.AutoSize = true;
             this.RadioBEC.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.RadioBEC.Location = new System.Drawing.Point(150, 85);
+            this.RadioBEC.Location = new System.Drawing.Point(149, 85);
             this.RadioBEC.Margin = new System.Windows.Forms.Padding(10);
             this.RadioBEC.Name = "RadioBEC";
             this.RadioBEC.Size = new System.Drawing.Size(46, 17);
@@ -216,7 +254,7 @@
             // OutputFilename
             // 
             this.OutputFilename.Enabled = false;
-            this.OutputFilename.Location = new System.Drawing.Point(235, 265);
+            this.OutputFilename.Location = new System.Drawing.Point(234, 265);
             this.OutputFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputFilename.Name = "OutputFilename";
             this.OutputFilename.Size = new System.Drawing.Size(337, 20);
@@ -225,7 +263,7 @@
             // OutputPanel
             // 
             this.OutputPanel.Controls.Add(this.OutputFilenameButton);
-            this.OutputPanel.Location = new System.Drawing.Point(150, 265);
+            this.OutputPanel.Location = new System.Drawing.Point(149, 265);
             this.OutputPanel.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputPanel.Name = "OutputPanel";
             this.OutputPanel.Size = new System.Drawing.Size(65, 23);
@@ -268,7 +306,7 @@
             // StatFilePanel
             // 
             this.StatFilePanel.Controls.Add(this.StatFilenameButton);
-            this.StatFilePanel.Location = new System.Drawing.Point(150, 225);
+            this.StatFilePanel.Location = new System.Drawing.Point(149, 225);
             this.StatFilePanel.Margin = new System.Windows.Forms.Padding(10, 8, 0, 0);
             this.StatFilePanel.Name = "StatFilePanel";
             this.StatFilePanel.Size = new System.Drawing.Size(65, 23);
@@ -290,7 +328,7 @@
             // StatFilename
             // 
             this.StatFilename.Enabled = false;
-            this.StatFilename.Location = new System.Drawing.Point(235, 227);
+            this.StatFilename.Location = new System.Drawing.Point(234, 227);
             this.StatFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.StatFilename.Name = "StatFilename";
             this.StatFilename.Size = new System.Drawing.Size(337, 20);
@@ -300,7 +338,7 @@
             // 
             this.StatCheck.AutoSize = true;
             this.StatCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.StatCheck.Location = new System.Drawing.Point(150, 127);
+            this.StatCheck.Location = new System.Drawing.Point(149, 127);
             this.StatCheck.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
             this.StatCheck.Name = "StatCheck";
             this.StatCheck.Size = new System.Drawing.Size(63, 17);
@@ -309,16 +347,6 @@
             this.StatCheck.UseVisualStyleBackColor = true;
             this.StatCheck.CheckedChanged += new System.EventHandler(this.StatCheck_CheckedChanged);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 14);
-            this.label6.Margin = new System.Windows.Forms.Padding(10, 14, 10, 10);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Programmer:";
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -326,7 +354,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228F));
             this.tableLayoutPanel2.Controls.Add(this.TestCheck, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.GraphCheck, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(225, 113);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(224, 113);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -364,7 +392,7 @@
             // GraphPanel
             // 
             this.GraphPanel.Controls.Add(this.GraphFilenameButton);
-            this.GraphPanel.Location = new System.Drawing.Point(150, 303);
+            this.GraphPanel.Location = new System.Drawing.Point(149, 303);
             this.GraphPanel.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.GraphPanel.Name = "GraphPanel";
             this.GraphPanel.Size = new System.Drawing.Size(65, 23);
@@ -396,7 +424,7 @@
             // GraphFilename
             // 
             this.GraphFilename.Enabled = false;
-            this.GraphFilename.Location = new System.Drawing.Point(235, 303);
+            this.GraphFilename.Location = new System.Drawing.Point(234, 303);
             this.GraphFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.GraphFilename.Name = "GraphFilename";
             this.GraphFilename.Size = new System.Drawing.Size(337, 20);
@@ -461,43 +489,30 @@
             this.GraphFileDialog.DefaultExt = "csv";
             this.GraphFileDialog.FileName = "Graph";
             // 
-            // FilterButton
+            // freshRunCheck
             // 
-            this.FilterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterButton.Location = new System.Drawing.Point(10, 50);
-            this.FilterButton.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(104, 50);
-            this.FilterButton.TabIndex = 16;
-            this.FilterButton.Text = "Filtrér";
-            this.FilterButton.UseVisualStyleBackColor = true;
-            this.FilterButton.Click += new System.EventHandler(this.FilterButton_Click);
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.FilterButton, 0, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 113);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(140, 100);
-            this.tableLayoutPanel3.TabIndex = 4;
+            this.freshRunCheck.AutoSize = true;
+            this.freshRunCheck.Location = new System.Drawing.Point(505, 402);
+            this.freshRunCheck.Name = "freshRunCheck";
+            this.freshRunCheck.Size = new System.Drawing.Size(87, 17);
+            this.freshRunCheck.TabIndex = 4;
+            this.freshRunCheck.Text = "Genindlæs fil";
+            this.freshRunCheck.UseVisualStyleBackColor = true;
+            this.freshRunCheck.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 421);
+            this.Controls.Add(this.freshRunCheck);
             this.Controls.Add(this.FormPanel);
             this.Name = "MainForm";
             this.Text = "e-værdi leverance test";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.OutputPanel.ResumeLayout(false);
             this.StatFilePanel.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -505,9 +520,8 @@
             this.GraphPanel.ResumeLayout(false);
             this.CollectDataPanel.ResumeLayout(false);
             this.FormPanel.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -551,6 +565,7 @@
         private System.Windows.Forms.SaveFileDialog GraphFileDialog;
         private System.Windows.Forms.Button FilterButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.CheckBox freshRunCheck;
     }
 }
 

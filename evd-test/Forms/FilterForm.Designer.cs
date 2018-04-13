@@ -318,9 +318,9 @@
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(12, 328);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(209, 17);
+            this.label13.Size = new System.Drawing.Size(265, 17);
             this.label13.TabIndex = 29;
-            this.label13.Text = "Handelspris i forhold til e-værdi:";
+            this.label13.Text = "Ændring handelspris i forhold til e-værdi:";
             // 
             // EvalueTo
             // 
@@ -402,9 +402,9 @@
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.Location = new System.Drawing.Point(343, 328);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(169, 17);
+            this.label19.Size = new System.Drawing.Size(227, 17);
             this.label19.TabIndex = 34;
-            this.label19.Text = "E-værdi fil 1 i forhold til 2:";
+            this.label19.Text = "Ændring E-værdi fil 1 i forhold til 2:";
             // 
             // label20
             // 

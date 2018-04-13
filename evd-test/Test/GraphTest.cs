@@ -64,8 +64,8 @@ namespace evd_test.Test
         {
             Console.WriteLine("\nFillGraph() Test:\n---------------------------------------------");
 
-            int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1);
-            int TryNew = EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2);
+            int TryOld = EvalueTest<EvalueBEC>.TryCollectData(testPathOld, ref localOldFile, 1, true);
+            int TryNew = EvalueTest<EvalueBEC>.TryCollectData(testPathNew, ref localNewFile, 2, true);
 
             stat = new Statistic(localOldFile, localNewFile);
             List<StatisticProperty> statList = stat.BuildStats();
