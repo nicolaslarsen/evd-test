@@ -82,7 +82,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.11454F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.88546F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 351F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.FirstFileButton, 1, 0);
@@ -178,7 +178,7 @@
             // 
             // FirstFilename
             // 
-            this.FirstFilename.Location = new System.Drawing.Point(234, 10);
+            this.FirstFilename.Location = new System.Drawing.Point(233, 10);
             this.FirstFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.FirstFilename.Name = "FirstFilename";
             this.FirstFilename.Size = new System.Drawing.Size(337, 20);
@@ -197,7 +197,7 @@
             // 
             // SecondFilename
             // 
-            this.SecondFilename.Location = new System.Drawing.Point(234, 49);
+            this.SecondFilename.Location = new System.Drawing.Point(233, 49);
             this.SecondFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.SecondFilename.Name = "SecondFilename";
             this.SecondFilename.Size = new System.Drawing.Size(337, 20);
@@ -219,7 +219,7 @@
             // 
             this.RadioLSB.AutoSize = true;
             this.RadioLSB.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.RadioLSB.Location = new System.Drawing.Point(234, 85);
+            this.RadioLSB.Location = new System.Drawing.Point(233, 85);
             this.RadioLSB.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.RadioLSB.Name = "RadioLSB";
             this.RadioLSB.Size = new System.Drawing.Size(45, 17);
@@ -254,7 +254,7 @@
             // OutputFilename
             // 
             this.OutputFilename.Enabled = false;
-            this.OutputFilename.Location = new System.Drawing.Point(234, 265);
+            this.OutputFilename.Location = new System.Drawing.Point(233, 265);
             this.OutputFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.OutputFilename.Name = "OutputFilename";
             this.OutputFilename.Size = new System.Drawing.Size(337, 20);
@@ -328,7 +328,7 @@
             // StatFilename
             // 
             this.StatFilename.Enabled = false;
-            this.StatFilename.Location = new System.Drawing.Point(234, 227);
+            this.StatFilename.Location = new System.Drawing.Point(233, 227);
             this.StatFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.StatFilename.Name = "StatFilename";
             this.StatFilename.Size = new System.Drawing.Size(337, 20);
@@ -354,7 +354,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228F));
             this.tableLayoutPanel2.Controls.Add(this.TestCheck, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.GraphCheck, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(224, 113);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(223, 113);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -424,7 +424,7 @@
             // GraphFilename
             // 
             this.GraphFilename.Enabled = false;
-            this.GraphFilename.Location = new System.Drawing.Point(234, 303);
+            this.GraphFilename.Location = new System.Drawing.Point(233, 303);
             this.GraphFilename.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.GraphFilename.Name = "GraphFilename";
             this.GraphFilename.Size = new System.Drawing.Size(337, 20);
@@ -472,11 +472,12 @@
             // 
             // FormPanel
             // 
+            this.FormPanel.Controls.Add(this.freshRunCheck);
             this.FormPanel.Controls.Add(this.tableLayoutPanel1);
             this.FormPanel.Controls.Add(this.CollectDataPanel);
             this.FormPanel.Location = new System.Drawing.Point(12, 12);
             this.FormPanel.Name = "FormPanel";
-            this.FormPanel.Size = new System.Drawing.Size(580, 387);
+            this.FormPanel.Size = new System.Drawing.Size(610, 407);
             this.FormPanel.TabIndex = 3;
             // 
             // StatFileDialog
@@ -492,7 +493,7 @@
             // freshRunCheck
             // 
             this.freshRunCheck.AutoSize = true;
-            this.freshRunCheck.Location = new System.Drawing.Point(505, 402);
+            this.freshRunCheck.Location = new System.Drawing.Point(486, 387);
             this.freshRunCheck.Name = "freshRunCheck";
             this.freshRunCheck.Size = new System.Drawing.Size(87, 17);
             this.freshRunCheck.TabIndex = 4;
@@ -505,7 +506,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 421);
-            this.Controls.Add(this.freshRunCheck);
             this.Controls.Add(this.FormPanel);
             this.Name = "MainForm";
             this.Text = "e-værdi leverance test";
@@ -520,8 +520,8 @@
             this.GraphPanel.ResumeLayout(false);
             this.CollectDataPanel.ResumeLayout(false);
             this.FormPanel.ResumeLayout(false);
+            this.FormPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
