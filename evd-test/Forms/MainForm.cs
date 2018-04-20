@@ -265,7 +265,7 @@ namespace evd_test
             OutputFilenameButton.Enabled = TestCheck.Checked;
             OutputFilename.Enabled = TestCheck.Checked;
 
-            if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text) && StatFilename.Text == "")
+            if (File.Exists(SecondFilename.Text) && File.Exists(FirstFilename.Text) && OutputFilename.Text == "")
             {
                 OutputFilename.Text = Path.GetDirectoryName(SecondFilename.Text) + "\\Test.csv";
             }
