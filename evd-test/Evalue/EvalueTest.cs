@@ -58,15 +58,22 @@ namespace evd_test
             return 0;
         }
 
-        public static async Task<int> TryCollectAsyncFiles(string firstFilename, EvalueStorage firstFile,
-                string secondFilename, EvalueStorage secondFile, bool freshRun)
+        // Saved to look at, it's not really useful, though 
+        public static async Task<List<EvalueStorage>> TryCollectAsyncFiles(string firstFilename,
+                string secondFilename)
         {
-            var firstTask = Task.Run(() => TryCollectData(firstFilename, ref firstFile, 1, freshRun));
-            var secondTask = Task.Run(() => TryCollectData(secondFilename, ref secondFile, 1, freshRun));
+            List<EvalueStorage> list = new List<EvalueStorage>();
 
-            await Task.WhenAll(firstTask, secondTask);
-            Console.WriteLine(firstTask);
-            return 0;
+            var test1 = Task.Run(() => CollectData(firstFilename));
+            var test2 = Task.Run(() => CollectData(secondFilename));
+
+            await Task.WhenAll(test1, test2);
+
+            list.Add(test1.Result);
+            list.Add(test2.Result);
+
+
+            return list;
         }
 
         public static string BuildOutputString(EvalueStorage firstFile, EvalueStorage secondFile)
