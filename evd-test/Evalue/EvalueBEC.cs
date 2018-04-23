@@ -38,7 +38,7 @@ namespace evd_test
 
         public override void Init(string dataLine)
         {
-                        string[] fields = dataLine.Split(';');
+            string[] fields = dataLine.Split(';');
            
             Int32.TryParse(fields[0], out LeveranceID);
             Int32.TryParse(fields[1], out LeveranceGruppe);
@@ -103,7 +103,6 @@ namespace evd_test
             "SenesteUdsbudsPris : " + SenesteUdsbudsPris + "\n" +
             "KVHX : " + KVHX + "\n";
             return output; 
- 
         }
     }
 }

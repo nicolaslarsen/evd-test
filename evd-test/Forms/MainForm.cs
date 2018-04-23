@@ -127,9 +127,38 @@ namespace evd_test
         {
             MouseLeft();
         }
-        
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+
+        private int TaskStat(Statistic stat, List<StatisticProperty> statList)
         {
+            if (StatCheck.Checked)
+            {
+                List<string> stats = stat.BuildStatString(statList);
+                File.WriteAllLines(StatFilename.Text, stats);
+                return 0;
+            }
+            return -1;
+        }
+
+        private int TaskGraph(List<StatisticProperty> statList)
+        {
+            if (GraphCheck.Checked)
+            {
+                Graph graph = new Graph(statList);
+                graph.FillGraph();
+                File.WriteAllLines(GraphFilename.Text, graph.BuildOutputString());
+                return 0;
+            }
+            return -1;
+        } 
+        
+        private async void BackgroundWorker_DoWorkAsync(object sender, DoWorkEventArgs e)
+        {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            Task<int> firstFileTask;
+            Task<int> secondFileTask;
+
             int error = 0;
             bool freshRun = true;
 
@@ -144,10 +173,26 @@ namespace evd_test
 
             if (RadioBEC.Checked)
             {
-                error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text,
-                    ref firstFile, 1, freshRun);
-                error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text,
-                    ref secondFile, 2, freshRun);
+                //List<EvalueStorage> test = EvalueTest<EvalueBEC>.TryCollectAsyncFiles(
+                //    FirstFilename.Text, SecondFilename.Text);
+
+                //firstFile = test[0];
+                //secondFile = test[1];
+
+                firstFileTask = Task.Run(() =>
+                    EvalueTest<EvalueBEC>.TryCollectData(
+                        FirstFilename.Text, ref firstFile, 1, freshRun));
+
+                secondFileTask = Task.Run(() =>
+                    EvalueTest<EvalueBEC>.TryCollectData(
+                        SecondFilename.Text, ref secondFile, 1, freshRun));
+
+                error += await firstFileTask;
+                error += await secondFileTask;
+                //error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text,
+                //    ref firstFile, 1, freshRun);
+                //error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text,
+                //    ref secondFile, 2, freshRun);
             }
             else if (RadioLSB.Checked) {
                 error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text,
@@ -167,17 +212,14 @@ namespace evd_test
                     List<StatisticProperty> statList = stat.BuildStats();
                     List<StatisticProperty> filteredStats =
                         filterForm.Filter.ApplyFilters(statList);
-                    if (StatCheck.Checked)
-                    {
-                        List<string> stats = stat.BuildStatString(filteredStats);
-                        File.WriteAllLines(StatFilename.Text, stats);
-                    }
-                    if (GraphCheck.Checked)
-                    {
-                        Graph graph = new Graph(filteredStats);
-                        graph.FillGraph();
-                        File.WriteAllLines(GraphFilename.Text, graph.BuildOutputString());
-                    }
+
+                    var statBuilder = Task.Run(() => TaskStat(stat, filteredStats));
+                    var graphBuilder = Task.Run(() => TaskGraph(filteredStats));
+
+                    // These two will be 0 on success and -1 if the stats or graph
+                    // wasn't created. It does not really seem relevant to check for now.
+                    int statRes = await statBuilder;
+                    int graphRes = await graphBuilder;
                 }
                 
                 if (TestCheck.Checked)
@@ -190,6 +232,10 @@ namespace evd_test
                     File.WriteAllText(OutputFilename.Text, output);
                     Process.Start(OutputFilename.Text);
                 }
+
+                // STOPWATCH
+                sw.Stop();
+
                 MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Invoke((MethodInvoker)delegate
@@ -199,8 +245,10 @@ namespace evd_test
             });
 
             firstRun = false;
+
+            Console.WriteLine(sw.Elapsed);
         }
-            
+        
         // Checks if a file should be overridden
         private bool AllowOverride(string filename, bool isChecked, string type)
         {

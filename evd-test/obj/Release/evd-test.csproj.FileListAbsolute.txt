@@ -7,3 +7,14 @@ C:\Users\nr\source\repos\evd-test\evd-test\obj\Release\evd-test.csproj.GenerateR
 C:\Users\nr\source\repos\evd-test\evd-test\obj\Release\evd-test.csproj.CoreCompileInputs.cache
 C:\Users\nr\source\repos\evd-test\evd-test\obj\Release\evd-test.exe
 C:\Users\nr\source\repos\evd-test\evd-test\obj\Release\evd-test.pdb
+C:\Users\nr\Documents\evd-test\evd-test\bin\Release\evd-test.exe.config
+C:\Users\nr\Documents\evd-test\evd-test\bin\Release\evd-test.exe
+C:\Users\nr\Documents\evd-test\evd-test\bin\Release\evd-test.pdb
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd_test.FilterForm.resources
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd_test.MainForm.resources
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd_test.Properties.Resources.resources
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd-test.csproj.GenerateResource.Cache
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd-test.csproj.CoreCompileInputs.cache
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd-test.exe
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd-test.pdb
+C:\Users\nr\Documents\evd-test\evd-test\obj\Release\evd-test.csprojResolveAssemblyReference.cache

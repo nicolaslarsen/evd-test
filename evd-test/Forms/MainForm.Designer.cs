@@ -468,7 +468,7 @@
             // 
             // BackgroundWorker
             // 
-            this.BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWorkAsync);
             // 
             // FormPanel
             // 

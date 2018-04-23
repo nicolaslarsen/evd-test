@@ -72,6 +72,7 @@
     <Compile Include="Statistics\Statistic.cs" />
     <Compile Include="Statistics\StatisticProperty.cs" />
     <Compile Include="Common\StoreProperty.cs" />
+    <Compile Include="Test\AsyncTest.cs" />
     <Compile Include="Test\EvalueBECTest.cs" />
     <Compile Include="Test\EvalueStorageNG.cs" />
     <Compile Include="Test\EvalueStorageTest.cs" />

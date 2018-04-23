@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,7 @@ namespace evd_test
         {
             EvalueStorage EvalueStore = new EvalueStorage(filename);
 
-            string[] dataLines;
-
-            dataLines = File.ReadAllLines(filename);
+            string[] dataLines = File.ReadAllLines(filename);
 
             for (int i = 0; i < dataLines.Count(); i++)
             {
@@ -59,7 +58,8 @@ namespace evd_test
         }
 
         // Saved to look at, it's not really useful, though 
-        public static async Task<List<EvalueStorage>> TryCollectAsyncFiles(string firstFilename,
+        // nevermind. When we use the o-drive, this becomes relevant again.
+        public static List<EvalueStorage> TryCollectAsyncFiles(string firstFilename,
                 string secondFilename)
         {
             List<EvalueStorage> list = new List<EvalueStorage>();
@@ -67,7 +67,7 @@ namespace evd_test
             var test1 = Task.Run(() => CollectData(firstFilename));
             var test2 = Task.Run(() => CollectData(secondFilename));
 
-            await Task.WhenAll(test1, test2);
+            Task.WhenAll(test1, test2);
 
             list.Add(test1.Result);
             list.Add(test2.Result);
