@@ -13,9 +13,7 @@ namespace evd_test
         public int[] GraphPoints = new int[22];
         public List<StatisticProperty> StatList;
 
-        public Graph()
-        {
-        }
+        public Graph(){}
 
         public Graph(List<StatisticProperty> statList)
         {

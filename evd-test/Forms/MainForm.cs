@@ -173,12 +173,6 @@ namespace evd_test
 
             if (RadioBEC.Checked)
             {
-                //List<EvalueStorage> test = EvalueTest<EvalueBEC>.TryCollectAsyncFiles(
-                //    FirstFilename.Text, SecondFilename.Text);
-
-                //firstFile = test[0];
-                //secondFile = test[1];
-
                 firstFileTask = Task.Run(() =>
                     EvalueTest<EvalueBEC>.TryCollectData(
                         FirstFilename.Text, ref firstFile, 1, freshRun));
@@ -189,16 +183,29 @@ namespace evd_test
 
                 error += await firstFileTask;
                 error += await secondFileTask;
+
                 //error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text,
                 //    ref firstFile, 1, freshRun);
                 //error += EvalueTest<EvalueBEC>.TryCollectData(SecondFilename.Text,
                 //    ref secondFile, 2, freshRun);
             }
-            else if (RadioLSB.Checked) {
-                error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text,
-                    ref firstFile, 1, freshRun);
-                error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text,
-                    ref secondFile, 2, freshRun);
+            else if (RadioLSB.Checked)
+            {
+                firstFileTask = Task.Run(() =>
+                    EvalueTest<EvalueLSB>.TryCollectData(
+                        FirstFilename.Text, ref firstFile, 1, freshRun));
+
+                secondFileTask = Task.Run(() =>
+                    EvalueTest<EvalueLSB>.TryCollectData(
+                        SecondFilename.Text, ref secondFile, 1, freshRun));
+
+                error += await firstFileTask;
+                error += await secondFileTask;
+
+                //error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text,
+                //    ref firstFile, 1, freshRun);
+                //error += EvalueTest<EvalueLSB>.TryCollectData(SecondFilename.Text,
+                //    ref secondFile, 2, freshRun);
             }
 
             if (error == 0)

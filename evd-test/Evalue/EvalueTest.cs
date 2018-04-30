@@ -59,6 +59,7 @@ namespace evd_test
 
         // Saved to look at, it's not really useful, though 
         // nevermind. When we use the o-drive, this becomes relevant again.
+        // Except, we still don't need this function.
         public static List<EvalueStorage> TryCollectAsyncFiles(string firstFilename,
                 string secondFilename)
         {
