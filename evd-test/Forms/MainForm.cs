@@ -132,8 +132,15 @@ namespace evd_test
         {
             if (StatCheck.Checked)
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+
                 List<string> stats = stat.BuildStatString(statList);
                 File.WriteAllLines(StatFilename.Text, stats);
+
+                sw.Stop();
+                Console.WriteLine("Stat: {0}", sw.Elapsed);
+
                 return 0;
             }
             return -1;
@@ -143,9 +150,16 @@ namespace evd_test
         {
             if (GraphCheck.Checked)
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+
                 Graph graph = new Graph(statList);
                 graph.FillGraph();
                 File.WriteAllLines(GraphFilename.Text, graph.BuildOutputString());
+
+                sw.Stop();
+                Console.WriteLine("Graph: {0}", sw.Elapsed);
+
                 return 0;
             }
             return -1;
@@ -153,9 +167,6 @@ namespace evd_test
         
         private async void BackgroundWorker_DoWorkAsync(object sender, DoWorkEventArgs e)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
             Task<int> firstFileTask;
             Task<int> secondFileTask;
 
@@ -173,6 +184,9 @@ namespace evd_test
 
             if (RadioBEC.Checked)
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+
                 firstFileTask = Task.Run(() =>
                     EvalueTest<EvalueBEC>.TryCollectData(
                         FirstFilename.Text, ref firstFile, 1, freshRun));
@@ -183,6 +197,9 @@ namespace evd_test
 
                 error += await firstFileTask;
                 error += await secondFileTask;
+
+                sw.Stop();
+                Console.WriteLine("Loading files: {0}", sw.Elapsed);
 
                 //error += EvalueTest<EvalueBEC>.TryCollectData(FirstFilename.Text,
                 //    ref firstFile, 1, freshRun);
@@ -191,6 +208,9 @@ namespace evd_test
             }
             else if (RadioLSB.Checked)
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+
                 firstFileTask = Task.Run(() =>
                     EvalueTest<EvalueLSB>.TryCollectData(
                         FirstFilename.Text, ref firstFile, 1, freshRun));
@@ -201,6 +221,9 @@ namespace evd_test
 
                 error += await firstFileTask;
                 error += await secondFileTask;
+
+                sw.Stop();
+                Console.WriteLine("Loading files: {0}", sw.Elapsed);
 
                 //error += EvalueTest<EvalueLSB>.TryCollectData(FirstFilename.Text,
                 //    ref firstFile, 1, freshRun);
@@ -210,11 +233,20 @@ namespace evd_test
 
             if (error == 0)
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+
                 EvalueStorage filterSecondFile = 
                     filterForm.Filter.ApplyFilters(secondFile.Evalues);
                 
+                sw.Stop();
+                Console.WriteLine("Filter file: {0}", sw.Elapsed);
+
                 if (StatCheck.Checked || GraphCheck.Checked)
                 {
+                    sw = new Stopwatch();
+                    sw.Start();
+
                     Statistic stat = new Statistic(firstFile, filterSecondFile);
                     List<StatisticProperty> statList = stat.BuildStats();
                     List<StatisticProperty> filteredStats =
@@ -227,10 +259,15 @@ namespace evd_test
                     // wasn't created. It does not really seem relevant to check for now.
                     int statRes = await statBuilder;
                     int graphRes = await graphBuilder;
+
+                    sw.Stop();
+                    Console.WriteLine("Stat and Graph: {0}", sw.Elapsed);
                 }
                 
                 if (TestCheck.Checked)
                 {
+                    sw = new Stopwatch();
+                    sw.Start();
 
                     string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, filterSecondFile);
                     output = "Linjeantal fil 1;" + firstFile.Length() +
@@ -238,10 +275,10 @@ namespace evd_test
                         output;
                     File.WriteAllText(OutputFilename.Text, output);
                     Process.Start(OutputFilename.Text);
+                    
+                    sw.Stop();
+                    Console.WriteLine("Test fil: {0}", sw.Elapsed);
                 }
-
-                // STOPWATCH
-                sw.Stop();
 
                 MessageBox.Show("Filen blev lavet", "File created successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -252,8 +289,6 @@ namespace evd_test
             });
 
             firstRun = false;
-
-            Console.WriteLine(sw.Elapsed);
         }
         
         // Checks if a file should be overridden

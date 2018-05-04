@@ -31,6 +31,9 @@ namespace evd_test
         // Returns a negative number on error
         public static int TryCollectData(string filename, ref EvalueStorage Evalue, int fileNum, bool freshRun)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
             // If we already have the file cached, we don't neeed to recollect the data
             if (!freshRun)
             {
@@ -53,6 +56,9 @@ namespace evd_test
                     "File " + filename + " IO error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -fileNum;
             }
+
+            sw.Stop();
+            Console.WriteLine("TryCollectData {0} at time: {1}", filename, sw.Elapsed);
 
             return 0;
         }
@@ -90,20 +96,22 @@ namespace evd_test
             while(i < 5 && randoms.Count() < firstFile.Length() &&
                 randoms.Count() < secondFile.Length())
             {
-                int randIndex = rand.Next(firstFile.Length());
+                int randIndex = rand.Next(secondFile.Length());
 
                 // If we already used this property
                 if (randoms.Contains(randIndex))
                 {
                     continue;
                 }
-                Evalue firstEjendom = firstFile.Evalues[randIndex];
+                // we should probably get the second ejendom first,
+                // since this one is filtered
+                Evalue secondEjendom = secondFile.Evalues[randIndex];
 
-                Evalue secondEjendom = secondFile.GetProperty(
-                    firstEjendom.KomNr, firstEjendom.EjdNr); 
+                Evalue firstEjendom = firstFile.GetProperty(
+                    secondEjendom.KomNr, secondEjendom.EjdNr); 
 
                 // If secondFile did not contain the property
-                if (secondEjendom == null)
+                if (firstEjendom == null)
                 {
                     continue;
                 }
