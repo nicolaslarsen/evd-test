@@ -269,10 +269,19 @@ namespace evd_test
                     sw = new Stopwatch();
                     sw.Start();
 
-                    string output = EvalueTest<EvalueBEC>.BuildOutputString(firstFile, filterSecondFile);
-                    output = "Linjeantal fil 1;" + firstFile.Length() +
-                        "\nLinjeantal fil 2;" + secondFile.Length() + "\n\n" +
-                        output;
+                    string output = "Linjeantal fil 1;" + firstFile.Length() +
+                        "\nLinjeantal fil 2;" + secondFile.Length() + "\n\n";
+
+                    if (RadioLSB.Checked)
+                    {
+                        output += EvalueTest<EvalueLSB>.BuildOutputString(
+                            firstFile, filterSecondFile);
+                    }
+                    else
+                    {
+                        output += EvalueTest<EvalueBEC>.BuildOutputString(
+                            firstFile, filterSecondFile);
+                    }
                     File.WriteAllText(OutputFilename.Text, output);
                     Process.Start(OutputFilename.Text);
                     
